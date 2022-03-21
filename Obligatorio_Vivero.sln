@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32228.343
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Obligatorio_Vivero", "Obligatorio_Vivero\Obligatorio_Vivero.csproj", "{7519DD4C-0BA0-4D95-BD64-63354F2A5227}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7519DD4C-0BA0-4D95-BD64-63354F2A5227}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7519DD4C-0BA0-4D95-BD64-63354F2A5227}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7519DD4C-0BA0-4D95-BD64-63354F2A5227}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7519DD4C-0BA0-4D95-BD64-63354F2A5227}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1CDAC727-DBCD-476F-AF27-7204474490A9}
+	EndGlobalSection
+EndGlobal
