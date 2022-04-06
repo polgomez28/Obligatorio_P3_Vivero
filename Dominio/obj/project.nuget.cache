@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "P3/rCiNk45/rqquj02mlWoopbk/D1+8wQ+us34Z2yYq5/PJdtiCvMIo0pErRFbSa2i7F5QyjNrfhkKabj17+MA==",
+  "dgSpecHash": "50tQnEMZWjdPVczz4Gl9cKsstcKbf4jD4JbXpUhLxLr67+uYTEr0murSzC0FQbNheujI/1XITHABleWyNJuLIQ==",
   "success": true,
-  "projectFilePath": "C:\\ORT\\Programacion3\\Vivero\\Obligatorio_Vivero\\Dominio\\Dominio.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\matia\\Source\\Repos\\Obligatorio_P3_Vivero\\Dominio\\Dominio.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\matia\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.10\\microsoft.aspnetcore.app.ref.3.1.10.nupkg.sha512",
+    "C:\\Users\\matia\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\3.1.0\\microsoft.windowsdesktop.app.ref.3.1.0.nupkg.sha512",
+    "C:\\Users\\matia\\.nuget\\packages\\microsoft.netcore.app.ref\\3.1.0\\microsoft.netcore.app.ref.3.1.0.nupkg.sha512"
+  ],
   "logs": []
 }

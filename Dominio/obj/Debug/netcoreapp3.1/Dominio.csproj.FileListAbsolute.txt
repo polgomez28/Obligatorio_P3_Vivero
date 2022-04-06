@@ -1,0 +1,10 @@
+C:\Users\matia\Source\Repos\Obligatorio_P3_Vivero\Dominio\bin\Debug\netcoreapp3.1\Dominio.deps.json
+C:\Users\matia\Source\Repos\Obligatorio_P3_Vivero\Dominio\bin\Debug\netcoreapp3.1\Dominio.dll
+C:\Users\matia\Source\Repos\Obligatorio_P3_Vivero\Dominio\bin\Debug\netcoreapp3.1\Dominio.pdb
+C:\Users\matia\Source\Repos\Obligatorio_P3_Vivero\Dominio\obj\Debug\netcoreapp3.1\Dominio.csproj.AssemblyReference.cache
+C:\Users\matia\Source\Repos\Obligatorio_P3_Vivero\Dominio\obj\Debug\netcoreapp3.1\Dominio.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\matia\Source\Repos\Obligatorio_P3_Vivero\Dominio\obj\Debug\netcoreapp3.1\Dominio.AssemblyInfoInputs.cache
+C:\Users\matia\Source\Repos\Obligatorio_P3_Vivero\Dominio\obj\Debug\netcoreapp3.1\Dominio.AssemblyInfo.cs
+C:\Users\matia\Source\Repos\Obligatorio_P3_Vivero\Dominio\obj\Debug\netcoreapp3.1\Dominio.csproj.CoreCompileInputs.cache
+C:\Users\matia\Source\Repos\Obligatorio_P3_Vivero\Dominio\obj\Debug\netcoreapp3.1\Dominio.dll
+C:\Users\matia\Source\Repos\Obligatorio_P3_Vivero\Dominio\obj\Debug\netcoreapp3.1\Dominio.pdb
