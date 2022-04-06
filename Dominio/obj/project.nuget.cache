@@ -1,8 +1,14 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "MDQAs3cwLw60eitGsdLhDhEGQRBo3tOFIPN8Q1prv+iHu34h1HPk2PASN91a5ab+dpkhDrwYxRc4hKyl3UkbDg==",
   "success": true,
   "projectFilePath": "C:\\Users\\matia\\Source\\Repos\\Obligatorio_P3_Vivero\\Dominio\\Dominio.csproj",
+=======
+  "dgSpecHash": "P3/rCiNk45/rqquj02mlWoopbk/D1+8wQ+us34Z2yYq5/PJdtiCvMIo0pErRFbSa2i7F5QyjNrfhkKabj17+MA==",
+  "success": true,
+  "projectFilePath": "C:\\ORT\\Programacion3\\Vivero\\Obligatorio_Vivero\\Dominio\\Dominio.csproj",
+>>>>>>> baa04e408e22273cc6886ef4f0db9522b1988dee
   "expectedPackageFiles": [],
   "logs": []
 }
