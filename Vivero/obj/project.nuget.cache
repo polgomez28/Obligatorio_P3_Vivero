@@ -1,17 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "X7BfJ0/9bvLAETnPklKSTXrgORlU6sayct0kYSvTXyuqJ+nZr3l/CWeh6G5KNciPrq/4gSX5gxUy5gqa7R++9Q==",
+  "dgSpecHash": "XH1VAG13/rGV+0OPHSqnfn9uRKgXQG6f2Eakgmvr03UWyfhExEQd3a4tvCzBexwbLIqCS/9tXw/FrIOB1HmtGQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\matia\\Source\\Repos\\Obligatorio_P3_Vivero\\Vivero\\Vivero.csproj",
+  "projectFilePath": "C:\\ORT\\Programacion3\\Vivero\\Obligatorio_Vivero\\Vivero\\Vivero.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\matia\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.22\\microsoft.netcore.app.host.win-x64.3.1.22.nupkg.sha512"
+    "C:\\Users\\p.gomez\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.22\\microsoft.netcore.app.host.win-x64.3.1.22.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Problem reading the cache file C:\\Users\\matia\\Source\\Repos\\Obligatorio_P3_Vivero\\Vivero\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
-    }
-  ]
+  "logs": []
 }
