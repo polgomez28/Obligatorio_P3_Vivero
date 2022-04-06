@@ -1,12 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "CFz8vjLI1KYhmb887wTMWHPXqJE7wr27ioWZn/g6R5zQYP76OeEMgJ/6E1Ui6tQl55iEWSH00CgWwwvGKumiiA==",
+  "dgSpecHash": "9JKpoXVp6HD/cbNHxCvkXTGC3y56CgCILveF+xWfJej5etNJ9oXNXLrAz3qTrSD55Pt2aNUs7G58T4sp2MGTfQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\matia\\Source\\Repos\\Obligatorio_P3_Vivero\\DataAcces\\DataAcces.csproj",
-  "expectedPackageFiles": [
-    "C:\\Users\\matia\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.10\\microsoft.aspnetcore.app.ref.3.1.10.nupkg.sha512",
-    "C:\\Users\\matia\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\3.1.0\\microsoft.windowsdesktop.app.ref.3.1.0.nupkg.sha512",
-    "C:\\Users\\matia\\.nuget\\packages\\microsoft.netcore.app.ref\\3.1.0\\microsoft.netcore.app.ref.3.1.0.nupkg.sha512"
-  ],
+  "projectFilePath": "C:\\ORT\\Programacion3\\Vivero\\Obligatorio_Vivero\\DataAcces\\DataAcces.csproj",
+  "expectedPackageFiles": [],
   "logs": []
 }
