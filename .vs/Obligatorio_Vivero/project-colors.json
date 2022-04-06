@@ -5,7 +5,22 @@
       "ProjectGuid": "60f6b761-5b1a-40c3-88d3-f93ca2ae7783",
       "DisplayName": "Vivero",
       "ColorIndex": 0
+    },
+    "66a9eb22-198f-4019-a6c1-e7faff248086": {
+      "ProjectGuid": "66a9eb22-198f-4019-a6c1-e7faff248086",
+      "DisplayName": "Vivero",
+      "ColorIndex": 1
+    },
+    "295458bd-edb8-4a4c-9b9d-751d0552f414": {
+      "ProjectGuid": "295458bd-edb8-4a4c-9b9d-751d0552f414",
+      "DisplayName": "Dominio",
+      "ColorIndex": 2
+    },
+    "ca747459-f2d1-4032-9312-234b0ece24e5": {
+      "ProjectGuid": "ca747459-f2d1-4032-9312-234b0ece24e5",
+      "DisplayName": "DataAcces",
+      "ColorIndex": 3
     }
   },
-  "NextColorIndex": 1
+  "NextColorIndex": 4
 }

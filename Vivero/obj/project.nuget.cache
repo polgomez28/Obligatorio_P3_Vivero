@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "L2dOWyvI1Z1xhQa07U92YZh0+jihg50BSZjHp5/WOwXfw1VE/2oFUf736bkf7u4j9N+qHW6Ce5OMxPpALuZZYQ==",
+  "dgSpecHash": "X7BfJ0/9bvLAETnPklKSTXrgORlU6sayct0kYSvTXyuqJ+nZr3l/CWeh6G5KNciPrq/4gSX5gxUy5gqa7R++9Q==",
   "success": true,
   "projectFilePath": "C:\\Users\\matia\\Source\\Repos\\Obligatorio_P3_Vivero\\Vivero\\Vivero.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\matia\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.22\\microsoft.netcore.app.host.win-x64.3.1.22.nupkg.sha512"
+  ],
   "logs": []
 }
