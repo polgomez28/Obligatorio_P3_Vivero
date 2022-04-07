@@ -1,15 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "MDQAs3cwLw60eitGsdLhDhEGQRBo3tOFIPN8Q1prv+iHu34h1HPk2PASN91a5ab+dpkhDrwYxRc4hKyl3UkbDg==",
+  "dgSpecHash": "36V+H6Iv2OlBWkisqRC1V43VQKdqW8bOx1v0tRTM0+4wylOSd46v5jA6Ek5Z+YSbqMb7WKR4OAcMzXex74nh0g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\matia\\Source\\Repos\\Obligatorio_P3_Vivero\\Dominio\\Dominio.csproj",
+  "projectFilePath": "D:\\Documents\\ORT\\AP\\Programacion 3\\Obligatorio\\Obligatorio_P3_Vivero\\Dominio\\Dominio.csproj",
   "expectedPackageFiles": [],
-  "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Problem reading the cache file C:\\Users\\matia\\Source\\Repos\\Obligatorio_P3_Vivero\\Dominio\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
-    }
-  ]
+  "logs": []
 }

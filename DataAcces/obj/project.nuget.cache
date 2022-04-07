@@ -1,15 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ZK0KTno/5eugwkezQe233mx4gjQhI/7aou8KkDmL1gH6ob7WTr9V97XX67fSq5MXDW/Mm1HW4y6hISW1IrF//Q==",
+  "dgSpecHash": "AgZjO9WPSU3jH9X2vLCn7lMvv2r1+Jwnwcf8OO6uMoYOi1pl2//MUgv92rhAoQHMrguJF2dHkpg1+3qO2LTMMg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\matia\\Source\\Repos\\Obligatorio_P3_Vivero\\DataAcces\\DataAcces.csproj",
+  "projectFilePath": "D:\\Documents\\ORT\\AP\\Programacion 3\\Obligatorio\\Obligatorio_P3_Vivero\\DataAcces\\DataAcces.csproj",
   "expectedPackageFiles": [],
-  "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Problem reading the cache file C:\\Users\\matia\\Source\\Repos\\Obligatorio_P3_Vivero\\DataAcces\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
-    }
-  ]
+  "logs": []
 }
