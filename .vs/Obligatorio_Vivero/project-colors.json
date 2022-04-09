@@ -20,7 +20,12 @@
       "ProjectGuid": "ca747459-f2d1-4032-9312-234b0ece24e5",
       "DisplayName": "DataAcces",
       "ColorIndex": 3
+    },
+    "9e0e87be-6437-4749-b9c8-b6bab5b8d683": {
+      "ProjectGuid": "9e0e87be-6437-4749-b9c8-b6bab5b8d683",
+      "DisplayName": "Vivero",
+      "ColorIndex": 4
     }
   },
-  "NextColorIndex": 4
+  "NextColorIndex": 5
 }
