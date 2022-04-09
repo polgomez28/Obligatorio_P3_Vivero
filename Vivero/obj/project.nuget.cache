@@ -1,5 +1,6 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "Jye75nJ09d65ND8XESR4que/BdCw7PCsfUF0UBMDokUDgH/jKdWRYnSSP9bb03XgaIZBdeTsNINFHzKwzdIIcw==",
   "success": true,
   "projectFilePath": "C:\\ORT\\Programacion3\\Vivero\\Obligatorio_Vivero\\Vivero\\Vivero.csproj",
@@ -15,5 +16,11 @@
     "C:\\Users\\p.gomez\\.nuget\\packages\\system.security.principal.windows\\4.7.0\\system.security.principal.windows.4.7.0.nupkg.sha512",
     "C:\\Users\\p.gomez\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.22\\microsoft.netcore.app.host.win-x64.3.1.22.nupkg.sha512"
   ],
+=======
+  "dgSpecHash": "OmHNFYj7hyuaPpoSDmB3NgzobdqZt9Oz4iRvEtZjvtDDRQocSujJKeOfj9ndjzH7NHpxUd7wVLFemTTtgckHwg==",
+  "success": true,
+  "projectFilePath": "D:\\Documents\\ORT\\AP\\Programacion 3\\Obligatorio\\Obligatorio_P3_Vivero\\Vivero\\Vivero.csproj",
+  "expectedPackageFiles": [],
+>>>>>>> 6e06ab09e7651ec164248852704cf50c8a12dae1
   "logs": []
 }

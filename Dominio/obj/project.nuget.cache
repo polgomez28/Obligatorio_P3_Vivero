@@ -1,5 +1,6 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "x0a7kjUnjdMKTEOmIW+JcYI4HvBupSFsOQgHSMTHTBULutWJhIIfUHyGi7HS6KkPnklCg89fixU5omY2A0mdHQ==",
   "success": true,
   "projectFilePath": "C:\\ORT\\Programacion3\\Vivero\\Obligatorio_Vivero\\Dominio\\Dominio.csproj",
@@ -14,5 +15,11 @@
     "C:\\Users\\p.gomez\\.nuget\\packages\\system.security.accesscontrol\\4.7.0\\system.security.accesscontrol.4.7.0.nupkg.sha512",
     "C:\\Users\\p.gomez\\.nuget\\packages\\system.security.principal.windows\\4.7.0\\system.security.principal.windows.4.7.0.nupkg.sha512"
   ],
+=======
+  "dgSpecHash": "36V+H6Iv2OlBWkisqRC1V43VQKdqW8bOx1v0tRTM0+4wylOSd46v5jA6Ek5Z+YSbqMb7WKR4OAcMzXex74nh0g==",
+  "success": true,
+  "projectFilePath": "D:\\Documents\\ORT\\AP\\Programacion 3\\Obligatorio\\Obligatorio_P3_Vivero\\Dominio\\Dominio.csproj",
+  "expectedPackageFiles": [],
+>>>>>>> 6e06ab09e7651ec164248852704cf50c8a12dae1
   "logs": []
 }
