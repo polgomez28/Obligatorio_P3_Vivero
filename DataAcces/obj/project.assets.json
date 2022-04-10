@@ -130,6 +130,19 @@
             "rid": "win"
           }
         }
+      },
+      "Dominio/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "System.Data.SqlClient": "4.8.3"
+        },
+        "compile": {
+          "bin/placeholder/Dominio.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Dominio.dll": {}
+        }
       }
     }
   },
@@ -446,45 +459,33 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
+    },
+    "Dominio/1.0.0": {
+      "type": "project",
+      "path": "../Dominio/Dominio.csproj",
+      "msbuildProject": "../Dominio/Dominio.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
+      "Dominio >= 1.0.0",
       "System.Data.SqlClient >= 4.8.3"
     ]
   },
   "packageFolders": {
-<<<<<<< HEAD
-    "C:\\Users\\p.gomez\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
-=======
     "C:\\Users\\Romina\\.nuget\\packages\\": {}
->>>>>>> 6e06ab09e7651ec164248852704cf50c8a12dae1
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-<<<<<<< HEAD
-      "projectUniqueName": "C:\\ORT\\Programacion3\\Vivero\\Obligatorio_Vivero\\DataAcces\\DataAcces.csproj",
-      "projectName": "DataAcces",
-      "projectPath": "C:\\ORT\\Programacion3\\Vivero\\Obligatorio_Vivero\\DataAcces\\DataAcces.csproj",
-      "packagesPath": "C:\\Users\\p.gomez\\.nuget\\packages\\",
-      "outputPath": "C:\\ORT\\Programacion3\\Vivero\\Obligatorio_Vivero\\DataAcces\\obj\\",
-=======
       "projectUniqueName": "D:\\Documents\\ORT\\AP\\Programacion 3\\Obligatorio\\Obligatorio_P3_Vivero\\DataAcces\\DataAcces.csproj",
       "projectName": "DataAcces",
       "projectPath": "D:\\Documents\\ORT\\AP\\Programacion 3\\Obligatorio\\Obligatorio_P3_Vivero\\DataAcces\\DataAcces.csproj",
       "packagesPath": "C:\\Users\\Romina\\.nuget\\packages\\",
       "outputPath": "D:\\Documents\\ORT\\AP\\Programacion 3\\Obligatorio\\Obligatorio_P3_Vivero\\DataAcces\\obj\\",
->>>>>>> 6e06ab09e7651ec164248852704cf50c8a12dae1
       "projectStyle": "PackageReference",
       "configFilePaths": [
-<<<<<<< HEAD
-        "C:\\Users\\p.gomez\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-=======
         "C:\\Users\\Romina\\AppData\\Roaming\\NuGet\\NuGet.Config",
->>>>>>> 6e06ab09e7651ec164248852704cf50c8a12dae1
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -497,7 +498,11 @@
       "frameworks": {
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
-          "projectReferences": {}
+          "projectReferences": {
+            "D:\\Documents\\ORT\\AP\\Programacion 3\\Obligatorio\\Obligatorio_P3_Vivero\\Dominio\\Dominio.csproj": {
+              "projectPath": "D:\\Documents\\ORT\\AP\\Programacion 3\\Obligatorio\\Obligatorio_P3_Vivero\\Dominio\\Dominio.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
@@ -530,11 +535,7 @@
             "privateAssets": "all"
           }
         },
-<<<<<<< HEAD
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.200\\RuntimeIdentifierGraph.json"
-=======
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
->>>>>>> 6e06ab09e7651ec164248852704cf50c8a12dae1
       }
     }
   }

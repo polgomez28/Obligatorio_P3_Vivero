@@ -1,25 +1,18 @@
 {
   "version": 2,
-<<<<<<< HEAD
-  "dgSpecHash": "x0a7kjUnjdMKTEOmIW+JcYI4HvBupSFsOQgHSMTHTBULutWJhIIfUHyGi7HS6KkPnklCg89fixU5omY2A0mdHQ==",
-  "success": true,
-  "projectFilePath": "C:\\ORT\\Programacion3\\Vivero\\Obligatorio_Vivero\\Dominio\\Dominio.csproj",
-  "expectedPackageFiles": [
-    "C:\\Users\\p.gomez\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
-    "C:\\Users\\p.gomez\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
-    "C:\\Users\\p.gomez\\.nuget\\packages\\runtime.native.system.data.sqlclient.sni\\4.7.0\\runtime.native.system.data.sqlclient.sni.4.7.0.nupkg.sha512",
-    "C:\\Users\\p.gomez\\.nuget\\packages\\runtime.win-arm64.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-arm64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
-    "C:\\Users\\p.gomez\\.nuget\\packages\\runtime.win-x64.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-x64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
-    "C:\\Users\\p.gomez\\.nuget\\packages\\runtime.win-x86.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-x86.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
-    "C:\\Users\\p.gomez\\.nuget\\packages\\system.data.sqlclient\\4.8.3\\system.data.sqlclient.4.8.3.nupkg.sha512",
-    "C:\\Users\\p.gomez\\.nuget\\packages\\system.security.accesscontrol\\4.7.0\\system.security.accesscontrol.4.7.0.nupkg.sha512",
-    "C:\\Users\\p.gomez\\.nuget\\packages\\system.security.principal.windows\\4.7.0\\system.security.principal.windows.4.7.0.nupkg.sha512"
-  ],
-=======
-  "dgSpecHash": "36V+H6Iv2OlBWkisqRC1V43VQKdqW8bOx1v0tRTM0+4wylOSd46v5jA6Ek5Z+YSbqMb7WKR4OAcMzXex74nh0g==",
+  "dgSpecHash": "DgNd/5nHArVGZuJiMFJlTjjtQs94pSo8ekYFeWb//OetvEYbTbSB/p39vyQ4eBqooGLYvUHGy6B43Le5fP7RXQ==",
   "success": true,
   "projectFilePath": "D:\\Documents\\ORT\\AP\\Programacion 3\\Obligatorio\\Obligatorio_P3_Vivero\\Dominio\\Dominio.csproj",
-  "expectedPackageFiles": [],
->>>>>>> 6e06ab09e7651ec164248852704cf50c8a12dae1
+  "expectedPackageFiles": [
+    "C:\\Users\\Romina\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
+    "C:\\Users\\Romina\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
+    "C:\\Users\\Romina\\.nuget\\packages\\runtime.native.system.data.sqlclient.sni\\4.7.0\\runtime.native.system.data.sqlclient.sni.4.7.0.nupkg.sha512",
+    "C:\\Users\\Romina\\.nuget\\packages\\runtime.win-arm64.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-arm64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
+    "C:\\Users\\Romina\\.nuget\\packages\\runtime.win-x64.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-x64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
+    "C:\\Users\\Romina\\.nuget\\packages\\runtime.win-x86.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-x86.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
+    "C:\\Users\\Romina\\.nuget\\packages\\system.data.sqlclient\\4.8.3\\system.data.sqlclient.4.8.3.nupkg.sha512",
+    "C:\\Users\\Romina\\.nuget\\packages\\system.security.accesscontrol\\4.7.0\\system.security.accesscontrol.4.7.0.nupkg.sha512",
+    "C:\\Users\\Romina\\.nuget\\packages\\system.security.principal.windows\\4.7.0\\system.security.principal.windows.4.7.0.nupkg.sha512"
+  ],
   "logs": []
 }
