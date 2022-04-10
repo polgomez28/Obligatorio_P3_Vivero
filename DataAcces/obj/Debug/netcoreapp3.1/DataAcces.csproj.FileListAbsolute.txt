@@ -8,3 +8,10 @@ C:\Users\matia\Source\Repos\Obligatorio_P3_Vivero\DataAcces\obj\Debug\netcoreapp
 C:\Users\matia\Source\Repos\Obligatorio_P3_Vivero\DataAcces\obj\Debug\netcoreapp3.1\DataAcces.csproj.CoreCompileInputs.cache
 C:\Users\matia\Source\Repos\Obligatorio_P3_Vivero\DataAcces\obj\Debug\netcoreapp3.1\DataAcces.dll
 C:\Users\matia\Source\Repos\Obligatorio_P3_Vivero\DataAcces\obj\Debug\netcoreapp3.1\DataAcces.pdb
+D:\Documents\ORT\AP\Programacion 3\Obligatorio\Obligatorio_P3_Vivero\DataAcces\obj\Debug\netcoreapp3.1\DataAcces.csproj.AssemblyReference.cache
+D:\Documents\ORT\AP\Programacion 3\Obligatorio\Obligatorio_P3_Vivero\DataAcces\obj\Debug\netcoreapp3.1\DataAcces.GeneratedMSBuildEditorConfig.editorconfig
+D:\Documents\ORT\AP\Programacion 3\Obligatorio\Obligatorio_P3_Vivero\DataAcces\obj\Debug\netcoreapp3.1\DataAcces.AssemblyInfoInputs.cache
+D:\Documents\ORT\AP\Programacion 3\Obligatorio\Obligatorio_P3_Vivero\DataAcces\obj\Debug\netcoreapp3.1\DataAcces.AssemblyInfo.cs
+D:\Documents\ORT\AP\Programacion 3\Obligatorio\Obligatorio_P3_Vivero\DataAcces\obj\Debug\netcoreapp3.1\DataAcces.csproj.CoreCompileInputs.cache
+D:\Documents\ORT\AP\Programacion 3\Obligatorio\Obligatorio_P3_Vivero\DataAcces\obj\Debug\netcoreapp3.1\DataAcces.dll
+D:\Documents\ORT\AP\Programacion 3\Obligatorio\Obligatorio_P3_Vivero\DataAcces\obj\Debug\netcoreapp3.1\DataAcces.pdb
