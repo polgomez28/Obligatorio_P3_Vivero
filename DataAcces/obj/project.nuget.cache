@@ -1,6 +1,5 @@
 {
   "version": 2,
-<<<<<<< HEAD
   "dgSpecHash": "5dU7vtXgCntQrlBnggAfS8OHucIgrvnFgPy/UtKQJEAG/kFxoPzAGCz7sns3uAOzL19r6GqRX4KzBEzUARVaEg==",
   "success": true,
   "projectFilePath": "C:\\ORT\\Programacion3\\Vivero\\Obligatorio_Vivero\\DataAcces\\DataAcces.csproj",
@@ -15,11 +14,12 @@
     "C:\\Users\\p.gomez\\.nuget\\packages\\system.security.accesscontrol\\4.7.0\\system.security.accesscontrol.4.7.0.nupkg.sha512",
     "C:\\Users\\p.gomez\\.nuget\\packages\\system.security.principal.windows\\4.7.0\\system.security.principal.windows.4.7.0.nupkg.sha512"
   ],
-=======
-  "dgSpecHash": "AgZjO9WPSU3jH9X2vLCn7lMvv2r1+Jwnwcf8OO6uMoYOi1pl2//MUgv92rhAoQHMrguJF2dHkpg1+3qO2LTMMg==",
-  "success": true,
-  "projectFilePath": "D:\\Documents\\ORT\\AP\\Programacion 3\\Obligatorio\\Obligatorio_P3_Vivero\\DataAcces\\DataAcces.csproj",
-  "expectedPackageFiles": [],
->>>>>>> 6e06ab09e7651ec164248852704cf50c8a12dae1
-  "logs": []
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problema al leer el archivo de caché C:\\ORT\\Programacion3\\Vivero\\Obligatorio_Vivero\\DataAcces\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    }
+  ]
 }
