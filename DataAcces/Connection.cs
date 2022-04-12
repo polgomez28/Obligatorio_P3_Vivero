@@ -8,7 +8,7 @@ namespace DataAcces
     {
         SqlConnection connection = null;
 
-        public string connectionString = @"data source =localhost\SQLEXPRESS; database=p3bd; integrated security = SSPI";
+        public string connectionString = @"data source =localhost\SQLEXPRESS; database=Vivero; integrated security = SSPI";
         public string ConnectionString { get => connectionString; set => connectionString = value; }
 
         public int ConnectionTimeout => connection.ConnectionTimeout;

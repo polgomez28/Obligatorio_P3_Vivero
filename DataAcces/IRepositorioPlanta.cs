@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DataAcces
 {
-    interface IRepositorioPlanta:IRepositorio<Planta>
+    public interface IRepositorioPlanta:IRepositorio<Planta>
     {
 
     }

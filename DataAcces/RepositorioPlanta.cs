@@ -158,5 +158,63 @@ namespace DataAcces
         }
 
         // Tipo de planta
+        public IEnumerable GetTipos()
+        {
+            ICollection<TipoPlanta> listadoPlantas = new List<TipoPlanta>();
+            IDbCommand command = conneccion.CreateCommand();
+            command.CommandText = "SELECT * FROM dbo.TipoPlanta";
+            List<TipoPlanta> tipos = new List<TipoPlanta>();
+            try
+            {
+                conneccion.Open();
+                using (IDataReader reader = command.ExecuteReader())
+                {
+                    
+                    while (reader.Read())
+                    {
+                        TipoPlanta unTipo = new TipoPlanta();
+                        // Completar después de tener la clase planta y los demás métodos del repositorio
+                        unTipo.Name = (string)reader["Name"];
+                        unTipo.DescripcionTipo = (string)reader["Descripcion"];
+
+                        tipos.Add(unTipo);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conneccion.Close();
+                conneccion.Dispose();
+            }
+            return listadoPlantas;
+        }
+        //Genero el insert del TipoPlanta obtenido del TipoPlantaController
+        public void InsertTipo(TipoPlanta obj)
+        {
+            IDbCommand command = conneccion.CreateCommand();
+            command.CommandText = @"Insert into dbo.TipoPlanta(TipoNombre, TipoDesc) Values(@TipoNombre, @TipoDesc)";
+
+            command.Parameters.Add(new SqlParameter("@TipoNombre", obj.Name));
+            command.Parameters.Add(new SqlParameter("@TipoDesc", obj.DescripcionTipo));         
+            try
+            {
+                conneccion.Open();
+                command.ExecuteNonQuery();
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conneccion.Close();
+                conneccion.Dispose();
+            }
+        }
     }
 }
