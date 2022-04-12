@@ -1,0 +1,34 @@
+﻿@model Dominio.TipoPlanta
+
+@{
+    ViewData["Titulo"] = "Crear";
+}
+
+<h1>Crear</h1>
+
+<h4>Tipo Planta</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Alta Tipo de Planta">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="TipoNombre" class="control-label"></label>
+                <input asp-for="TipoNombre" class="form-control" />
+                <span asp-validation-for="TipoNombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TipoDesc" class="control-label"></label>
+                <input asp-for="TipoDesc" class="form-control" />
+                <span asp-validation-for="TipoDesc" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

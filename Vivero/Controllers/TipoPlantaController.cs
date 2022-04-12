@@ -39,7 +39,7 @@ namespace Vivero.Controllers
             {
                 TipoPlanta unTipo = new TipoPlanta(Name, DescripcionTipo);
                 repositorio.InsertTipo(unTipo);
-                return RedirectToAction(nameof(Index));
+                return View();
             }
             catch
             {
