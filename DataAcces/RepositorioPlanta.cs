@@ -160,24 +160,25 @@ namespace DataAcces
         // Tipo de planta
         public IEnumerable GetTipos()
         {
-            ICollection<TipoPlanta> listadoPlantas = new List<TipoPlanta>();
+            ICollection<TipoPlanta> resultado = new List<TipoPlanta>();
             IDbCommand command = conneccion.CreateCommand();
             command.CommandText = "SELECT * FROM dbo.TipoPlanta";
-            List<TipoPlanta> tipos = new List<TipoPlanta>();
+
             try
             {
                 conneccion.Open();
                 using (IDataReader reader = command.ExecuteReader())
                 {
-                    
+                    TipoPlanta unTipo = null;
                     while (reader.Read())
                     {
-                        TipoPlanta unTipo = new TipoPlanta();
+                        unTipo = new TipoPlanta();
                         // Completar después de tener la clase planta y los demás métodos del repositorio
-                        unTipo.Name = (string)reader["Name"];
-                        unTipo.DescripcionTipo = (string)reader["Descripcion"];
+                        //unTipo.IdTipoPlanta = (int)reader["IdTipoPlanta"];
+                        unTipo.TipoNombre = (string)reader["TipoNombre"];
+                        unTipo.TipoDesc = (string)reader["TipoDesc"];
 
-                        tipos.Add(unTipo);
+                        resultado.Add(unTipo);
                     }
                 }
             }
@@ -190,7 +191,7 @@ namespace DataAcces
                 conneccion.Close();
                 conneccion.Dispose();
             }
-            return listadoPlantas;
+            return resultado;
         }
         //Genero el insert del TipoPlanta obtenido del TipoPlantaController
         public void InsertTipo(TipoPlanta obj)
@@ -198,8 +199,8 @@ namespace DataAcces
             IDbCommand command = conneccion.CreateCommand();
             command.CommandText = @"Insert into dbo.TipoPlanta(TipoNombre, TipoDesc) Values(@TipoNombre, @TipoDesc)";
 
-            command.Parameters.Add(new SqlParameter("@TipoNombre", obj.Name));
-            command.Parameters.Add(new SqlParameter("@TipoDesc", obj.DescripcionTipo));         
+            command.Parameters.Add(new SqlParameter("@TipoNombre", obj.TipoNombre));
+            command.Parameters.Add(new SqlParameter("@TipoDesc", obj.TipoDesc));         
             try
             {
                 conneccion.Open();

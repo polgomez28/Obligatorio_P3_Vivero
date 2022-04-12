@@ -6,16 +6,16 @@ namespace Dominio
 {
     public class TipoPlanta
     {
-        public int IdTipo { get; }
-        public string Name { get; set; }
-        public string DescripcionTipo { get; set; }
+        public int IdTipoPlanta { get; set; }
+        public string TipoNombre { get; set; }
+        public string TipoDesc { get; set; }
         
         #region Constructores
         public TipoPlanta() { }
-        public TipoPlanta(string Name, string DescripcionTipo)
+        public TipoPlanta(string TipoNombre, string TipoDesc)
         {
-            this.Name = Name;
-            this.DescripcionTipo = DescripcionTipo;
+            this.TipoNombre = TipoNombre;
+            this.TipoDesc = TipoDesc;
         }
         #endregion
 

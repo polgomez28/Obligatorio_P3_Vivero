@@ -15,7 +15,7 @@ namespace Vivero.Controllers
         // GET: TipoPlantaController
         public ActionResult Index()
         {
-            return View();
+            return View(repositorio.GetTipos());
         }
 
         // GET: TipoPlantaController/Details/5

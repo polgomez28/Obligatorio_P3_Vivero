@@ -9,6 +9,7 @@ namespace DataAcces
     public interface IRepositorio<T>
     {
         IEnumerable Get();
+        IEnumerable GetTipos();
         T GetByID(int id);
         void Insert(T obj);
         void Delete(int id);
