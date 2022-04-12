@@ -7,6 +7,6 @@ namespace DataAcces
 {
     public interface IRepositorioPlanta:IRepositorio<Planta>
     {
-
+        
     }
 }

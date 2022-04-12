@@ -11,7 +11,7 @@ namespace Vivero.Controllers
 {
     public class TipoPlantaController : Controller
     {
-        //IRepositorio<Planta> repositorio = new RepositorioPlanta(new Connection());
+        IRepositorio<Planta> repositorio = new RepositorioPlanta(new Connection());
         // GET: TipoPlantaController
         public ActionResult Index()
         {

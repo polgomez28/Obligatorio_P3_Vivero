@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dominio;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
@@ -13,5 +14,6 @@ namespace DataAcces
         void Delete(int id);
         void Update(T obj);
         void Save();
+        void InsertTipo(TipoPlanta unTipo);
     }
 }

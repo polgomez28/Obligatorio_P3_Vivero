@@ -8,7 +8,7 @@ using System.Text;
 
 namespace DataAcces
 {
-    class RepositorioPlanta : IRepositorioPlanta
+    public class RepositorioPlanta : IRepositorioPlanta
     {
         private IDbConnection conneccion;
 
