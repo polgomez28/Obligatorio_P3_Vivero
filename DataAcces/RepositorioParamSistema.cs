@@ -8,7 +8,7 @@ using System.Data.SqlClient;
 
 namespace DataAcces
 {
-    class RepositorioParamSistema : IRepositorioParamSistema
+    public class RepositorioParamSistema : IRepositorioParamSistema
     {
         private IDbConnection conneccion;
 
@@ -26,7 +26,7 @@ namespace DataAcces
         {
             ICollection<ParamSistema> resultado = new List<ParamSistema>();
             IDbCommand command = conneccion.CreateCommand();
-            command.CommandText = "SELECT * FROM dbo.TipoPlanta";
+            command.CommandText = "SELECT * FROM dbo.ParamSistema";
 
             try
             {

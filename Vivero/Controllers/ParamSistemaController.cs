@@ -1,18 +1,20 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using DataAcces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using Dominio;
 namespace Vivero.Controllers
 {
     public class ParamSistemaController : Controller
     {
+        IRepositorio<ParamSistema> repositorio = new RepositorioParamSistema(new Connection());
         // GET: ParamSistemaController
         public ActionResult Index()
         {
-            return View();
+            return View(repositorio.Get());
         }
 
         // GET: ParamSistemaController/Details/5
