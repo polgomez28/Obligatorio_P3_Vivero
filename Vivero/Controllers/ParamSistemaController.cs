@@ -47,17 +47,19 @@ namespace Vivero.Controllers
         // GET: ParamSistemaController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            return View(repositorio.GetByID(id));
         }
 
         // POST: ParamSistemaController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(IFormCollection collection)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                ParamSistema unParam = new ParamSistema();
+                repositorio.Update(unParam);
+                return View("SuccessAlta");
             }
             catch
             {

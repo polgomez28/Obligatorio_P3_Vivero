@@ -12,25 +12,19 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.TipoDescMin)
+                @Html.DisplayNameFor(model => model.IdParam)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TipoDescMax)
+                @Html.DisplayNameFor(model => model.Nombre)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PlantaDescMin)
+                @Html.DisplayNameFor(model => model.Descripcion)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PlantaDescMax)
+                @Html.DisplayNameFor(model => model.ValorMin)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TasaIVA)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TasaImpuesto)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TasaArancelaria)
+                @Html.DisplayNameFor(model => model.ValorMax)
             </th>
             <th></th>
         </tr>
@@ -40,25 +34,24 @@
         {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.TipoDescMin)
+                @Html.DisplayFor(modelItem => item.IdParam)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TipoDescMax)
+                @Html.DisplayFor(modelItem => item.Nombre)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PlantaDescMin)
+                @Html.DisplayFor(modelItem => item.Descripcion)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PlantaDescMax)
+                @Html.DisplayFor(modelItem => item.ValorMin)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TasaIVA)
+                @Html.DisplayFor(modelItem => item.ValorMax)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TasaImpuesto)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TasaArancelaria)
+                <a asp-action="Edit" asp-route-id="@item.IdParam">Editar</a> |
+                <a asp-action="Detalles" asp-route-id="@item.IdParam">Detalles</a> |
+                <a asp-action="Borrar" asp-route-id="@item.IdParam">Borrar</a>
             </td>
         </tr>
         }

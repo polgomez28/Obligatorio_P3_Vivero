@@ -38,14 +38,12 @@ namespace DataAcces
                     {
                         unParam = new ParamSistema();
                         // Completar después de tener la clase planta y los demás métodos del repositorio
-                        unParam.TipoDescMin = (int)reader["TipoDescMin"];
-                        unParam.TipoDescMax = (int)reader["TipoDescMax"];
-                        unParam.PlantaDescMin = (int)reader["PlantaDescMin"];
-                        unParam.PlantaDescMax = (int)reader["PlantaDescMax"];
-                        unParam.TasaIVA = (int)reader["TasaIVA"];
-                        unParam.TasaImpuesto = (int)reader["TasaImpuesto"];
-                        unParam.TasaArancelaria = (int)reader["TasaArancelaria"];
-
+                        unParam.IdParam = (int)reader["IdParam"];
+                        unParam.Nombre = (string)reader["Nombre"];
+                        unParam.Descripcion = (string)reader["Descripcion"];
+                        unParam.ValorMin = (int)reader["ValorMin"];
+                        unParam.ValorMax = (int)reader["ValorMax"];
+                        
                         resultado.Add(unParam);
                     }
                 }
@@ -64,7 +62,35 @@ namespace DataAcces
 
         public ParamSistema GetByID(int id)
         {
-            throw new NotImplementedException();
+            ParamSistema unParam = new ParamSistema();
+            IDbCommand command = conneccion.CreateCommand();
+            command.CommandText = "SELECT * FROM dbo.ParamSistema WHERE IdParam ="+ id;
+            //command.Parameters.Add(new SqlParameter("@id", id));
+            try
+            {
+                conneccion.Open();
+                using (IDataReader reader = command.ExecuteReader())
+                {
+                    
+                    unParam.IdParam = (int)reader["IdParam"];
+                    unParam.Nombre = (string)reader["Nombre"];
+                    unParam.Descripcion = (string)reader["Descripcion"];
+                    unParam.ValorMin = (int)reader["ValorMin"];
+                    unParam.ValorMax = (int)reader["ValorMax"];
+                    
+                }
+                
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conneccion.Close();
+                conneccion.Dispose();
+            }
+            return unParam;
         }
 
         public IEnumerable GetTipos()
@@ -89,7 +115,29 @@ namespace DataAcces
 
         public void Update(ParamSistema obj)
         {
-            throw new NotImplementedException();
+            
+            IDbCommand command = conneccion.CreateCommand();
+            command.CommandText = "UPDATE ParamSistema SET Nombre = @obj.Nombre, Descripcion = @obj.Descripcion, ValorMin = @obj.ValorMin, ValorMax = @obj.ValorMax WHERE IdParam = @obj.IdParam";
+
+            command.Parameters.Add(new SqlParameter("@obj.Nombre", obj.Nombre));
+            command.Parameters.Add(new SqlParameter("obj.Descripcion", obj.Descripcion));
+            command.Parameters.Add(new SqlParameter("@obj.ValorMin", obj.ValorMin));
+            command.Parameters.Add(new SqlParameter("@obj.ValorMax", obj.ValorMax));
+            
+            try
+            {
+                conneccion.Open();
+                int filasAfectadas = command.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conneccion.Close();
+                conneccion.Dispose();
+            }
         }
     }
 }
