@@ -3,11 +3,20 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace DataAcces
 {
     class RepositorioParamSistema : IRepositorioParamSistema
     {
+        private IDbConnection conneccion;
+
+        // Constructor de RepositorioPlanta
+        public RepositorioParamSistema(IDbConnection con)
+        {
+            this.conneccion = con;
+        }
         public void Delete(int id)
         {
             throw new NotImplementedException();
@@ -15,7 +24,42 @@ namespace DataAcces
 
         public IEnumerable Get()
         {
-            throw new NotImplementedException();
+            ICollection<ParamSistema> resultado = new List<ParamSistema>();
+            IDbCommand command = conneccion.CreateCommand();
+            command.CommandText = "SELECT * FROM dbo.TipoPlanta";
+
+            try
+            {
+                conneccion.Open();
+                using (IDataReader reader = command.ExecuteReader())
+                {
+                    ParamSistema unParam = null;
+                    while (reader.Read())
+                    {
+                        unParam = new ParamSistema();
+                        // Completar después de tener la clase planta y los demás métodos del repositorio
+                        unParam.TipoDescMin = (int)reader["TipoDescMin"];
+                        unParam.TipoDescMax = (int)reader["TipoDescMax"];
+                        unParam.PlantaDescMin = (int)reader["PlantaDescMin"];
+                        unParam.PlantaDescMax = (int)reader["PlantaDescMax"];
+                        unParam.TasaIVA = (int)reader["TasaIVA"];
+                        unParam.TasaImpuesto = (int)reader["TasaImpuesto"];
+                        unParam.TasaArancelaria = (int)reader["TasaArancelaria"];
+
+                        resultado.Add(unParam);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conneccion.Close();
+                conneccion.Dispose();
+            }
+            return resultado;
         }
 
         public ParamSistema GetByID(int id)

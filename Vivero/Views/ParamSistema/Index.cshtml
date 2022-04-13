@@ -1,0 +1,66 @@
+﻿@model IEnumerable<Dominio.ParamSistema>
+
+@{
+    ViewData["Titulo"] = "Index";
+}
+<h1>Lista de Tipos de Plantas</h1>
+
+<p>
+    <a asp-action="Edit">Editar Parametros del sistema</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TipoDescMin)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TipoDescMax)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PlantaDescMin)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PlantaDescMax)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TasaIVA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TasaImpuesto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TasaArancelaria)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TipoDescMin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TipoDescMax)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PlantaDescMin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PlantaDescMax)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TasaIVA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TasaImpuesto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TasaArancelaria)
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
