@@ -33,17 +33,18 @@ namespace Vivero.Controllers
         // POST: TipoPlantaController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(string Name, string DescripcionTipo)
+        public ActionResult Create(string TipoNombre, string TipoDesc)
         {
             try
             {
-                TipoPlanta unTipo = new TipoPlanta(Name, DescripcionTipo);
+                TipoPlanta unTipo = new TipoPlanta(TipoNombre, TipoDesc);
                 repositorio.InsertTipo(unTipo);
-                return View();
+
+                return View("SuccessAlta");
             }
             catch
             {
-                return View();
+                return View("ErrorAlta");
             }
         }
 
