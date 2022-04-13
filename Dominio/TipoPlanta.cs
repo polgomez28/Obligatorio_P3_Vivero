@@ -20,7 +20,25 @@ namespace Dominio
         #endregion
 
         #region Métodos
-        
+        //Verificar si contiene numeros
+        public static bool NoContieneNumeros(string TipoNombre)
+        {
+            bool bandera = true;
+            foreach (char c in TipoNombre)
+            {
+                if (c >= '0' && c <= '9')
+                {
+                    bandera = false;
+                }
+            }
+            return bandera;
+        }
+        public static bool QuitarEspacios(string TipoNombre)
+        {
+            char[] charsToTrim = { ' ' };
+            string result = TipoNombre.Trim(charsToTrim);
+            return NoContieneNumeros(result);
+        }
         #endregion
     }
 }

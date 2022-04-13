@@ -37,10 +37,17 @@ namespace Vivero.Controllers
         {
             try
             {
+                
                 TipoPlanta unTipo = new TipoPlanta(TipoNombre, TipoDesc);
-                repositorio.InsertTipo(unTipo);
-
-                return View("SuccessAlta");
+                if (TipoPlanta.QuitarEspacios(TipoNombre))
+                {
+                    repositorio.InsertTipo(unTipo);
+                    return View("SuccessAlta");
+                }
+                else
+                {
+                    return View("ErrorAlta");
+                }
             }
             catch
             {
