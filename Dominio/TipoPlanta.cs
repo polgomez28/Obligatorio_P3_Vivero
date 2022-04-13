@@ -33,12 +33,14 @@ namespace Dominio
             }
             return bandera;
         }
+        //Quitamos espacios al inicio y al final
         public static bool QuitarEspacios(string TipoNombre)
         {
             char[] charsToTrim = { ' ' };
             string result = TipoNombre.Trim(charsToTrim);
             return NoContieneNumeros(result);
         }
+        //Valida cantidad caracteres descripción
         #endregion
     }
 }
