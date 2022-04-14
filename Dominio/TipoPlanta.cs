@@ -10,15 +10,6 @@ namespace Dominio
         public string TipoNombre { get; set; }
         public string TipoDesc { get; set; }
         
-        #region Constructores
-        public TipoPlanta() { }
-        public TipoPlanta(string TipoNombre, string TipoDesc)
-        {
-            this.TipoNombre = TipoNombre;
-            this.TipoDesc = TipoDesc;
-        }
-        #endregion
-
         #region Métodos
         //Verificar si contiene numeros
         public static bool NoContieneNumeros(string TipoNombre)
@@ -40,7 +31,7 @@ namespace Dominio
             string result = TipoNombre.Trim(charsToTrim);
             return NoContieneNumeros(result);
         }
-        //Valida cantidad caracteres descripción
+        
         #endregion
     }
 }

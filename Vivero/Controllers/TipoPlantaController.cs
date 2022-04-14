@@ -33,13 +33,13 @@ namespace Vivero.Controllers
         // POST: TipoPlantaController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(string TipoNombre, string TipoDesc)
+        public ActionResult Create(TipoPlanta unTipo)
         {
             try
             {
                 
-                TipoPlanta unTipo = new TipoPlanta(TipoNombre, TipoDesc);
-                if (TipoPlanta.QuitarEspacios(TipoNombre))
+                //TipoPlanta unTipo = new TipoPlanta(TipoNombre, TipoDesc);
+                if (TipoPlanta.QuitarEspacios(unTipo.TipoNombre))
                 {
                     repositorio.InsertTipo(unTipo);
                     return View("SuccessAlta");
@@ -58,22 +58,17 @@ namespace Vivero.Controllers
         // GET: TipoPlantaController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            TipoPlanta unTipo = repositorio.GetByIdTipo(id);
+            return View(unTipo);
         }
 
         // POST: TipoPlantaController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(TipoPlanta unTipo)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            repositorio.UpdateTipo(unTipo);
+            return View("SuccessAlta");
         }
 
         // GET: TipoPlantaController/Delete/5

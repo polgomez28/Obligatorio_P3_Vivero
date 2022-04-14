@@ -22,6 +22,11 @@ namespace DataAcces
             throw new NotImplementedException();
         }
 
+        public bool ExisteTipo(TipoPlanta unTipo)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable Get()
         {
             ICollection<ParamSistema> resultado = new List<ParamSistema>();
@@ -95,6 +100,11 @@ namespace DataAcces
             return unParam;
         }
 
+        public TipoPlanta GetByIdTipo(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable GetTipos()
         {
             throw new NotImplementedException();
@@ -142,6 +152,11 @@ namespace DataAcces
                 conneccion.Dispose();
                 command.Dispose();
             }
+        }
+
+        public void UpdateTipo(TipoPlanta obj)
+        {
+            throw new NotImplementedException();
         }
     }
 }
