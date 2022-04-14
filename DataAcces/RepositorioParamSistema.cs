@@ -74,6 +74,7 @@ namespace DataAcces
                     reader.Read();
 
                     unParam = new ParamSistema();
+                    unParam.IdParam = (int)reader["IdParam"];
                     unParam.Nombre = (string)reader["Nombre"];
                     unParam.Descripcion = (string)reader["Descripcion"];
                     unParam.ValorMin = (int)reader["ValorMin"];
@@ -118,13 +119,14 @@ namespace DataAcces
         {
             
             IDbCommand command = conneccion.CreateCommand();
-            command.CommandText = "UPDATE ParamSistema SET Nombre = @obj.Nombre, Descripcion = @obj.Descripcion, ValorMin = @obj.ValorMin, ValorMax = @obj.ValorMax WHERE IdParam = @obj.IdParam";
-
-            command.Parameters.Add(new SqlParameter("@obj.Nombre", obj.Nombre));
-            command.Parameters.Add(new SqlParameter("obj.Descripcion", obj.Descripcion));
-            command.Parameters.Add(new SqlParameter("@obj.ValorMin", obj.ValorMin));
-            command.Parameters.Add(new SqlParameter("@obj.ValorMax", obj.ValorMax));
+            command.CommandText = @"UPDATE ParamSistema SET Nombre = @Nombre, Descripcion = @Descripcion, ValorMin = @ValorMin, ValorMax = @ValorMax WHERE IdParam = @IdParam";
             
+            command.Parameters.Add(new SqlParameter("@Nombre", obj.Nombre));
+            command.Parameters.Add(new SqlParameter("@Descripcion", obj.Descripcion));
+            command.Parameters.Add(new SqlParameter("@ValorMin", obj.ValorMin));
+            command.Parameters.Add(new SqlParameter("@ValorMax", obj.ValorMax));
+            command.Parameters.Add(new SqlParameter("@IdParam", obj.IdParam));
+
             try
             {
                 conneccion.Open();
@@ -138,6 +140,7 @@ namespace DataAcces
             {
                 conneccion.Close();
                 conneccion.Dispose();
+                command.Dispose();
             }
         }
     }
