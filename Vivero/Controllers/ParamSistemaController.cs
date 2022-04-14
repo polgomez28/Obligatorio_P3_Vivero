@@ -47,7 +47,8 @@ namespace Vivero.Controllers
         // GET: ParamSistemaController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View(repositorio.GetByID(id));
+            ParamSistema unParam = repositorio.GetByID(id);
+            return View(unParam);
         }
 
         // POST: ParamSistemaController/Edit/5

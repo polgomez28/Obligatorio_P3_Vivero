@@ -62,22 +62,22 @@ namespace DataAcces
 
         public ParamSistema GetByID(int id)
         {
-            ParamSistema unParam = new ParamSistema();
+            ParamSistema unParam = null;
             IDbCommand command = conneccion.CreateCommand();
-            command.CommandText = "SELECT * FROM dbo.ParamSistema WHERE IdParam ="+ id;
-            //command.Parameters.Add(new SqlParameter("@id", id));
+            command.CommandText = @"SELECT * FROM dbo.ParamSistema WHERE IdParam = @id";
+            command.Parameters.Add(new SqlParameter("@id", id));
             try
             {
                 conneccion.Open();
                 using (IDataReader reader = command.ExecuteReader())
                 {
-                    
-                    unParam.IdParam = (int)reader["IdParam"];
+                    reader.Read();
+
+                    unParam = new ParamSistema();
                     unParam.Nombre = (string)reader["Nombre"];
                     unParam.Descripcion = (string)reader["Descripcion"];
                     unParam.ValorMin = (int)reader["ValorMin"];
                     unParam.ValorMax = (int)reader["ValorMax"];
-                    
                 }
                 
             }
@@ -89,6 +89,7 @@ namespace DataAcces
             {
                 conneccion.Close();
                 conneccion.Dispose();
+                command.Dispose();
             }
             return unParam;
         }

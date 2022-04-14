@@ -15,6 +15,7 @@ namespace Dominio
         public ParamSistema() { }
         public ParamSistema(string Nombre, string Descripcion, int ValorMin, int ValorMax)
         {
+            
             this.Nombre = Nombre;
             this.Descripcion = Descripcion;
             this.ValorMin = ValorMin;
