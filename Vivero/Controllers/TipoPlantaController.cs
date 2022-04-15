@@ -74,21 +74,23 @@ namespace Vivero.Controllers
         // GET: TipoPlantaController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            TipoPlanta unTipo = repositorio.GetByIdTipo(id);
+            return View(unTipo);
         }
 
         // POST: TipoPlantaController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult DeleteTipo(int IdTipoPlanta)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                repositorio.DeleteTipo(IdTipoPlanta);
+                return View("SuccessAlta");
             }
             catch
             {
-                return View();
+                return View("ErrorAlta");
             }
         }
     }

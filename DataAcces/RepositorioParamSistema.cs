@@ -22,6 +22,11 @@ namespace DataAcces
             throw new NotImplementedException();
         }
 
+        public void DeleteTipo(int idTipoPlanta)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool ExisteTipo(TipoPlanta unTipo)
         {
             throw new NotImplementedException();

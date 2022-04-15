@@ -19,6 +19,7 @@ namespace DataAcces
         void InsertTipo(TipoPlanta unTipo);
         bool ExisteTipo(TipoPlanta unTipo);
         TipoPlanta GetByIdTipo(int id);
+        void DeleteTipo(int idTipoPlanta);
     }
 }
 

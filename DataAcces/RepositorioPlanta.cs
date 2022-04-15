@@ -293,5 +293,47 @@ namespace DataAcces
             }
             return unTipo;
         }
+
+        //public void DeteleTipo(int Id)
+        //{
+        //    IDbCommand command = conneccion.CreateCommand();
+        //    command.CommandText = "DELETE FROM TipoPlanta WHERE IdTipoPlanta = @Id";
+        //    command.Parameters.Add(new SqlParameter("@Id", Id));
+        //    try
+        //    {
+        //        conneccion.Open();
+        //        command.ExecuteNonQuery();
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }
+        //    finally
+        //    {
+        //        conneccion.Close();
+        //        conneccion.Dispose();
+        //    }
+        //}
+
+        public void DeleteTipo(int idTipoPlanta)
+        {
+            IDbCommand command = conneccion.CreateCommand();
+            command.CommandText = @"DELETE FROM TipoPlanta WHERE IdTipoPlanta = @idTipoPlanta";
+            command.Parameters.Add(new SqlParameter("@idTipoPlanta", idTipoPlanta));
+            try
+            {
+                conneccion.Open();
+                command.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conneccion.Close();
+                conneccion.Dispose();
+            }
+        }
     }
 }
