@@ -222,7 +222,9 @@ namespace DataAcces
         //Genero el insert del TipoPlanta obtenido del TipoPlantaController Siempre y cuando no exista (!ExisteTipo)
         public void InsertTipo(TipoPlanta obj)
         {
-            
+            //if (!ExisteTipo(obj))
+            //{
+
                 IDbCommand command = conneccion.CreateCommand();
                 command.CommandText = @"INSERT INTO TipoPlanta(TipoNombre, TipoDesc) VALUES(@TipoNombre, @TipoDesc)";
                 command.Parameters.Add(new SqlParameter("@TipoNombre", obj.TipoNombre));
@@ -233,7 +235,7 @@ namespace DataAcces
                     int filasAfectadas = command.ExecuteNonQuery();
                     if (filasAfectadas == 0)
                         throw new Exception();
-            }
+                }
                 catch (Exception)
                 {
                     throw;
@@ -243,6 +245,12 @@ namespace DataAcces
                     conneccion.Close();
                     conneccion.Dispose();
                 }
+            //}
+            //else
+            //{
+            //    throw new Exception();
+            //}
+            
         }
         // Busca si existe un Tipo por nombre en la base de datos
         public bool ExisteTipo(TipoPlanta obj)
@@ -293,27 +301,6 @@ namespace DataAcces
             }
             return unTipo;
         }
-
-        //public void DeteleTipo(int Id)
-        //{
-        //    IDbCommand command = conneccion.CreateCommand();
-        //    command.CommandText = "DELETE FROM TipoPlanta WHERE IdTipoPlanta = @Id";
-        //    command.Parameters.Add(new SqlParameter("@Id", Id));
-        //    try
-        //    {
-        //        conneccion.Open();
-        //        command.ExecuteNonQuery();
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
-        //    finally
-        //    {
-        //        conneccion.Close();
-        //        conneccion.Dispose();
-        //    }
-        //}
 
         public void DeleteTipo(int idTipoPlanta)
         {

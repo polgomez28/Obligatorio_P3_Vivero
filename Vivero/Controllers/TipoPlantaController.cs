@@ -37,8 +37,6 @@ namespace Vivero.Controllers
         {
             try
             {
-                
-                //TipoPlanta unTipo = new TipoPlanta(TipoNombre, TipoDesc);
                 if (TipoPlanta.QuitarEspacios(unTipo.TipoNombre))
                 {
                     repositorio.InsertTipo(unTipo);
@@ -54,7 +52,7 @@ namespace Vivero.Controllers
                 return View("ErrorAlta");
             }
         }
-
+        
         // GET: TipoPlantaController/Edit/5
         public ActionResult Edit(int id)
         {
