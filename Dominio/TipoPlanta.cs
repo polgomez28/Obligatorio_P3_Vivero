@@ -31,7 +31,6 @@ namespace Dominio
             string result = TipoNombre.Trim(charsToTrim);
             return NoContieneNumeros(result);
         }
-        
         #endregion
     }
 }

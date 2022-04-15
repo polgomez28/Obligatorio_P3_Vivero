@@ -21,21 +21,30 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @if (Model.Any())
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TipoNombre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TipoDesc)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.IdTipoPlanta">Editar</a> |
-                    <a asp-action="Details" asp-route-id="@item.IdTipoPlanta">Detalles</a> |
-                    <a asp-action="Delete" asp-route-id="@item.IdTipoPlanta">Borrar</a>
-                </td>
-            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TipoNombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TipoDesc)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.IdTipoPlanta">Editar</a> |
+                        <a asp-action="Delete" asp-route-id="@item.IdTipoPlanta">Borrar</a>
+                    </td>
+                </tr>
+            }
         }
+        else
+        {
+            <div class="alert alert-warning" role="alert">
+                No existen Tipos ingresados por el momento
+            </div>
+        }
+
     </tbody>
 </table>
