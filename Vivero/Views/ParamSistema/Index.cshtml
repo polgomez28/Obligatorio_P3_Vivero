@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Dominio.ParamSistema>
+
+@{
+    ViewData["Titulo"] = "Index";
+}
+<h1>Lista de Tipos de Plantas</h1>
+
+<p>
+    <a asp-action="Edit">Editar Parametros del sistema</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IdParam)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ValorMin)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ValorMax)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdParam)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValorMin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValorMax)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdParam">Editar</a> |
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

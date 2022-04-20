@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Dominio.TipoPlanta>
+
+@{
+    ViewData["Titulo"] = "Index";
+}
+<h1>Lista de Tipos de Plantas</h1>
+
+<p>
+    <a asp-action="Create">Nuevo Tipo</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TipoNombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TipoDesc)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Any())
+        {
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TipoNombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TipoDesc)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.IdTipoPlanta">Editar</a> |
+                        <a asp-action="Delete" asp-route-id="@item.IdTipoPlanta">Borrar</a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <div class="alert alert-warning" role="alert">
+                No existen Tipos ingresados por el momento
+            </div>
+        }
+
+    </tbody>
+</table>
