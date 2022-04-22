@@ -4,7 +4,9 @@ using System.Text;
 
 namespace Dominio
 {
-    class NombresVulgares
+    public class NombresVulgares
     {
+        public int IdNombreVulgar { get; set; }
+        public string TextoNombre { get; set; }
     }
 }
