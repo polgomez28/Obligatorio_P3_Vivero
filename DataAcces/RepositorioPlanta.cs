@@ -10,21 +10,21 @@ namespace DataAcces
 {
     public class RepositorioPlanta : IRepositorioPlanta
     {
-        private IDbConnection conneccion;
+        private IDbConnection connection;
 
         // Constructor de RepositorioPlanta
         public RepositorioPlanta(IDbConnection con)
         {
-            this.conneccion = con;
+            this.connection = con;
         }
         public void Delete(int id)
         {
-            IDbCommand command = conneccion.CreateCommand();
+            IDbCommand command = connection.CreateCommand();
             command.CommandText = "DELETE FROM dbo.Plantas WHERE Id = @Id";
             command.Parameters.Add(new SqlParameter("@Id", id));
             try
             {
-                conneccion.Open();
+                connection.Open();
                 command.ExecuteNonQuery();
             }
             catch (Exception)
@@ -33,20 +33,20 @@ namespace DataAcces
             }
             finally
             {
-                conneccion.Close();
-                conneccion.Dispose();
+                connection.Close();
+                connection.Dispose();
             }
         }
 
         public IEnumerable Get()
         {
             ICollection<Planta> listadoPlantas = new List<Planta>();
-            IDbCommand command = conneccion.CreateCommand();
+            IDbCommand command = connection.CreateCommand();
             command.CommandText = "SELECT * FROM dbo.Plantas";
 
             try
             {
-                conneccion.Open();
+                connection.Open();
                 using (IDataReader reader = command.ExecuteReader())
                 {
                     Planta unaPlanta = null;
@@ -72,21 +72,21 @@ namespace DataAcces
             }
             finally
             {
-                conneccion.Close();
-                conneccion.Dispose();
+                connection.Close();
+                connection.Dispose();
             }
             return listadoPlantas;
         }
 
         public Planta GetByID(int id)
         {
-            IDbCommand command = conneccion.CreateCommand();
+            IDbCommand command = connection.CreateCommand();
             command.CommandText = "SELECT * FROM dbo.Plantas WHERE Id = @Id";
             command.Parameters.Add(new SqlParameter("@Id", id));
             Planta unaPlanta = null;
             try
             {
-                conneccion.Open();
+                connection.Open();
                 using(IDataReader reader = command.ExecuteReader())
                 {                     
                     while (reader.Read())
@@ -110,15 +110,15 @@ namespace DataAcces
             }
             finally
             {
-                conneccion.Close();
-                conneccion.Dispose();
+                connection.Close();
+                connection.Dispose();
             }
             return unaPlanta;
         }
 
         public void Insert(Planta obj)
         {
-            IDbCommand command = conneccion.CreateCommand();
+            IDbCommand command = connection.CreateCommand();
             command.CommandText = @"Insert into dbo.Plantas(Tipo, NombreCientifico, NombresVulgares, Descripcion, FichaCuidados, Foto, Ambiente, Altura) Values(@Tipo, @NombreCientifico,
             @NombresVulgares, @Descripcion, @FichaCuidados, @Foto, @Ambiente, @Altura)";
 
@@ -132,7 +132,7 @@ namespace DataAcces
             //command.Parameters.Add(new SqlParameter("@Altura", obj.Altura));            
             try
             {
-                conneccion.Open();
+                connection.Open();
                 command.ExecuteNonQuery();
 
             }
@@ -142,8 +142,8 @@ namespace DataAcces
             }
             finally
             {
-                conneccion.Close();
-                conneccion.Dispose();
+                connection.Close();
+                connection.Dispose();
             }
         }
 
@@ -160,7 +160,7 @@ namespace DataAcces
         // Tipo de planta
         public void UpdateTipo(TipoPlanta obj)
         {
-            IDbCommand command = conneccion.CreateCommand();
+            IDbCommand command = connection.CreateCommand();
             command.CommandText = @"UPDATE TipoPlanta SET TipoNombre = @TipoNombre, TipoDesc = @TipoDesc WHERE IdTipoPlanta = @IdTipoPlanta";
 
             command.Parameters.Add(new SqlParameter("@TipoNombre", obj.TipoNombre));
@@ -170,7 +170,7 @@ namespace DataAcces
 
             try
             {
-                conneccion.Open();
+                connection.Open();
                 int filasAfectadas = command.ExecuteNonQuery();
             }
             catch (Exception)
@@ -179,20 +179,20 @@ namespace DataAcces
             }
             finally
             {
-                conneccion.Close();
-                conneccion.Dispose();
+                connection.Close();
+                connection.Dispose();
                 command.Dispose();
             }
         }
         public IEnumerable GetTipos()
         {
             ICollection<TipoPlanta> resultado = new List<TipoPlanta>();
-            IDbCommand command = conneccion.CreateCommand();
+            IDbCommand command = connection.CreateCommand();
             command.CommandText = "SELECT * FROM dbo.TipoPlanta";
 
             try
             {
-                conneccion.Open();
+                connection.Open();
                 using (IDataReader reader = command.ExecuteReader())
                 {
                     TipoPlanta unTipo = null;
@@ -214,69 +214,72 @@ namespace DataAcces
             }
             finally
             {
-                conneccion.Close();
-                conneccion.Dispose();
+                connection.Close();
+                connection.Dispose();
             }
             return resultado;
         }
         //Genero el insert del TipoPlanta obtenido del TipoPlantaController Siempre y cuando no exista (!ExisteTipo)
         public void InsertTipo(TipoPlanta obj)
         {
-            //if (!ExisteTipo(obj))
-            //{
+            TipoPlanta unT = new TipoPlanta();
+            
+            unT = ExisteTipo(obj);
+            if ( unT == null)
+            {
 
-                IDbCommand command = conneccion.CreateCommand();
+                IDbCommand command = connection.CreateCommand();
                 command.CommandText = @"INSERT INTO TipoPlanta(TipoNombre, TipoDesc) VALUES(@TipoNombre, @TipoDesc)";
                 command.Parameters.Add(new SqlParameter("@TipoNombre", obj.TipoNombre));
                 command.Parameters.Add(new SqlParameter("@TipoDesc", obj.TipoDesc));
                 try
                 {
-                    conneccion.Open();
-                    int filasAfectadas = command.ExecuteNonQuery();
-                    if (filasAfectadas == 0)
-                        throw new Exception();
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                    
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    throw;
+                    Console.WriteLine($"Se controló la excepción {ex.Message} en el método invocado InvocarCodigoExcepción()");
                 }
                 finally
                 {
-                    conneccion.Close();
-                    conneccion.Dispose();
+                    connection.Close();
+                    connection.Dispose();
                 }
-            //}
-            //else
-            //{
-            //    throw new Exception();
-            //}
-            
+            }
+            else
+            {
+                throw new Exception();
+            }
+
         }
         // Busca si existe un Tipo por nombre en la base de datos
-        public bool ExisteTipo(TipoPlanta obj)
+        public TipoPlanta ExisteTipo(TipoPlanta obj)
         {
-            bool existe = false;
+            //TipoPlanta Tipo = new TipoPlanta();
+            TipoPlanta Tipo = null;
             ICollection<TipoPlanta> resultado = new List<TipoPlanta>();
             resultado = (ICollection<TipoPlanta>)GetTipos();
             foreach (TipoPlanta unTipo in resultado)
             {
                 if (obj.TipoNombre == unTipo.TipoNombre)
                 {
-                    existe = true;
+                    Tipo = unTipo;
                 }
             }
-            return existe;
+            return Tipo;
         }
 
         public TipoPlanta GetByIdTipo(int id)
         {
             TipoPlanta unTipo = null;
-            IDbCommand command = conneccion.CreateCommand();
+            IDbCommand command = connection.CreateCommand();
             command.CommandText = @"SELECT * FROM TipoPlanta WHERE IdTipoPlanta = @id";
             command.Parameters.Add(new SqlParameter("@id", id));
             try
             {
-                conneccion.Open();
+                connection.Open();
                 using (IDataReader reader = command.ExecuteReader())
                 {
                     reader.Read();
@@ -295,21 +298,67 @@ namespace DataAcces
             }
             finally
             {
-                conneccion.Close();
-                conneccion.Dispose();
+                connection.Close();
+                connection.Dispose();
                 command.Dispose();
             }
             return unTipo;
         }
 
+        public TipoPlanta GetByNombreTipo(string TipoNombre)
+        {
+            TipoPlanta Tipo = null;
+            ICollection<TipoPlanta> resultado = new List<TipoPlanta>();
+            resultado = (ICollection<TipoPlanta>)GetTipos();
+            foreach (TipoPlanta unTipo in resultado)
+            {
+                if (TipoNombre == unTipo.TipoNombre)
+                {
+                    Tipo = unTipo;
+                }
+            }
+            return Tipo;
+
+            //TipoPlanta unTipo = null;
+            //IDbCommand command = connection.CreateCommand();
+            //command.CommandText = @"SELECT * FROM TipoPlanta WHERE TipoNombre = @TipoNombre";
+            //command.Parameters.Add(new SqlParameter("@TipoNombre", TipoNombre));
+            //try
+            //{
+            //    connection.Open();
+            //    using (IDataReader reader = command.ExecuteReader())
+            //    {
+            //        reader.Read();
+
+            //        unTipo = new TipoPlanta();
+            //        unTipo.IdTipoPlanta = (int)reader["IdTipoPlanta"];
+            //        unTipo.TipoNombre = (string)reader["TipoNombre"];
+            //        unTipo.TipoDesc = (string)reader["TipoDesc"];
+
+            //    }
+
+            //}
+            //catch (Exception ex)
+            //{
+            //    throw;
+            //}
+            //finally
+            //{
+            //    connection.Close();
+            //    connection.Dispose();
+            //    command.Dispose();
+            //}
+            //return unTipo;
+        }
+
         public void DeleteTipo(int idTipoPlanta)
         {
-            IDbCommand command = conneccion.CreateCommand();
+            IDbCommand command = connection.CreateCommand();
             command.CommandText = @"DELETE FROM TipoPlanta WHERE IdTipoPlanta = @idTipoPlanta";
             command.Parameters.Add(new SqlParameter("@idTipoPlanta", idTipoPlanta));
             try
             {
-                conneccion.Open();
+                connection.Open();
                 command.ExecuteNonQuery();
             }
             catch (Exception)
@@ -318,9 +367,15 @@ namespace DataAcces
             }
             finally
             {
-                conneccion.Close();
-                conneccion.Dispose();
+                connection.Close();
+                connection.Dispose();
+                command.Dispose();
             }
+        }
+
+        bool IRepositorio<Planta>.ExisteTipo(TipoPlanta unTipo)
+        {
+            throw new NotImplementedException();
         }
     }
 }
