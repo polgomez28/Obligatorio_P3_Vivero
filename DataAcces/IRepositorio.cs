@@ -20,6 +20,7 @@ namespace DataAcces
         bool ExisteTipo(TipoPlanta unTipo);
         TipoPlanta GetByIdTipo(int id);
         void DeleteTipo(int idTipoPlanta);
+        TipoPlanta GetByNombreTipo(string tipoNombre);
     }
 }
 

@@ -110,6 +110,11 @@ namespace DataAcces
             throw new NotImplementedException();
         }
 
+        public TipoPlanta GetByNombreTipo(string tipoNombre)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable GetTipos()
         {
             throw new NotImplementedException();
