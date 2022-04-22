@@ -91,5 +91,15 @@ namespace Vivero.Controllers
                 return View("ErrorAlta");
             }
         }
+        public ActionResult Search()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Search(string TipoNombre)
+        {
+            TipoPlanta unTipo = repositorio.GetByNombreTipo(TipoNombre);
+            return View("ViewSearch",unTipo);
+        }
     }
 }

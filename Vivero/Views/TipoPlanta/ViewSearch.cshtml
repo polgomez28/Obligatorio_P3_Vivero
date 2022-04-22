@@ -1,0 +1,35 @@
+﻿@model Dominio.TipoPlanta
+
+@{
+    ViewData["Title"] = "ViewSearch";
+}
+<h1>Visualizar busqueda</h1>
+
+<div>
+    <h4>Tipo de Planta</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.IdTipoPlanta)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.IdTipoPlanta)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TipoNombre)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TipoNombre)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TipoDesc)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TipoDesc)
+        </dd>
+    </dl>
+
+    <form>
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

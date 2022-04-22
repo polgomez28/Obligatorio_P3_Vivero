@@ -305,6 +305,52 @@ namespace DataAcces
             return unTipo;
         }
 
+        public TipoPlanta GetByNombreTipo(string TipoNombre)
+        {
+            TipoPlanta Tipo = null;
+            ICollection<TipoPlanta> resultado = new List<TipoPlanta>();
+            resultado = (ICollection<TipoPlanta>)GetTipos();
+            foreach (TipoPlanta unTipo in resultado)
+            {
+                if (TipoNombre == unTipo.TipoNombre)
+                {
+                    Tipo = unTipo;
+                }
+            }
+            return Tipo;
+
+            //TipoPlanta unTipo = null;
+            //IDbCommand command = connection.CreateCommand();
+            //command.CommandText = @"SELECT * FROM TipoPlanta WHERE TipoNombre = @TipoNombre";
+            //command.Parameters.Add(new SqlParameter("@TipoNombre", TipoNombre));
+            //try
+            //{
+            //    connection.Open();
+            //    using (IDataReader reader = command.ExecuteReader())
+            //    {
+            //        reader.Read();
+
+            //        unTipo = new TipoPlanta();
+            //        unTipo.IdTipoPlanta = (int)reader["IdTipoPlanta"];
+            //        unTipo.TipoNombre = (string)reader["TipoNombre"];
+            //        unTipo.TipoDesc = (string)reader["TipoDesc"];
+
+            //    }
+
+            //}
+            //catch (Exception ex)
+            //{
+            //    throw;
+            //}
+            //finally
+            //{
+            //    connection.Close();
+            //    connection.Dispose();
+            //    command.Dispose();
+            //}
+            //return unTipo;
+        }
+
         public void DeleteTipo(int idTipoPlanta)
         {
             IDbCommand command = connection.CreateCommand();
