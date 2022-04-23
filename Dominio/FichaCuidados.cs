@@ -4,7 +4,11 @@ using System.Text;
 
 namespace Dominio
 {
-    class FichaCuidados
+    public class FichaCuidados
     {
+        public int IdFichaCuidados { get; set; }
+        public string Riego { get; set; }
+        public TipoIluminacion TipoIluminacion { get; set; }
+        public double Temperatura { get; set; }
     }
 }

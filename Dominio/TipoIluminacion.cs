@@ -4,7 +4,11 @@ using System.Text;
 
 namespace Dominio
 {
-    class TipoIluminacion
+    public class TipoIluminacion
     {
+        public int IdIluminacion { get; set; }
+        public string DescripcionTipoIlum { get; set; }
     }
+
+    // Validaciones
 }

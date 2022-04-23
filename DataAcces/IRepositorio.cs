@@ -8,19 +8,11 @@ namespace DataAcces
 {
     public interface IRepositorio<T>
     {
-        IEnumerable Get();
-        IEnumerable GetTipos();
+        IEnumerable Get();              
         T GetByID(int id);
         void Insert(T obj);
         void Delete(int id);
-        void Update(T obj);
-        void UpdateTipo(TipoPlanta obj);
-        void Save();
-        void InsertTipo(TipoPlanta unTipo);
-        bool ExisteTipo(TipoPlanta unTipo);
-        TipoPlanta GetByIdTipo(int id);
-        void DeleteTipo(int idTipoPlanta);
-        TipoPlanta GetByNombreTipo(string tipoNombre);
+        void Update(T obj);                   
     }
 }
 

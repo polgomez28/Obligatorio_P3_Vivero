@@ -31,6 +31,24 @@ namespace Dominio
             string result = TipoNombre.Trim(charsToTrim);
             return NoContieneNumeros(result);
         }
+        public static bool DescValid(string TipoDesc, int numMax, int numMin)
+        {
+            if (TipoDesc.Length < numMin)
+            {
+                return false;
+            }
+            else
+            {
+                if (TipoDesc.Length < numMax)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
         #endregion
     }
 }

@@ -4,7 +4,13 @@ using System.Text;
 
 namespace Dominio
 {
-    class Compras
+    public abstract class Compras // La clase es abstracta porque DePlaza e Importada heredan de esta clase y no va a haber otro tipo de compra, entonces no se va a instanciar Compra
     {
+        public int IdCompra { get; set; }
+        public DateTime FechaCompra { get; set; }
+        public List<Planta> ListaPlantas { get; set; }
+        public double CostoTotal { get; set; }
+        // agrego atributo list para listar items
+        public List<ItemPlantas> Items { get; set; }
     }
 }

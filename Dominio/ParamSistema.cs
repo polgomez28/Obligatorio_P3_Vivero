@@ -12,16 +12,6 @@ namespace Dominio
         public int ValorMin { get; set; }
         public int ValorMax { get; set; }
 
-        //public ParamSistema() { }
-        //public ParamSistema(string Nombre, string Descripcion, int ValorMin, int ValorMax)
-        //{
-
-        //    this.Nombre = Nombre;
-        //    this.Descripcion = Descripcion;
-        //    this.ValorMin = ValorMin;
-        //    this.ValorMax = ValorMax;
-        //}
-
         public bool IsValid()
         {
             return !string.IsNullOrEmpty(Nombre);

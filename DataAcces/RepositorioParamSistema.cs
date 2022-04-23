@@ -22,16 +22,6 @@ namespace DataAcces
             throw new NotImplementedException();
         }
 
-        public void DeleteTipo(int idTipoPlanta)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool ExisteTipo(TipoPlanta unTipo)
-        {
-            throw new NotImplementedException();
-        }
-
         public IEnumerable Get()
         {
             ICollection<ParamSistema> resultado = new List<ParamSistema>();
@@ -66,6 +56,7 @@ namespace DataAcces
             {
                 conneccion.Close();
                 conneccion.Dispose();
+                command.Dispose();
             }
             return resultado;
         }
@@ -105,27 +96,7 @@ namespace DataAcces
             return unParam;
         }
 
-        public TipoPlanta GetByIdTipo(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public TipoPlanta GetByNombreTipo(string tipoNombre)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable GetTipos()
-        {
-            throw new NotImplementedException();
-        }
-
         public void Insert(ParamSistema obj)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void InsertTipo(TipoPlanta unTipo)
         {
             throw new NotImplementedException();
         }
@@ -162,11 +133,6 @@ namespace DataAcces
                 conneccion.Dispose();
                 command.Dispose();
             }
-        }
-
-        public void UpdateTipo(TipoPlanta obj)
-        {
-            throw new NotImplementedException();
         }
     }
 }

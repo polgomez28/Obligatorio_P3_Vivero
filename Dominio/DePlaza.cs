@@ -4,7 +4,10 @@ using System.Text;
 
 namespace Dominio
 {
-    class DePlaza
+    public class DePlaza:Compras
     {
+        public static double TasaIVA { get; set; }
+        public double CostoFlete { get; set; }
+
     }
 }
