@@ -14,10 +14,10 @@ namespace DataAcces
         void Insert(T obj);
         void Delete(int id);
         void Update(T obj);
-        void UpdateTipo(TipoPlanta obj);
         void Save();
+        void UpdateTipo(TipoPlanta obj);
         void InsertTipo(TipoPlanta unTipo);
-        bool ExisteTipo(TipoPlanta unTipo);
+        TipoPlanta ExisteTipo(TipoPlanta unTipo);
         TipoPlanta GetByIdTipo(int id);
         void DeleteTipo(int idTipoPlanta);
         TipoPlanta GetByNombreTipo(string tipoNombre);

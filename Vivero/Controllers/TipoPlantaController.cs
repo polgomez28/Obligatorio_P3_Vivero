@@ -49,29 +49,36 @@ namespace Vivero.Controllers
                         numMin = item.ValorMin;
                     }
                 }
-                if (TipoPlanta.DescValid(unTipo.TipoDesc,numMax,numMin))
-                {
-                    if (TipoPlanta.QuitarEspacios(unTipo.TipoNombre))
+                    if (TipoPlanta.DescValid(unTipo.TipoDesc, numMax, numMin))
                     {
-                        repositorio.InsertTipo(unTipo);
-                        return View("SuccessAlta");
+                        if (TipoPlanta.QuitarEspacios(unTipo.TipoNombre))
+                        {
+                            try
+                            {
+                                repositorio.InsertTipo(unTipo);
+                                return View("SuccessAlta");
+                            }
+                            catch (Exception ex)
+                            {
+                                return View("ErrorAlta");
+                            }
+                        }
+                        else
+                        {
+                            return View("ErrorAlta");
+                        }
                     }
                     else
                     {
                         return View("ErrorAlta");
                     }
-                }
-                else
-                {
-                    return View("ErrorAlta");
-                }
             }
             catch
             {
                 return View("ErrorAlta");
             }
         }
-        
+
         // GET: TipoPlantaController/Edit/5
         public ActionResult Edit(int id)
         {
@@ -118,7 +125,7 @@ namespace Vivero.Controllers
         public ActionResult Search(string TipoNombre)
         {
             TipoPlanta unTipo = repositorio.GetByNombreTipo(TipoNombre);
-            return View("ViewSearch",unTipo);
+            return View("ViewSearch", unTipo);
         }
     }
 }

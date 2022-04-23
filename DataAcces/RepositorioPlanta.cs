@@ -227,11 +227,11 @@ namespace DataAcces
         //Genero el insert del TipoPlanta obtenido del TipoPlantaController Siempre y cuando no exista (!ExisteTipo)
         public void InsertTipo(TipoPlanta obj)
         {
-            TipoPlanta unT = new TipoPlanta();
+            //TipoPlanta unT = new TipoPlanta();
             
-            unT = ExisteTipo(obj);
-            if (unT == null)
-            {
+            //unT = ExisteTipo(obj);
+            //if (unT == null)
+            //{
 
                 IDbCommand command = connection.CreateCommand();
                 command.CommandText = @"INSERT INTO TipoPlanta(TipoNombre, TipoDesc) VALUES(@TipoNombre, @TipoDesc)";
@@ -245,7 +245,7 @@ namespace DataAcces
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"Se controló la excepción {ex.Message} en el método invocado InvocarCodigoExcepción()");
+                    throw new Exception("No se pudo grabar el tipo" + ex.Message);
                 }
                 finally
                 {
@@ -253,11 +253,11 @@ namespace DataAcces
                     connection.Dispose();
                     command.Dispose();
                 }
-            }
-            else
-            {
-                throw new Exception();
-            }
+            //}
+            //else
+            //{
+            //    throw new Exception("Ya existe el tipo ingresado");
+            //}
 
         }
         // Busca si existe un Tipo por nombre en la base de datos
@@ -376,11 +376,6 @@ namespace DataAcces
                 connection.Dispose();
                 command.Dispose();
             }
-        }
-
-        bool IRepositorio<Planta>.ExisteTipo(TipoPlanta unTipo)
-        {
-            throw new NotImplementedException();
         }
     }
 }
