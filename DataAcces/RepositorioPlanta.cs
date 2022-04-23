@@ -68,7 +68,9 @@ namespace DataAcces
                         unaPlanta.NombreCientifico = (string)reader["NomCientifico"];
                         unaPlanta.NombresVulgares = new List<NombresVulgares>(); // (string)reader["NomVulgar"]  crear un método que traiga un string con los nombres y los separe, agregarlos a la lista de nombres
                         unaPlanta.Descripcion = (string)reader["Descripcion"];
-                        //unaPlanta.IdFichaCuidados = (int)reader["FichaCuidados"]; // reader trae el id de ficha, llamar método que busca ficha por id
+                        int idFicha = (int)reader["IdFichaCuidados"];
+                        FichaCuidados unaFicha = GetByIdFicha(idFicha);
+                        unaPlanta.FichaCuidados = unaFicha;                       
                         unaPlanta.FotosPlanta = new List<Foto>();  // modificar luego de definir cómo se va a manejar la foto (string)reader["Foto"]
                         unaPlanta.Ambiente = (string)reader["Ambiente"];
                         unaPlanta.Altura = (int)reader["Altura"];
@@ -109,7 +111,9 @@ namespace DataAcces
                         unaPlanta.NombreCientifico = (string)reader["NomCientifico"];
                         unaPlanta.NombresVulgares = new List<NombresVulgares>(); // (string)reader["NomVulgar"]  crear un método que traiga un string con los nombres y los separe, agregarlos a la lista de nombres
                         unaPlanta.Descripcion = (string)reader["Descripcion"];
-                        //unaPlanta.FichaCuidados = (int)reader["FichaCuidados"]; // reader trae el id de ficha, llamar método que busca ficha por id
+                        int idFicha = (int)reader["IdFichaCuidados"];
+                        FichaCuidados unaFicha = GetByIdFicha(idFicha);
+                        unaPlanta.FichaCuidados = unaFicha;
                         unaPlanta.FotosPlanta = new List<Foto>();  // modificar luego de definir cómo se va a manejar la foto (string)reader["Foto"]
                         unaPlanta.Ambiente = (string)reader["Ambiente"];
                         unaPlanta.Altura = (int)reader["Altura"];                      
@@ -160,12 +164,7 @@ namespace DataAcces
                 connection.Dispose();
                 command.Dispose();
             }
-        }
-
-        public void Save()
-        {
-            throw new NotImplementedException();
-        }
+        }      
 
         public void Update(Planta obj)
         {
@@ -392,7 +391,39 @@ namespace DataAcces
         // Ficha cuidados
         public IEnumerable GetFichas()
         {
-            throw new NotImplementedException();
+            ICollection<FichaCuidados> listadoFichas = new List<FichaCuidados>();
+            IDbCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM dbo.FichaCuidados";
+                       
+            try
+            {
+                connection.Open();
+                using (IDataReader reader = command.ExecuteReader())
+                {
+                    FichaCuidados unaFicha = null;
+                    while (reader.Read())
+                    {
+                        unaFicha = new FichaCuidados();
+                        int idTipoIluminacion = (int)reader["IdTipoIluminacion"]; // obtengo id del tipo de iluminacion
+                        TipoIluminacion unTipoIlum = GetByIdTipoIlum(idTipoIluminacion); // llamo método que busca tipo iluminacion por id
+                        unaFicha.TipoIluminacion = unTipoIlum;
+                        unaFicha.Riego = (string)reader["Riego"];
+                        unaFicha.Temperatura = (int)reader["Temperatura"];
+                        listadoFichas.Add(unaFicha);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                connection.Close();
+                connection.Dispose();
+                command.Dispose();
+            }
+            return listadoFichas;
         }
 
         public void UpdateFicha(FichaCuidados obj)
@@ -420,8 +451,8 @@ namespace DataAcces
                     {
                         unaFicha = new FichaCuidados();
                         int idTipoIluminacion = (int)reader["IdTipoIluminacion"]; // obtengo id del tipo de iluminacion
-                        //TipoIluminacion unTipoIlum = GetByIdTipoIluminacio(idTipoIluminacion); // llamo método que busca tipo iluminacion por id
-                        //unaFicha.TipoIluminacion = unTipoIlum;
+                        TipoIluminacion unTipoIlum = GetByIdTipoIlum(idTipoIluminacion); // llamo método que busca tipo iluminacion por id
+                        unaFicha.TipoIluminacion = unTipoIlum;
                         unaFicha.Riego = (string)reader["Riego"];
                         unaFicha.Temperatura = (int)reader["Temperatura"];                        
                     }
@@ -442,8 +473,59 @@ namespace DataAcces
         public void DeleteFicha(int idFicha)
         {
             throw new NotImplementedException();
-        }  
-        
+        }
 
+        // Tipo iluminacion
+
+        public IEnumerable GetTiposIlum()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteTipoILum(int idTipoIlum)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateTipoIlum(TipoIluminacion obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void InsertTipoIlum(TipoIluminacion obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public TipoIluminacion GetByIdTipoIlum(int idTipoIlum)
+        {
+            IDbCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM dbo.TipoIluminacion WHERE Id = @Id";
+            command.Parameters.Add(new SqlParameter("@Id", idTipoIlum));
+            TipoIluminacion unTipoIlum = null;
+            try
+            {
+                connection.Open();
+                using (IDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        unTipoIlum = new TipoIluminacion();                       
+                        unTipoIlum.DescripcionTipoIlum = (string)reader["Tipo"];                        
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                connection.Close();
+                connection.Dispose();
+                command.Dispose();
+            }
+            return unTipoIlum;
+        }
     }
 }
