@@ -12,6 +12,7 @@ namespace Vivero.Controllers
     public class TipoPlantaController : Controller
     {
         IRepositorio<Planta> repositorio = new RepositorioPlanta(new Connection());
+        IRepositorio<ParamSistema> repositorioParam = new RepositorioParamSistema(new Connection());
         // GET: TipoPlantaController
         public ActionResult Index()
         {
@@ -37,10 +38,28 @@ namespace Vivero.Controllers
         {
             try
             {
-                if (TipoPlanta.QuitarEspacios(unTipo.TipoNombre))
+                ICollection<ParamSistema> resultado = new List<ParamSistema>();
+                resultado = (ICollection<ParamSistema>)repositorioParam.Get();
+                int numMin = 0, numMax = 0;
+                foreach (ParamSistema item in resultado)
                 {
-                    repositorio.InsertTipo(unTipo);
-                    return View("SuccessAlta");
+                    if (item.Nombre.Equals("TipoDesc"))
+                    {
+                        numMax = item.ValorMax;
+                        numMin = item.ValorMin;
+                    }
+                }
+                if (TipoPlanta.DescValid(unTipo.TipoDesc,numMax,numMin))
+                {
+                    if (TipoPlanta.QuitarEspacios(unTipo.TipoNombre))
+                    {
+                        repositorio.InsertTipo(unTipo);
+                        return View("SuccessAlta");
+                    }
+                    else
+                    {
+                        return View("ErrorAlta");
+                    }
                 }
                 else
                 {

@@ -66,6 +66,7 @@ namespace DataAcces
             {
                 conneccion.Close();
                 conneccion.Dispose();
+                command.Dispose();
             }
             return resultado;
         }
