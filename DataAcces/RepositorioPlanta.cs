@@ -25,7 +25,13 @@ namespace DataAcces
             try
             {
                 connection.Open();
-                command.ExecuteNonQuery();
+                int filasAfectadas = command.ExecuteNonQuery();
+                // comprobar que se hayan realizado cambios en la bd
+                if(filasAfectadas == 0)
+                {
+                    throw new Exception();
+                }
+
             }
             catch (Exception)
             {
@@ -55,14 +61,17 @@ namespace DataAcces
                     {
                         unaPlanta = new Planta();
                         // Completar después de tener la clase planta y los demás métodos del repositorio
-                        // unaPlanta.Tipo = (string)reader["Tipo"]; reader trae el nombre del tipo. llamar método que busca tipo por id(nombre)
-                        // unaPlanta.NombreCientifico = (string)reader["NombreCientifico"];
-                        // unaPlanta.NombresVulgares = (striing)reader["NombresVulgares"]; hay que corregir, nombres vulgares sería una lista
-                        // unaPlanta.Descripcion = (string)reader["Descripcion"];
-                        // unaPlanta.FichaCuidados = (int)reader["FichaCuidados"]; reader trae el id de ficha, llamar método que busca ficha por id
-                        // unaPlanta.Foto = (string)reader["Foto"]; modificar luego de definir cómo se va a manejar la foto
-                        // unaPlanta.Ambiente = (string)reader["Ambiente"];
-                        // unaPlanta.Altura = (int)reader["Altura"]; cambiar int por tipo de valor que se defina en la bd
+
+                        int idTipo = (int)reader["IdTipoPlanta"]; // obtengo id del tipo de planta
+                        TipoPlanta unTipo = GetByIdTipo(idTipo); // llamo método que busca tipo por id
+                        unaPlanta.TipoPlanta = unTipo;
+                        unaPlanta.NombreCientifico = (string)reader["NomCientifico"];
+                        unaPlanta.NombresVulgares = new List<NombresVulgares>(); // (string)reader["NomVulgar"]  crear un método que traiga un string con los nombres y los separe, agregarlos a la lista de nombres
+                        unaPlanta.Descripcion = (string)reader["Descripcion"];
+                        unaPlanta.IdFichaCuidados = (int)reader["FichaCuidados"]; // reader trae el id de ficha, llamar método que busca ficha por id
+                        unaPlanta.FotosPlanta = new List<Foto>();  // modificar luego de definir cómo se va a manejar la foto (string)reader["Foto"]
+                        unaPlanta.Ambiente = (string)reader["Ambiente"];
+                        unaPlanta.Altura = (int)reader["Altura"];
                         listadoPlantas.Add(unaPlanta);
                     }
                 }
@@ -94,15 +103,16 @@ namespace DataAcces
                     while (reader.Read())
                     {
                         unaPlanta = new Planta();
-                        // Completar después de tener la clase planta y los demás métodos del repositorio
-                        // unaPlanta.Tipo = (string)reader["Tipo"]; reader trae el nombre del tipo. llamar método que busca tipo por id(nombre)
-                        // unaPlanta.NombreCientifico = (string)reader["NombreCientifico"];
-                        // unaPlanta.NombresVulgares = (striing)reader["NombresVulgares"]; hay que corregir, nombres vulgares sería una lista
-                        // unaPlanta.Descripcion = (string)reader["Descripcion"];
-                        // unaPlanta.FichaCuidados = (int)reader["FichaCuidados"]; reader trae el id de ficha, llamar método que busca ficha por id
-                        // unaPlanta.Foto = (string)reader["Foto"]; modificar luego de definir cómo se va a manejar la foto
-                        // unaPlanta.Ambiente = (string)reader["Ambiente"];
-                        // unaPlanta.Altura = (int)reader["Altura"]; cambiar int por tipo de valor que se defina en la bd                        
+                        int idTipo = (int)reader["IdTipoPlanta"]; // obtengo id del tipo de planta
+                        TipoPlanta unTipo = GetByIdTipo(idTipo); // llamo método que busca tipo por id
+                        unaPlanta.TipoPlanta = unTipo;
+                        unaPlanta.NombreCientifico = (string)reader["NomCientifico"];
+                        unaPlanta.NombresVulgares = new List<NombresVulgares>(); // (string)reader["NomVulgar"]  crear un método que traiga un string con los nombres y los separe, agregarlos a la lista de nombres
+                        unaPlanta.Descripcion = (string)reader["Descripcion"];
+                        unaPlanta.IdFichaCuidados = (int)reader["FichaCuidados"]; // reader trae el id de ficha, llamar método que busca ficha por id
+                        unaPlanta.FotosPlanta = new List<Foto>();  // modificar luego de definir cómo se va a manejar la foto (string)reader["Foto"]
+                        unaPlanta.Ambiente = (string)reader["Ambiente"];
+                        unaPlanta.Altura = (int)reader["Altura"];                      
                     }
                 }
             }
@@ -122,17 +132,16 @@ namespace DataAcces
         public void Insert(Planta obj)
         {
             IDbCommand command = connection.CreateCommand();
-            command.CommandText = @"Insert into dbo.Plantas(Tipo, NombreCientifico, NombresVulgares, Descripcion, FichaCuidados, Foto, Ambiente, Altura) Values(@Tipo, @NombreCientifico,
-            @NombresVulgares, @Descripcion, @FichaCuidados, @Foto, @Ambiente, @Altura)";
+            command.CommandText = @"Insert into dbo.Plantas(NomCientifico, Descripcion, TipoPlanta, IdFichaCuidados, Ambiente, Altura) Values(@NombreCientifico,
+            @Descripcion,  @TipoPlanta, @FichaCuidados, @Ambiente, @Altura)";
 
-            //command.Parameters.Add(new SqlParameter("@Tipo", obj.Tipo));
-            //command.Parameters.Add(new SqlParameter("@NombreCientifico", obj.NombreCientifico));
-            //command.Parameters.Add(new SqlParameter("@NombresVulgares", obj.NombresVulgares));
-            //command.Parameters.Add(new SqlParameter("@Descripcion", obj.Descripcion));
-            //command.Parameters.Add(new SqlParameter("@FichaCuidados", obj.FichaCuidados));
-            //command.Parameters.Add(new SqlParameter("@Foto", obj.Foto));
-            //command.Parameters.Add(new SqlParameter("@Ambiente", obj.Ambiente));
-            //command.Parameters.Add(new SqlParameter("@Altura", obj.Altura));            
+            
+            command.Parameters.Add(new SqlParameter("@NombreCientifico", obj.NombreCientifico));            
+            command.Parameters.Add(new SqlParameter("@Descripcion", obj.Descripcion));
+            command.Parameters.Add(new SqlParameter("@Tipo", obj.TipoPlanta));
+            command.Parameters.Add(new SqlParameter("@FichaCuidados", obj.IdFichaCuidados)); // Ficha cuidados es creado al mismo tiempo que planta? o se crea después de crear la planta           
+            command.Parameters.Add(new SqlParameter("@Ambiente", obj.Ambiente));
+            command.Parameters.Add(new SqlParameter("@Altura", obj.Altura));            
             try
             {
                 connection.Open();
