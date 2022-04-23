@@ -66,7 +66,7 @@ namespace DataAcces
                         TipoPlanta unTipo = GetByIdTipo(idTipo); // llamo método que busca tipo por id
                         unaPlanta.TipoPlanta = unTipo;
                         unaPlanta.NombreCientifico = (string)reader["NomCientifico"];
-                        unaPlanta.NombresVulgares = new List<NombresVulgares>(); // (string)reader["NomVulgar"]  crear un método que traiga un string con los nombres y los separe, agregarlos a la lista de nombres
+                        unaPlanta.NombresVulgares = (string)reader["NombresVulgares"];
                         unaPlanta.Descripcion = (string)reader["Descripcion"];
                         int idFicha = (int)reader["IdFichaCuidados"];
                         FichaCuidados unaFicha = GetByIdFicha(idFicha);
@@ -109,7 +109,7 @@ namespace DataAcces
                         TipoPlanta unTipo = GetByIdTipo(idTipo); // llamo método que busca tipo por id
                         unaPlanta.TipoPlanta = unTipo;
                         unaPlanta.NombreCientifico = (string)reader["NomCientifico"];
-                        unaPlanta.NombresVulgares = new List<NombresVulgares>(); // (string)reader["NomVulgar"]  crear un método que traiga un string con los nombres y los separe, agregarlos a la lista de nombres
+                        unaPlanta.NombresVulgares = (string)reader["NombresVulgares"];
                         unaPlanta.Descripcion = (string)reader["Descripcion"];
                         int idFicha = (int)reader["IdFichaCuidados"];
                         FichaCuidados unaFicha = GetByIdFicha(idFicha);
@@ -145,9 +145,8 @@ namespace DataAcces
             command.Parameters.Add(new SqlParameter("@IdTipo", obj.TipoPlanta.IdTipoPlanta));
             command.Parameters.Add(new SqlParameter("@IdFichaCuidados", obj.FichaCuidados.IdFichaCuidados));           
             command.Parameters.Add(new SqlParameter("@Ambiente", obj.Ambiente));
-            command.Parameters.Add(new SqlParameter("@Altura", obj.Altura));        
+            command.Parameters.Add(new SqlParameter("@Altura", obj.Altura));                    
             
-            // Insertar nombres en tabla nombres
             try
             {
                 connection.Open();

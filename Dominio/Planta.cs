@@ -12,7 +12,7 @@ namespace Dominio
         public TipoPlanta TipoPlanta { get; set; }
         public List<Foto> FotosPlanta { get; set; }
         public FichaCuidados FichaCuidados { get; set; }
-        public List<NombresVulgares> NombresVulgares { get; set; }
+        public string NombresVulgares { get; set; }
         public string Ambiente { get; set; } // Enum o tabla?
         public double Altura { get; set; }
 
