@@ -35,6 +35,7 @@ namespace DataAcces
             {
                 connection.Close();
                 connection.Dispose();
+                command.Dispose();
             }
         }
 
@@ -74,6 +75,7 @@ namespace DataAcces
             {
                 connection.Close();
                 connection.Dispose();
+                command.Dispose();
             }
             return listadoPlantas;
         }
@@ -112,6 +114,7 @@ namespace DataAcces
             {
                 connection.Close();
                 connection.Dispose();
+                command.Dispose();
             }
             return unaPlanta;
         }
@@ -144,6 +147,7 @@ namespace DataAcces
             {
                 connection.Close();
                 connection.Dispose();
+                command.Dispose();
             }
         }
 
@@ -216,6 +220,7 @@ namespace DataAcces
             {
                 connection.Close();
                 connection.Dispose();
+                command.Dispose();
             }
             return resultado;
         }
@@ -225,7 +230,7 @@ namespace DataAcces
             TipoPlanta unT = new TipoPlanta();
             
             unT = ExisteTipo(obj);
-            if ( unT == null)
+            if (unT == null)
             {
 
                 IDbCommand command = connection.CreateCommand();
@@ -246,6 +251,7 @@ namespace DataAcces
                 {
                     connection.Close();
                     connection.Dispose();
+                    command.Dispose();
                 }
             }
             else
@@ -257,13 +263,12 @@ namespace DataAcces
         // Busca si existe un Tipo por nombre en la base de datos
         public TipoPlanta ExisteTipo(TipoPlanta obj)
         {
-            //TipoPlanta Tipo = new TipoPlanta();
             TipoPlanta Tipo = null;
             ICollection<TipoPlanta> resultado = new List<TipoPlanta>();
             resultado = (ICollection<TipoPlanta>)GetTipos();
             foreach (TipoPlanta unTipo in resultado)
             {
-                if (obj.TipoNombre == unTipo.TipoNombre)
+                if (obj.TipoNombre.Equals(unTipo.TipoNombre))
                 {
                     Tipo = unTipo;
                 }
