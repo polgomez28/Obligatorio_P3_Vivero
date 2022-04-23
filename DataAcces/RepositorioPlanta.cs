@@ -68,7 +68,7 @@ namespace DataAcces
                         unaPlanta.NombreCientifico = (string)reader["NomCientifico"];
                         unaPlanta.NombresVulgares = new List<NombresVulgares>(); // (string)reader["NomVulgar"]  crear un método que traiga un string con los nombres y los separe, agregarlos a la lista de nombres
                         unaPlanta.Descripcion = (string)reader["Descripcion"];
-                        unaPlanta.IdFichaCuidados = (int)reader["FichaCuidados"]; // reader trae el id de ficha, llamar método que busca ficha por id
+                        //unaPlanta.IdFichaCuidados = (int)reader["FichaCuidados"]; // reader trae el id de ficha, llamar método que busca ficha por id
                         unaPlanta.FotosPlanta = new List<Foto>();  // modificar luego de definir cómo se va a manejar la foto (string)reader["Foto"]
                         unaPlanta.Ambiente = (string)reader["Ambiente"];
                         unaPlanta.Altura = (int)reader["Altura"];
@@ -109,7 +109,7 @@ namespace DataAcces
                         unaPlanta.NombreCientifico = (string)reader["NomCientifico"];
                         unaPlanta.NombresVulgares = new List<NombresVulgares>(); // (string)reader["NomVulgar"]  crear un método que traiga un string con los nombres y los separe, agregarlos a la lista de nombres
                         unaPlanta.Descripcion = (string)reader["Descripcion"];
-                        unaPlanta.IdFichaCuidados = (int)reader["FichaCuidados"]; // reader trae el id de ficha, llamar método que busca ficha por id
+                        //unaPlanta.FichaCuidados = (int)reader["FichaCuidados"]; // reader trae el id de ficha, llamar método que busca ficha por id
                         unaPlanta.FotosPlanta = new List<Foto>();  // modificar luego de definir cómo se va a manejar la foto (string)reader["Foto"]
                         unaPlanta.Ambiente = (string)reader["Ambiente"];
                         unaPlanta.Altura = (int)reader["Altura"];                      
@@ -132,16 +132,18 @@ namespace DataAcces
         public void Insert(Planta obj)
         {
             IDbCommand command = connection.CreateCommand();
-            command.CommandText = @"Insert into dbo.Plantas(NomCientifico, Descripcion, TipoPlanta, IdFichaCuidados, Ambiente, Altura) Values(@NombreCientifico,
-            @Descripcion,  @TipoPlanta, @FichaCuidados, @Ambiente, @Altura)";
+            command.CommandText = @"Insert into dbo.Plantas(NomCientifico, Descripcion, IdTipoPlanta, IdFichaCuidados, Ambiente, Altura) Values(@NombreCientifico,
+            @Descripcion,  @IdTipo, @FichaCuidados, @Ambiente, @Altura)";
 
             
             command.Parameters.Add(new SqlParameter("@NombreCientifico", obj.NombreCientifico));            
             command.Parameters.Add(new SqlParameter("@Descripcion", obj.Descripcion));
-            command.Parameters.Add(new SqlParameter("@Tipo", obj.TipoPlanta));
-            command.Parameters.Add(new SqlParameter("@FichaCuidados", obj.IdFichaCuidados)); // Ficha cuidados es creado al mismo tiempo que planta? o se crea después de crear la planta           
+            command.Parameters.Add(new SqlParameter("@IdTipo", obj.TipoPlanta.IdTipoPlanta));
+            command.Parameters.Add(new SqlParameter("@IdFichaCuidados", obj.FichaCuidados.IdFichaCuidados));           
             command.Parameters.Add(new SqlParameter("@Ambiente", obj.Ambiente));
-            command.Parameters.Add(new SqlParameter("@Altura", obj.Altura));            
+            command.Parameters.Add(new SqlParameter("@Altura", obj.Altura));        
+            
+            // Insertar nombres en tabla nombres
             try
             {
                 connection.Open();
@@ -386,5 +388,62 @@ namespace DataAcces
                 command.Dispose();
             }
         }
+
+        // Ficha cuidados
+        public IEnumerable GetFichas()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateFicha(FichaCuidados obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void InsertFicha(FichaCuidados obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public FichaCuidados GetByIdFicha(int id)
+        {
+            IDbCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM dbo.FichaCuidados WHERE Id = @Id";
+            command.Parameters.Add(new SqlParameter("@Id", id));
+            FichaCuidados unaFicha = null;
+            try
+            {
+                connection.Open();
+                using (IDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        unaFicha = new FichaCuidados();
+                        int idTipoIluminacion = (int)reader["IdTipoIluminacion"]; // obtengo id del tipo de iluminacion
+                        //TipoIluminacion unTipoIlum = GetByIdTipoIluminacio(idTipoIluminacion); // llamo método que busca tipo iluminacion por id
+                        //unaFicha.TipoIluminacion = unTipoIlum;
+                        unaFicha.Riego = (string)reader["Riego"];
+                        unaFicha.Temperatura = (int)reader["Temperatura"];                        
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                connection.Close();
+                connection.Dispose();
+                command.Dispose();
+            }
+            return unaFicha;
+        }
+        public void DeleteFicha(int idFicha)
+        {
+            throw new NotImplementedException();
+        }  
+        
+
     }
 }

@@ -169,10 +169,6 @@ namespace DataAcces
         {
             throw new NotImplementedException();
         }
-
-        TipoPlanta IRepositorio<ParamSistema>.ExisteTipo(TipoPlanta unTipo)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }

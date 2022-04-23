@@ -11,11 +11,10 @@ namespace Dominio
         public string Descripcion { get; set; }
         public TipoPlanta TipoPlanta { get; set; }
         public List<Foto> FotosPlanta { get; set; }
-        //public FichaCuidados FichaCuidados { get; set; }
-        public int IdFichaCuidados { get; set; } // cambiar después de tener manejada la clase ficha
+        public FichaCuidados FichaCuidados { get; set; }
         public List<NombresVulgares> NombresVulgares { get; set; }
         public string Ambiente { get; set; } // Enum o tabla?
-        public int Altura { get; set; } // cambiar a double
+        public double Altura { get; set; }
 
         // Agregar métodos de validación, tal vez hacer una clase que maneje eso
 
