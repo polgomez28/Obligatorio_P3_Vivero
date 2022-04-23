@@ -91,8 +91,49 @@ namespace Vivero.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(TipoPlanta unTipo)
         {
-            repositorio.UpdateTipo(unTipo);
-            return View("SuccessAlta");
+            try
+            {
+                ICollection<ParamSistema> resultado = new List<ParamSistema>();
+                resultado = (ICollection<ParamSistema>)repositorioParam.Get();
+                int numMin = 0, numMax = 0;
+                foreach (ParamSistema item in resultado)
+                {
+                    if (item.Nombre.Equals("TipoDesc"))
+                    {
+                        numMax = item.ValorMax;
+                        numMin = item.ValorMin;
+                    }
+                }
+                if (TipoPlanta.DescValid(unTipo.TipoDesc, numMax, numMin))
+                {
+                    if (TipoPlanta.QuitarEspacios(unTipo.TipoNombre))
+                    {
+                        try
+                        {
+                            repositorio.UpdateTipo(unTipo);
+                            return View("SuccessAlta");
+                        }
+                        catch (Exception ex)
+                        {
+                            return View("ErrorAlta");
+                        }
+                    }
+                    else
+                    {
+                        return View("ErrorAlta");
+                    }
+                }
+                else
+                {
+                    return View("ErrorAlta");
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
         }
 
         // GET: TipoPlantaController/Delete/5
@@ -124,8 +165,24 @@ namespace Vivero.Controllers
         [HttpPost]
         public ActionResult Search(string TipoNombre)
         {
-            TipoPlanta unTipo = repositorio.GetByNombreTipo(TipoNombre);
-            return View("ViewSearch", unTipo);
+            try
+            
+            {
+                TipoPlanta unTipo = repositorio.GetByNombreTipo(TipoNombre);
+                if (unTipo==null)
+                {
+                    return View("ErrorAlta");
+                }
+                else
+                {
+                    return View("ViewSearch",unTipo);
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 }
