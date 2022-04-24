@@ -15,6 +15,7 @@ namespace Dominio
         public string NombresVulgares { get; set; }
         public string Ambiente { get; set; } // Enum o tabla?
         public double Altura { get; set; }
+        public string NomFotoVariable { get; set; }
 
         // Agregar métodos de validación, tal vez hacer una clase que maneje eso
 

@@ -49,7 +49,7 @@ namespace DataAcces
         {
             ICollection<Planta> listadoPlantas = new List<Planta>();
             IDbCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT * FROM dbo.Plantas";
+            command.CommandText = "SELECT * FROM Planta";
 
             try
             {
@@ -78,7 +78,7 @@ namespace DataAcces
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }

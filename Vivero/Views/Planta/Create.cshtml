@@ -1,0 +1,60 @@
+﻿@model Dominio.Planta
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Planta</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="IdPlanta" class="control-label"></label>
+                <input asp-for="IdPlanta" class="form-control" />
+                <span asp-validation-for="IdPlanta" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NombreCientifico" class="control-label"></label>
+                <input asp-for="NombreCientifico" class="form-control" />
+                <span asp-validation-for="NombreCientifico" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="imagen" class="control-label"></label>
+                <input type="file" name="imagen" class="form-control" />
+                <span asp-validation-for="NomFotoVariable" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Descripcion" class="control-label"></label>
+                <input asp-for="Descripcion" class="form-control" />
+                <span asp-validation-for="Descripcion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NombresVulgares" class="control-label"></label>
+                <input asp-for="NombresVulgares" class="form-control" />
+                <span asp-validation-for="NombresVulgares" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Ambiente" class="control-label"></label>
+                <input asp-for="Ambiente" class="form-control" />
+                <span asp-validation-for="Ambiente" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Altura" class="control-label"></label>
+                <input asp-for="Altura" class="form-control" />
+                <span asp-validation-for="Altura" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
