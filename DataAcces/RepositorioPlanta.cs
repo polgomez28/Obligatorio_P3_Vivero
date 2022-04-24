@@ -17,6 +17,8 @@ namespace DataAcces
         {
             this.connection = con;
         }
+
+        // DELETE PLANTA
         public void Delete(int id)
         {
             IDbCommand command = connection.CreateCommand();
@@ -45,6 +47,7 @@ namespace DataAcces
             }
         }
 
+        // GET PLANTA
         public IEnumerable Get()
         {
             ICollection<Planta> listadoPlantas = new List<Planta>();
@@ -91,6 +94,7 @@ namespace DataAcces
             return listadoPlantas;
         }
 
+        // GET BY ID PLANTA
         public Planta GetByID(int id)
         {
             IDbCommand command = connection.CreateCommand();
@@ -133,6 +137,7 @@ namespace DataAcces
             return unaPlanta;
         }
 
+        // INSERT PLANTA
         public void Insert(Planta obj)
         {
             IDbCommand command = connection.CreateCommand();
@@ -165,6 +170,7 @@ namespace DataAcces
             }
         }      
 
+        // UPDATE PLANTA
         public void Update(Planta obj)
         {
             throw new NotImplementedException();
@@ -388,6 +394,8 @@ namespace DataAcces
         }
 
         // Ficha cuidados
+
+        // GET FICHAS
         public IEnumerable GetFichas()
         {
             ICollection<FichaCuidados> listadoFichas = new List<FichaCuidados>();
@@ -425,16 +433,43 @@ namespace DataAcces
             return listadoFichas;
         }
 
+        // UPDATE FICHA
         public void UpdateFicha(FichaCuidados obj)
         {
             throw new NotImplementedException();
         }
 
+        // INSERT FICHA
         public void InsertFicha(FichaCuidados obj)
         {
-            throw new NotImplementedException();
+            IDbCommand command = connection.CreateCommand();
+            command.CommandText = @"Insert into dbo.FichaCuidados(Riego, IdTipoIluminacion, Temperatura) Values(@Riego,
+            @IdTipoIlum, @Temperatura)";
+
+
+            command.Parameters.Add(new SqlParameter("@Riego", obj.Riego));
+            command.Parameters.Add(new SqlParameter("@IdTipoIlum", obj.TipoIluminacion.IdIluminacion));
+            command.Parameters.Add(new SqlParameter("@Temperatura", obj.Temperatura));            
+
+            try
+            {
+                connection.Open();
+                command.ExecuteNonQuery();
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                connection.Close();
+                connection.Dispose();
+                command.Dispose();
+            }
         }
 
+        // GET BY ID FICHA
         public FichaCuidados GetByIdFicha(int id)
         {
             IDbCommand command = connection.CreateCommand();
@@ -469,33 +504,134 @@ namespace DataAcces
             }
             return unaFicha;
         }
+
+        // DELETE FICHA
         public void DeleteFicha(int idFicha)
         {
-            throw new NotImplementedException();
+            IDbCommand command = connection.CreateCommand();
+            command.CommandText = "DELETE FROM dbo.FichaCuidados WHERE IdFichaCuidados = @Id";
+            command.Parameters.Add(new SqlParameter("@Id", idFicha));
+            try
+            {
+                connection.Open();
+                int filasAfectadas = command.ExecuteNonQuery();
+                // comprobar que se hayan realizado cambios en la bd
+                if (filasAfectadas == 0)
+                {
+                    throw new Exception();
+                }
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                connection.Close();
+                connection.Dispose();
+                command.Dispose();
+            }
         }
 
         // Tipo iluminacion
 
+        // GET TIPOS ILUMINACION
         public IEnumerable GetTiposIlum()
         {
-            throw new NotImplementedException();
+            ICollection<TipoIluminacion> listadoTipos = new List<TipoIluminacion>();
+            IDbCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM dbo.TipoIluminacion";
+
+            try
+            {
+                connection.Open();
+                using (IDataReader reader = command.ExecuteReader())
+                {
+                    TipoIluminacion unTipo = null;
+                    while (reader.Read())
+                    {
+                        unTipo = new TipoIluminacion();                        
+                        unTipo.IdIluminacion = (int)reader["IdTipoIluminacion"];
+                        unTipo.DescripcionTipoIlum = (string)reader["Tipo"];
+                        listadoTipos.Add(unTipo);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                connection.Close();
+                connection.Dispose();
+                command.Dispose();
+            }
+            return listadoTipos;
         }
 
+        // DELETE TIPO ILUMINACION
         public void DeleteTipoILum(int idTipoIlum)
         {
-            throw new NotImplementedException();
+            IDbCommand command = connection.CreateCommand();
+            command.CommandText = "DELETE FROM dbo.TipoIluminacion WHERE IdTipoIluminacion = @Id";
+            command.Parameters.Add(new SqlParameter("@Id", idTipoIlum));
+            try
+            {
+                connection.Open();
+                int filasAfectadas = command.ExecuteNonQuery();
+                // comprobar que se hayan realizado cambios en la bd
+                if (filasAfectadas == 0)
+                {
+                    throw new Exception();
+                }
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                connection.Close();
+                connection.Dispose();
+                command.Dispose();
+            }
         }
 
+        // UPDATE TIPO ILUMINACION
         public void UpdateTipoIlum(TipoIluminacion obj)
         {
             throw new NotImplementedException();
         }
 
+        // INSERT TIPO ILUMINACION
         public void InsertTipoIlum(TipoIluminacion obj)
         {
-            throw new NotImplementedException();
+            IDbCommand command = connection.CreateCommand();
+            command.CommandText = @"INSERT INTO TipoIluminacion(TipoNombre) VALUES(@TipoNombre)";
+            command.Parameters.Add(new SqlParameter("@TipoNombre", obj.DescripcionTipoIlum));
+            
+            try
+            {
+                connection.Open();
+                command.ExecuteNonQuery();
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                connection.Close();
+                connection.Dispose();
+                command.Dispose();
+            }
         }
 
+        // GET BY ID TIPO ILUMINACION
         public TipoIluminacion GetByIdTipoIlum(int idTipoIlum)
         {
             IDbCommand command = connection.CreateCommand();
