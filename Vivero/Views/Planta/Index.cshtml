@@ -22,6 +22,12 @@
                 @Html.DisplayNameFor(model => model.Descripcion)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.TipoPlanta)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FichaCuidados)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.NombresVulgares)
             </th>
             <th>
@@ -29,6 +35,9 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Altura)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NomFotoVariable)
             </th>
             <th></th>
         </tr>
@@ -46,6 +55,12 @@
                 @Html.DisplayFor(modelItem => item.Descripcion)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.TipoPlanta.TipoNombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FichaCuidados.IdFichaCuidados)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.NombresVulgares)
             </td>
             <td>
@@ -53,6 +68,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Altura)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NomFotoVariable)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |

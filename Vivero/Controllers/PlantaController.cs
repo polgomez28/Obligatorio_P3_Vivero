@@ -24,7 +24,32 @@ namespace Vivero.Controllers
         // GET: HomeController1
         public ActionResult Index()
         {
-            return View(repositorio.Get());
+            List<AuxPlanta> plantas = null;
+            List<Planta> plantasOK = null;
+            plantas = (List<AuxPlanta>)repositorio.Get();
+            if (plantas != null)
+            {
+                foreach (AuxPlanta aux in plantas)
+                {
+                    TipoPlanta unTipo = repositorio.GetByIdTipo(aux.IdTipoPlanta);
+                    FichaCuidados unFicha = repositorio.GetByIdFicha(aux.IdFichaCuidados);
+                    // Se deja comentado por falta de implementacion (traer lista de fotos)
+                    //List<Foto> fotos = repositorio.GetFotos(unaPlanta.IdFotos, unaPlanta.IdPlanta);
+                    Planta unaPlanta = new Planta();
+                    unaPlanta.IdPlanta = aux.IdPlanta;
+                    unaPlanta.NombreCientifico = aux.NombreCientifico;
+                    unaPlanta.Descripcion = aux.Descripcion;
+                    unaPlanta.TipoPlanta = unTipo;
+                    unaPlanta.FichaCuidados = unFicha;
+                    unaPlanta.NombresVulgares = aux.NombresVulgares;
+                    unaPlanta.Ambiente = aux.Ambiente;
+                    unaPlanta.Altura = aux.Altura;
+                    unaPlanta.NomFotoVariable = aux.NomFotoVariable;
+                    plantasOK.Add(unaPlanta);
+
+                }
+            }
+            return View(plantasOK);
         }
 
         // GET: HomeController1/Details/5

@@ -50,33 +50,31 @@ namespace DataAcces
         // GET PLANTA
         public IEnumerable Get()
         {
-            ICollection<Planta> listadoPlantas = new List<Planta>();
+            ICollection<AuxPlanta> listadoPlantas = new List<AuxPlanta>();
             IDbCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT * FROM Planta";
+            command.CommandText = @"SELECT * FROM Planta";
 
             try
             {
                 connection.Open();
                 using (IDataReader reader = command.ExecuteReader())
                 {
-                    Planta unaPlanta = null;
+                    AuxPlanta unaPlanta = null;
                     while (reader.Read())
                     {
-                        unaPlanta = new Planta();
+                        unaPlanta = new AuxPlanta();
                         // Completar después de tener la clase planta y los demás métodos del repositorio
 
-                        int idTipo = (int)reader["IdTipoPlanta"]; // obtengo id del tipo de planta
-                        TipoPlanta unTipo = GetByIdTipo(idTipo); // llamo método que busca tipo por id
-                        unaPlanta.TipoPlanta = unTipo;
+                        unaPlanta.IdPlanta = (int)reader["IdPlanta"]; // obtengo id del tipo de planta
+                        //TipoPlanta unTipo = GetByIdTipo(idTipo); // llamo método que busca tipo por id
                         unaPlanta.NombreCientifico = (string)reader["NomCientifico"];
-                        unaPlanta.NombresVulgares = (string)reader["NombresVulgares"];
                         unaPlanta.Descripcion = (string)reader["Descripcion"];
-                        int idFicha = (int)reader["IdFichaCuidados"];
-                        FichaCuidados unaFicha = GetByIdFicha(idFicha);
-                        unaPlanta.FichaCuidados = unaFicha;                       
-                        unaPlanta.FotosPlanta = new List<Foto>();  // modificar luego de definir cómo se va a manejar la foto (string)reader["Foto"]
+                        unaPlanta.IdTipoPlanta = (int)reader["IdTipoPlanta"];
+                        unaPlanta.IdFotos = (int)reader["IdFoto"];
+                        unaPlanta.IdFichaCuidados = (int)reader["IdFichaCuidados"];
                         unaPlanta.Ambiente = (string)reader["Ambiente"];
                         unaPlanta.Altura = (int)reader["Altura"];
+                        unaPlanta.NombresVulgares = (string)reader["NombresVulgares"];
                         listadoPlantas.Add(unaPlanta);
                     }
                 }
@@ -312,7 +310,7 @@ namespace DataAcces
                 }
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }
@@ -478,7 +476,10 @@ namespace DataAcces
             FichaCuidados unaFicha = null;
             try
             {
-                connection.Open();
+                if (connection.State.Equals(0))
+                {
+                    connection.Open();
+                }
                 using (IDataReader reader = command.ExecuteReader())
                 {
                     while (reader.Read())
