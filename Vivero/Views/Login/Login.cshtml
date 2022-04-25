@@ -1,0 +1,75 @@
+﻿@model Dominio.Usuario
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="~/css/animate.min.css" rel="stylesheet" />
+    <link href="~/css/bootstrap.min-4.css" rel="stylesheet" />
+    <link href="~/css/signin.css" rel="stylesheet" />
+
+    <link href="~/css/adminlte.css" rel="stylesheet" />
+
+    <title>LogIn</title>
+
+</head>
+<body>
+    <div class="animated fadeInDown loginColumns middle-box text-center ">
+        <div class="row">
+            <div class="col-md-12"></div>
+            <div class="col-md-12">
+                <h2 style="font-size: 30px;">Vivero</h2>
+
+
+                <form asp-action="Login" class="form-signin">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <img class="mb-4" src="~/img/user.png" alt="" width="70" height="70" />
+                    <h1 class="h3 mb-3 font-weight-normal">Iniciar Sesión</h1>
+
+                    @*<label asp-for="Email" class="sr-only"></label>*@
+                    <input asp-for="Email" class="form-control" placeholder="Ingrese Usuario" autofocus="" required="" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+
+                    <br />
+
+                    @*<label asp-for="Contraseña" class="control-label"></label>*@
+                    <input asp-for="Contraseña" type="password" class="form-control" placeholder="Ingrese Contraseña" required="" />
+                    <span asp-validation-for="Contraseña" class="text-danger"></span>
+
+                    <div class="form-group">
+                        <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
+                    </div>
+                </form>
+
+
+                @*<form class="form-signin" action="/login/login" method="post">
+
+                    <img class="mb-4" src="~/img/user.png" alt="" width="70" height="70" />
+                    <h1 class="h3 mb-3 font-weight-normal">Iniciar Sesión</h1>
+
+                    <label for="usuario" class="sr-only">Usuario</label>
+                    <input type="text" id="user" name="user" class="form-control" placeholder="Ingrese Usuario" required="" autofocus="">
+                    <br />
+                    <label for="inputPassword" class="sr-only">Password</label>
+                    <input type="password" id="password" name="password" class="form-control" placeholder="Ingrese Contraseña" required="">
+
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
+
+                    </form>*@
+                <div class="card bg-gradient-danger">
+                    @ViewBag.mensaje
+                </div>
+
+            </div>
+            <div class="col-md-12"></div>
+        </div>
+    </div>
+</body>
+</html>

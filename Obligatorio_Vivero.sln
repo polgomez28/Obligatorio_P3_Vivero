@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dominio", "Dominio\Dominio.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAcces", "DataAcces\DataAcces.csproj", "{CA747459-F2D1-4032-9312-234B0ECE24E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vivero", "Vivero\Vivero.csproj", "{9E0E87BE-6437-4749-B9C8-B6BAB5B8D683}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vivero", "Vivero\Vivero.csproj", "{9E0E87BE-6437-4749-B9C8-B6BAB5B8D683}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Vivero_DataBase", "Vivero_DataBase\Vivero_DataBase.sqlproj", "{EB13A5FC-45A5-4B6F-A8B7-36F646B4F00C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,12 @@ Global
 		{9E0E87BE-6437-4749-B9C8-B6BAB5B8D683}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9E0E87BE-6437-4749-B9C8-B6BAB5B8D683}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9E0E87BE-6437-4749-B9C8-B6BAB5B8D683}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB13A5FC-45A5-4B6F-A8B7-36F646B4F00C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB13A5FC-45A5-4B6F-A8B7-36F646B4F00C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB13A5FC-45A5-4B6F-A8B7-36F646B4F00C}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{EB13A5FC-45A5-4B6F-A8B7-36F646B4F00C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB13A5FC-45A5-4B6F-A8B7-36F646B4F00C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB13A5FC-45A5-4B6F-A8B7-36F646B4F00C}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

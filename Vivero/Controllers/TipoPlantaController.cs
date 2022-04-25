@@ -16,7 +16,11 @@ namespace Vivero.Controllers
         // GET: TipoPlantaController
         public ActionResult Index()
         {
-            return View(repositorio.GetTipos());
+            if (!(HttpContext.Session.GetString("_Name") is null))
+            {
+                return View(repositorio.GetTipos());
+            }
+            return Redirect("/Login/Login");
         }
 
         // GET: TipoPlantaController/Details/5

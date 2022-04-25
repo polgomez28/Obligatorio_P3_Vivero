@@ -1,10 +1,13 @@
-﻿using System;
+﻿using Dominio;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
 namespace DataAcces
 {
-    interface IRepositorioUsuario
+    public interface IRepositorioUsuario
     {
+        IList<Usuario> GetUsuarios();
     }
 }
