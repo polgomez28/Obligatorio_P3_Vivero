@@ -23,21 +23,26 @@ namespace Vivero.Controllers
             return Redirect("/Login/Login");
         }
 
-        public ActionResult IndexPlanta()
-        {
-            return View(repositorio.Get());
-        }
-
         // GET: TipoPlantaController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            if (!(HttpContext.Session.GetString("_Name") is null))
+            {
+                return View();
+            }
+
+            return Redirect("/Login/Login");
         }
 
         // GET: TipoPlantaController/Create
         public ActionResult Create()
         {
-            return View();
+            if (!(HttpContext.Session.GetString("_Name") is null))
+            {
+                return View();
+            }
+
+            return Redirect("/Login/Login");
         }
 
         // POST: TipoPlantaController/Create
@@ -45,19 +50,21 @@ namespace Vivero.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(TipoPlanta unTipo)
         {
-            try
+            if (!(HttpContext.Session.GetString("_Name") is null))
             {
-                ICollection<ParamSistema> resultado = new List<ParamSistema>();
-                resultado = (ICollection<ParamSistema>)repositorioParam.Get();
-                int numMin = 0, numMax = 0;
-                foreach (ParamSistema item in resultado)
+                try
                 {
-                    if (item.Nombre.Equals("TipoDesc"))
+                    ICollection<ParamSistema> resultado = new List<ParamSistema>();
+                    resultado = (ICollection<ParamSistema>)repositorioParam.Get();
+                    int numMin = 0, numMax = 0;
+                    foreach (ParamSistema item in resultado)
                     {
-                        numMax = item.ValorMax;
-                        numMin = item.ValorMin;
+                        if (item.Nombre.Equals("TipoDesc"))
+                        {
+                            numMax = item.ValorMax;
+                            numMin = item.ValorMin;
+                        }
                     }
-                }
                     if (TipoPlanta.DescValid(unTipo.TipoDesc, numMax, numMin))
                     {
                         if (TipoPlanta.QuitarEspacios(unTipo.TipoNombre))
@@ -81,18 +88,26 @@ namespace Vivero.Controllers
                     {
                         return View("ErrorAlta");
                     }
+                }
+                catch
+                {
+                    return View("ErrorAlta");
+                }
             }
-            catch
-            {
-                return View("ErrorAlta");
-            }
+
+            return Redirect("/Login/Login");
         }
 
         // GET: TipoPlantaController/Edit/5
         public ActionResult Edit(int id)
         {
-            TipoPlanta unTipo = repositorio.GetByIdTipo(id);
-            return View(unTipo);
+            if (!(HttpContext.Session.GetString("_Name") is null))
+            {
+                TipoPlanta unTipo = repositorio.GetByIdTipo(id);
+                return View(unTipo);
+            }
+
+            return Redirect("/Login/Login");
         }
 
         // POST: TipoPlantaController/Edit/5
@@ -100,29 +115,36 @@ namespace Vivero.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(TipoPlanta unTipo)
         {
-            try
+            if (!(HttpContext.Session.GetString("_Name") is null))
             {
-                ICollection<ParamSistema> resultado = new List<ParamSistema>();
-                resultado = (ICollection<ParamSistema>)repositorioParam.Get();
-                int numMin = 0, numMax = 0;
-                foreach (ParamSistema item in resultado)
+                try
                 {
-                    if (item.Nombre.Equals("TipoDesc"))
+                    ICollection<ParamSistema> resultado = new List<ParamSistema>();
+                    resultado = (ICollection<ParamSistema>)repositorioParam.Get();
+                    int numMin = 0, numMax = 0;
+                    foreach (ParamSistema item in resultado)
                     {
-                        numMax = item.ValorMax;
-                        numMin = item.ValorMin;
-                    }
-                }
-                if (TipoPlanta.DescValid(unTipo.TipoDesc, numMax, numMin))
-                {
-                    if (TipoPlanta.QuitarEspacios(unTipo.TipoNombre))
-                    {
-                        try
+                        if (item.Nombre.Equals("TipoDesc"))
                         {
-                            repositorio.UpdateTipo(unTipo);
-                            return View("SuccessAlta");
+                            numMax = item.ValorMax;
+                            numMin = item.ValorMin;
                         }
-                        catch (Exception ex)
+                    }
+                    if (TipoPlanta.DescValid(unTipo.TipoDesc, numMax, numMin))
+                    {
+                        if (TipoPlanta.QuitarEspacios(unTipo.TipoNombre))
+                        {
+                            try
+                            {
+                                repositorio.UpdateTipo(unTipo);
+                                return View("SuccessAlta");
+                            }
+                            catch (Exception ex)
+                            {
+                                return View("ErrorAlta");
+                            }
+                        }
+                        else
                         {
                             return View("ErrorAlta");
                         }
@@ -132,24 +154,26 @@ namespace Vivero.Controllers
                         return View("ErrorAlta");
                     }
                 }
-                else
+                catch (Exception)
                 {
-                    return View("ErrorAlta");
+
+                    throw;
                 }
             }
-            catch (Exception)
-            {
 
-                throw;
-            }
-            
+            return Redirect("/Login/Login");
         }
 
         // GET: TipoPlantaController/Delete/5
         public ActionResult Delete(int id)
         {
-            TipoPlanta unTipo = repositorio.GetByIdTipo(id);
-            return View(unTipo);
+            if (!(HttpContext.Session.GetString("_Name") is null))
+            {
+                TipoPlanta unTipo = repositorio.GetByIdTipo(id);
+                return View(unTipo);
+            }
+
+            return Redirect("/Login/Login");
         }
 
         // POST: TipoPlantaController/Delete/5
@@ -157,41 +181,56 @@ namespace Vivero.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteTipo(int IdTipoPlanta)
         {
-            try
+            if (!(HttpContext.Session.GetString("_Name") is null))
             {
-                repositorio.DeleteTipo(IdTipoPlanta);
-                return View("SuccessAlta");
+                try
+                {
+                    repositorio.DeleteTipo(IdTipoPlanta);
+                    return View("SuccessAlta");
+                }
+                catch
+                {
+                    return View("ErrorAlta");
+                }
             }
-            catch
-            {
-                return View("ErrorAlta");
-            }
+
+            return Redirect("/Login/Login");
         }
         public ActionResult Search()
         {
-            return View();
+            if (!(HttpContext.Session.GetString("_Name") is null))
+            {
+                return View();
+            }
+
+            return Redirect("/Login/Login");
         }
         [HttpPost]
         public ActionResult Search(string TipoNombre)
         {
-            try
-            
+            if (!(HttpContext.Session.GetString("_Name") is null))
             {
-                TipoPlanta unTipo = repositorio.GetByNombreTipo(TipoNombre);
-                if (unTipo==null)
-                {
-                    return View("ErrorAlta");
-                }
-                else
-                {
-                    return View("ViewSearch",unTipo);
-                }
-            }
-            catch (Exception)
-            {
+                try
 
-                throw;
+                {
+                    TipoPlanta unTipo = repositorio.GetByNombreTipo(TipoNombre);
+                    if (unTipo == null)
+                    {
+                        return View("ErrorAlta");
+                    }
+                    else
+                    {
+                        return View("ViewSearch", unTipo);
+                    }
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
             }
+
+            return Redirect("/Login/Login");
         }
     }
 }

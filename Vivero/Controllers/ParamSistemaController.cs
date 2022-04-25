@@ -14,19 +14,34 @@ namespace Vivero.Controllers
         // GET: ParamSistemaController
         public ActionResult Index()
         {
-            return View(repositorio.Get());
+            if (!(HttpContext.Session.GetString("_Name") is null))
+            {
+                return View(repositorio.Get());
+            }
+
+            return Redirect("/Login/Login");
         }
 
         // GET: ParamSistemaController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            if (!(HttpContext.Session.GetString("_Name") is null))
+            {
+                return View();
+            }
+
+            return Redirect("/Login/Login");
         }
 
         // GET: ParamSistemaController/Create
         public ActionResult Create()
         {
-            return View();
+            if (!(HttpContext.Session.GetString("_Name") is null))
+            {
+                return View();
+            }
+
+            return Redirect("/Login/Login");
         }
 
         // POST: ParamSistemaController/Create
@@ -34,21 +49,31 @@ namespace Vivero.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
         {
-            try
+            if (!(HttpContext.Session.GetString("_Name") is null))
             {
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+                catch
+                {
+                    return View();
+                }
             }
-            catch
-            {
-                return View();
-            }
+
+            return Redirect("/Login/Login");
         }
 
         // GET: ParamSistemaController/Edit/5
         public ActionResult Edit(int id)
         {
-            ParamSistema unParam = repositorio.GetByID(id);
-            return View(unParam);
+            if (!(HttpContext.Session.GetString("_Name") is null))
+            {
+                ParamSistema unParam = repositorio.GetByID(id);
+                return View(unParam);
+            }
+
+            return Redirect("/Login/Login");
         }
 
         // POST: ParamSistemaController/Edit/5
@@ -56,21 +81,31 @@ namespace Vivero.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(ParamSistema unParam)
         {
-            try
+            if (!(HttpContext.Session.GetString("_Name") is null))
             {
-                repositorio.Update(unParam);
-                return View("SuccessAlta");
+                try
+                {
+                    repositorio.Update(unParam);
+                    return View("SuccessAlta");
+                }
+                catch
+                {
+                    return View("ErrorAlta");
+                }
             }
-            catch
-            {
-                return View("ErrorAlta");
-            }
+
+            return Redirect("/Login/Login");
         }
 
         // GET: ParamSistemaController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            if (!(HttpContext.Session.GetString("_Name") is null))
+            {
+                return View();
+            }
+
+            return Redirect("/Login/Login");
         }
 
         // POST: ParamSistemaController/Delete/5
@@ -78,14 +113,19 @@ namespace Vivero.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)
         {
-            try
+            if (!(HttpContext.Session.GetString("_Name") is null))
             {
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+                catch
+                {
+                    return View();
+                }
             }
-            catch
-            {
-                return View();
-            }
+
+            return Redirect("/Login/Login");
         }
     }
 }
