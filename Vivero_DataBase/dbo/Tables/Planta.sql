@@ -7,10 +7,13 @@
     [IdFichaCuidados] INT           NULL,
     [Ambiente]        VARCHAR (30)  NULL,
     [Altura]          INT           NULL,
+    [NombresVulgares] VARCHAR (500) NULL,
     CONSTRAINT [PK_PLANTA] PRIMARY KEY CLUSTERED ([IdPlanta] ASC),
     CONSTRAINT [FK_IDFICHACUIDADOS] FOREIGN KEY ([IdFichaCuidados]) REFERENCES [dbo].[FichaCuidados] ([IdFichaCuidados]),
     CONSTRAINT [FK_IDFOTO] FOREIGN KEY ([IdFoto]) REFERENCES [dbo].[Foto] ([IdFoto]),
     CONSTRAINT [FK_IDTIPO] FOREIGN KEY ([IdTipoPlanta]) REFERENCES [dbo].[TipoPlanta] ([IdTipoPlanta]),
     UNIQUE NONCLUSTERED ([NomCientifico] ASC)
 );
+
+
 
