@@ -23,6 +23,11 @@ namespace Vivero.Controllers
             return Redirect("/Login/Login");
         }
 
+        public ActionResult IndexPlanta()
+        {
+            return View(repositorio.Get());
+        }
+
         // GET: TipoPlantaController/Details/5
         public ActionResult Details(int id)
         {

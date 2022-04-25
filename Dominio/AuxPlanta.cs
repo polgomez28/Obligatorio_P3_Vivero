@@ -4,20 +4,18 @@ using System.Text;
 
 namespace Dominio
 {
-    public class Planta
+    public class AuxPlanta
     {
         public int IdPlanta { get; set; }
         public string NombreCientifico { get; set; }
         public string Descripcion { get; set; }
-        public TipoPlanta TipoPlanta { get; set; }
-        public List<Foto> FotosPlanta { get; set; }
-        public FichaCuidados FichaCuidados { get; set; }
+        public int IdTipoPlanta { get; set; }
+        public int IdFotos { get; set; }
+        public int IdFichaCuidados { get; set; }
         public string NombresVulgares { get; set; }
         public string Ambiente { get; set; } // Enum o tabla?
-        public double Altura { get; set; }
         public string NomFotoVariable { get; set; }
-
-        // Agregar métodos de validación, tal vez hacer una clase que maneje eso
-
+        public double Altura { get; set; }
+        
     }
 }
