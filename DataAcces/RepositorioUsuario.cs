@@ -19,7 +19,7 @@ namespace DataAcces
 
         public IList<Usuario> GetUsuarios()
         {
-            IList<Usuario> resultado = new List<Usuario>();
+            IList<Usuario> listaUsuarios = new List<Usuario>();
             IDbCommand command = conneccion.CreateCommand();
             command.CommandText = "SELECT * FROM dbo.Usuario";
 
@@ -36,7 +36,7 @@ namespace DataAcces
                         usuario.Email = (string)reader["Email"];
                         usuario.Contraseña = (string)reader["Contraseña"];
 
-                        resultado.Add(usuario);
+                        listaUsuarios.Add(usuario);
                     }
                 }
             }
@@ -50,7 +50,7 @@ namespace DataAcces
                 conneccion.Dispose();
                 command.Dispose();
             }
-            return resultado;
+            return listaUsuarios;
         }
     }
 }

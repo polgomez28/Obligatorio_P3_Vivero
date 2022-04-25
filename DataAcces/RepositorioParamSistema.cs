@@ -22,9 +22,9 @@ namespace DataAcces
             throw new NotImplementedException();
         }
 
-        public IEnumerable Get()
+        public IList<ParamSistema> Get()
         {
-            ICollection<ParamSistema> resultado = new List<ParamSistema>();
+            IList<ParamSistema> resultado = new List<ParamSistema>();
             IDbCommand command = conneccion.CreateCommand();
             command.CommandText = "SELECT * FROM dbo.ParamSistema";
 

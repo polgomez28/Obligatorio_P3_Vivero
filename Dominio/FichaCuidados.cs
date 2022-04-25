@@ -9,6 +9,6 @@ namespace Dominio
         public int IdFichaCuidados { get; set; }
         public string Riego { get; set; }
         public TipoIluminacion TipoIluminacion { get; set; }
-        public double Temperatura { get; set; }
+        public int Temperatura { get; set; }
     }
 }
