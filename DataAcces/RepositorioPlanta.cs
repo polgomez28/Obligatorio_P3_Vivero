@@ -29,7 +29,7 @@ namespace DataAcces
                 connection.Open();
                 int filasAfectadas = command.ExecuteNonQuery();
                 // comprobar que se hayan realizado cambios en la bd
-                if(filasAfectadas == 0)
+                if (filasAfectadas == 0)
                 {
                     throw new Exception();
                 }
@@ -48,34 +48,41 @@ namespace DataAcces
         }
 
         // GET PLANTA
-        public IEnumerable Get()
+        public IList<Planta> Get()
         {
-            ICollection<AuxPlanta> listadoPlantas = new List<AuxPlanta>();
+            IList<Planta> listaPlantas = new List<Planta>();
             IDbCommand command = connection.CreateCommand();
-            command.CommandText = @"SELECT * FROM Planta";
+            command.CommandText = "SELECT p.IdPlanta, p.NomCientifico, p.Descripcion, p.Ambiente, p.Altura, tp.IdTipoPlanta, tp.TipoNombre, tp.TipoDesc, fc.IdFichaCuidados, fc.Riego, fc.Temperatura, ti.IdTipoIluminacion, ti.Tipo FROM dbo.Planta p INNER JOIN dbo.TipoPlanta tp ON p.IdTipoPlanta = tp.IdTipoPlanta INNER JOIN dbo.FichaCuidados fc ON p.IdFichaCuidados = fc.IdFichaCuidados INNER JOIN dbo.TipoIluminacion ti ON fc.IdTipoIluminacion = ti.IdTipoIluminacion";
 
             try
             {
                 connection.Open();
                 using (IDataReader reader = command.ExecuteReader())
                 {
-                    AuxPlanta unaPlanta = null;
+                    Planta planta = null;
+                    List<Foto> listaFotos = new List<Foto>();
                     while (reader.Read())
                     {
-                        unaPlanta = new AuxPlanta();
-                        // Completar después de tener la clase planta y los demás métodos del repositorio
+                        planta = new Planta();
+                        planta.IdPlanta = (int)reader["IdPlanta"];
+                        planta.NombreCientifico = (string)reader["NomCientifico"];
+                        planta.Descripcion = (string)reader["Descripcion"];
+                        planta.Ambiente = (string)reader["Ambiente"];
+                        planta.Altura = (int)reader["Altura"];
+                        planta.TipoPlanta = new TipoPlanta();
+                        planta.TipoPlanta.IdTipoPlanta = (int)reader["IdTipoPlanta"];
+                        planta.TipoPlanta.TipoNombre = (string)reader["TipoNombre"];
+                        planta.TipoPlanta.TipoDesc = (string)reader["TipoDesc"];
+                        planta.FichaCuidados = new FichaCuidados();
+                        planta.FichaCuidados.IdFichaCuidados = (int)reader["IdFichaCuidados"];
+                        planta.FichaCuidados.Riego = (string)reader["Riego"];
+                        planta.FichaCuidados.Temperatura = (int)reader["Temperatura"];
+                        planta.FichaCuidados.TipoIluminacion = new TipoIluminacion();
+                        planta.FichaCuidados.TipoIluminacion.IdIluminacion = (int)reader["IdTipoIluminacion"];
+                        planta.FichaCuidados.TipoIluminacion.DescripcionTipoIlum = (string)reader["Tipo"];
+                        planta.ListaFotos = listaFotos; //Agregar la lista de fotos de cada planta
 
-                        unaPlanta.IdPlanta = (int)reader["IdPlanta"]; // obtengo id del tipo de planta
-                        //TipoPlanta unTipo = GetByIdTipo(idTipo); // llamo método que busca tipo por id
-                        unaPlanta.NombreCientifico = (string)reader["NomCientifico"];
-                        unaPlanta.Descripcion = (string)reader["Descripcion"];
-                        unaPlanta.IdTipoPlanta = (int)reader["IdTipoPlanta"];
-                        unaPlanta.IdFotos = (int)reader["IdFoto"];
-                        unaPlanta.IdFichaCuidados = (int)reader["IdFichaCuidados"];
-                        unaPlanta.Ambiente = (string)reader["Ambiente"];
-                        unaPlanta.Altura = (int)reader["Altura"];
-                        unaPlanta.NombresVulgares = (string)reader["NombresVulgares"];
-                        listadoPlantas.Add(unaPlanta);
+                        listaPlantas.Add(planta);
                     }
                 }
             }
@@ -89,7 +96,7 @@ namespace DataAcces
                 connection.Dispose();
                 command.Dispose();
             }
-            return listadoPlantas;
+            return listaPlantas;
         }
 
         // GET BY ID PLANTA
@@ -102,8 +109,8 @@ namespace DataAcces
             try
             {
                 connection.Open();
-                using(IDataReader reader = command.ExecuteReader())
-                {                     
+                using (IDataReader reader = command.ExecuteReader())
+                {
                     while (reader.Read())
                     {
                         unaPlanta = new Planta();
@@ -116,9 +123,9 @@ namespace DataAcces
                         int idFicha = (int)reader["IdFichaCuidados"];
                         FichaCuidados unaFicha = GetByIdFicha(idFicha);
                         unaPlanta.FichaCuidados = unaFicha;
-                        unaPlanta.FotosPlanta = new List<Foto>();  // modificar luego de definir cómo se va a manejar la foto (string)reader["Foto"]
+                        unaPlanta.ListaFotos = new List<Foto>();  // modificar luego de definir cómo se va a manejar la foto (string)reader["Foto"]
                         unaPlanta.Ambiente = (string)reader["Ambiente"];
-                        unaPlanta.Altura = (int)reader["Altura"];                      
+                        unaPlanta.Altura = (int)reader["Altura"];
                     }
                 }
             }
@@ -142,14 +149,14 @@ namespace DataAcces
             command.CommandText = @"Insert into dbo.Plantas(NomCientifico, Descripcion, IdTipoPlanta, IdFichaCuidados, Ambiente, Altura) Values(@NombreCientifico,
             @Descripcion,  @IdTipo, @FichaCuidados, @Ambiente, @Altura)";
 
-            
-            command.Parameters.Add(new SqlParameter("@NombreCientifico", obj.NombreCientifico));            
+
+            command.Parameters.Add(new SqlParameter("@NombreCientifico", obj.NombreCientifico));
             command.Parameters.Add(new SqlParameter("@Descripcion", obj.Descripcion));
             command.Parameters.Add(new SqlParameter("@IdTipo", obj.TipoPlanta.IdTipoPlanta));
-            command.Parameters.Add(new SqlParameter("@IdFichaCuidados", obj.FichaCuidados.IdFichaCuidados));           
+            command.Parameters.Add(new SqlParameter("@IdFichaCuidados", obj.FichaCuidados.IdFichaCuidados));
             command.Parameters.Add(new SqlParameter("@Ambiente", obj.Ambiente));
-            command.Parameters.Add(new SqlParameter("@Altura", obj.Altura));                    
-            
+            command.Parameters.Add(new SqlParameter("@Altura", obj.Altura));
+
             try
             {
                 connection.Open();
@@ -166,7 +173,7 @@ namespace DataAcces
                 connection.Dispose();
                 command.Dispose();
             }
-        }      
+        }
 
         // UPDATE PLANTA
         public void Update(Planta obj)
@@ -183,7 +190,7 @@ namespace DataAcces
             command.Parameters.Add(new SqlParameter("@TipoNombre", obj.TipoNombre));
             command.Parameters.Add(new SqlParameter("@TipoDesc", obj.TipoDesc));
             command.Parameters.Add(new SqlParameter("@IdTipoPlanta", obj.IdTipoPlanta));
-            
+
 
             try
             {
@@ -241,31 +248,31 @@ namespace DataAcces
         public void InsertTipo(TipoPlanta obj)
         {
             //TipoPlanta unT = new TipoPlanta();
-            
+
             //unT = ExisteTipo(obj);
             //if (unT == null)
             //{
 
-                IDbCommand command = connection.CreateCommand();
-                command.CommandText = @"INSERT INTO TipoPlanta(TipoNombre, TipoDesc) VALUES(@TipoNombre, @TipoDesc)";
-                command.Parameters.Add(new SqlParameter("@TipoNombre", obj.TipoNombre));
-                command.Parameters.Add(new SqlParameter("@TipoDesc", obj.TipoDesc));
-                try
-                {
-                    connection.Open();
-                    command.ExecuteNonQuery();
-                    
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception("No se pudo grabar el tipo" + ex.Message);
-                }
-                finally
-                {
-                    connection.Close();
-                    connection.Dispose();
-                    command.Dispose();
-                }
+            IDbCommand command = connection.CreateCommand();
+            command.CommandText = @"INSERT INTO TipoPlanta(TipoNombre, TipoDesc) VALUES(@TipoNombre, @TipoDesc)";
+            command.Parameters.Add(new SqlParameter("@TipoNombre", obj.TipoNombre));
+            command.Parameters.Add(new SqlParameter("@TipoDesc", obj.TipoDesc));
+            try
+            {
+                connection.Open();
+                command.ExecuteNonQuery();
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("No se pudo grabar el tipo" + ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+                connection.Dispose();
+                command.Dispose();
+            }
             //}
             //else
             //{
@@ -306,7 +313,7 @@ namespace DataAcces
                     unTipo.IdTipoPlanta = (int)reader["IdTipoPlanta"];
                     unTipo.TipoNombre = (string)reader["TipoNombre"];
                     unTipo.TipoDesc = (string)reader["TipoDesc"];
-                    
+
                 }
 
             }
@@ -399,7 +406,7 @@ namespace DataAcces
             ICollection<FichaCuidados> listadoFichas = new List<FichaCuidados>();
             IDbCommand command = connection.CreateCommand();
             command.CommandText = "SELECT * FROM dbo.FichaCuidados";
-                       
+
             try
             {
                 connection.Open();
@@ -447,7 +454,7 @@ namespace DataAcces
 
             command.Parameters.Add(new SqlParameter("@Riego", obj.Riego));
             command.Parameters.Add(new SqlParameter("@IdTipoIlum", obj.TipoIluminacion.IdIluminacion));
-            command.Parameters.Add(new SqlParameter("@Temperatura", obj.Temperatura));            
+            command.Parameters.Add(new SqlParameter("@Temperatura", obj.Temperatura));
 
             try
             {
@@ -489,7 +496,7 @@ namespace DataAcces
                         TipoIluminacion unTipoIlum = GetByIdTipoIlum(idTipoIluminacion); // llamo método que busca tipo iluminacion por id
                         unaFicha.TipoIluminacion = unTipoIlum;
                         unaFicha.Riego = (string)reader["Riego"];
-                        unaFicha.Temperatura = (int)reader["Temperatura"];                        
+                        unaFicha.Temperatura = (int)reader["Temperatura"];
                     }
                 }
             }
@@ -552,7 +559,7 @@ namespace DataAcces
                     TipoIluminacion unTipo = null;
                     while (reader.Read())
                     {
-                        unTipo = new TipoIluminacion();                        
+                        unTipo = new TipoIluminacion();
                         unTipo.IdIluminacion = (int)reader["IdTipoIluminacion"];
                         unTipo.DescripcionTipoIlum = (string)reader["Tipo"];
                         listadoTipos.Add(unTipo);
@@ -613,7 +620,7 @@ namespace DataAcces
             IDbCommand command = connection.CreateCommand();
             command.CommandText = @"INSERT INTO TipoIluminacion(TipoNombre) VALUES(@TipoNombre)";
             command.Parameters.Add(new SqlParameter("@TipoNombre", obj.DescripcionTipoIlum));
-            
+
             try
             {
                 connection.Open();
@@ -646,8 +653,8 @@ namespace DataAcces
                 {
                     while (reader.Read())
                     {
-                        unTipoIlum = new TipoIluminacion();                       
-                        unTipoIlum.DescripcionTipoIlum = (string)reader["Tipo"];                        
+                        unTipoIlum = new TipoIluminacion();
+                        unTipoIlum.DescripcionTipoIlum = (string)reader["Tipo"];
                     }
                 }
             }

@@ -8,7 +8,12 @@ namespace DataAcces
 {
     public interface IRepositorioPlanta:IRepositorio<Planta>
     {
-        // Tipo planta
+        #region Planta
+        //IList<Planta> GetPlantas();
+
+        #endregion
+
+        #region TipoPlanta
         IEnumerable GetTipos();
         void UpdateTipo(TipoPlanta obj);
         void InsertTipo(TipoPlanta unTipo);
@@ -17,19 +22,25 @@ namespace DataAcces
         void DeleteTipo(int idTipoPlanta);
         TipoPlanta GetByNombreTipo(string tipoNombre);
 
-        // Ficha cuidados
+        #endregion
+
+        #region FichaCuidados
         IEnumerable GetFichas();
         void UpdateFicha(FichaCuidados obj);
         void InsertFicha(FichaCuidados obj);
         FichaCuidados GetByIdFicha(int id);
         void DeleteFicha(int idFicha);
 
-        // Tipo iluminacion
+        #endregion
+
+        #region TipoIluminacion
         IEnumerable GetTiposIlum();
         void DeleteTipoILum(int idTipoIlum);
         void UpdateTipoIlum(TipoIluminacion obj);
         void InsertTipoIlum(TipoIluminacion obj);
-        TipoIluminacion GetByIdTipoIlum(int idTipoIlum);        
+        TipoIluminacion GetByIdTipoIlum(int idTipoIlum);
+
+#endregion
 
     }
 }
