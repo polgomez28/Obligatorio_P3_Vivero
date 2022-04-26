@@ -22,6 +22,10 @@ namespace Dominio
         [Required]
         public string NomFotoVariable { get; set; }
 
+        public List<TipoPlanta> ListaTipoPlantas { get; set; }
+
+        public List<FichaCuidados> ListaFichas { get; set; }
+
         // Validaciones
 
         // --- Validar Nombre Científico

@@ -787,7 +787,7 @@ namespace DataAcces
             IList<Foto> listaFotos = new List<Foto>();
             Planta planta = new Planta();
             planta.ListaFotos = (List<Foto>)listaFotos;
-            planta.ListaTipoPlantas = (List<Foto>)listaTipos;
+            planta.ListaTipoPlantas = (List<TipoPlanta>)listaTipos;
             planta.ListaFichas = (List<FichaCuidados>)listaFichas;
 
             IDbCommand command = connection.CreateCommand();
@@ -807,10 +807,16 @@ namespace DataAcces
                         tipo.IdTipoPlanta = (int)reader["IdTipoPlanta"];
                         tipo.TipoNombre = (string)reader["TipoNombre"];
                         tipo.TipoDesc = (string)reader["TipoDesc"];
-                        listaTipos.Add(tipo);
+                        listaTipos.Add(tipo);                        
+                    }
+                    while (reader.Read())
+                    {
                         ficha = new FichaCuidados();
                         ficha.IdFichaCuidados = (int)reader["IdFichaCuidados"];
                         listaFichas.Add(ficha);
+                    }
+                    while (reader.Read())
+                    {
                         foto = new Foto();
                         foto.IdFoto = (int)reader["IdFoto"];
                         foto.Nombre = (string)reader["Nombre"];
