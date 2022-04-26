@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Dominio.TipoPlanta>
+﻿@model IList<Dominio.TipoPlanta>
 
 @{
     ViewData["Titulo"] = "Index";
@@ -14,10 +14,10 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.TipoNombre)
+                Nombre
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TipoDesc)
+                Descripcion
             </th>
             <th></th>
         </tr>

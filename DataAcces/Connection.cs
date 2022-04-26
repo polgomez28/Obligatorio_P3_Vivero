@@ -8,7 +8,7 @@ namespace DataAcces
     {
         SqlConnection connection = null;
 
-        public string connectionString = @"data Source=DESKTOP-8DJ4U7A;Database=Vivero;User Instance=false; Integrated Security=True";
+        public string connectionString = @"data Source=PC-224;Database=Vivero;User Instance=false; Integrated Security=True";
         public string ConnectionString { get => connectionString; set => connectionString = value; }
 
         public int ConnectionTimeout => connection.ConnectionTimeout;

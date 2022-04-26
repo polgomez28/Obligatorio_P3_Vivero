@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace Dominio
@@ -8,6 +9,7 @@ namespace Dominio
     {
         public int IdPlanta { get; set; }
         public string NombreCientifico { get; set; }
+        [Required]
         public string Descripcion { get; set; }
         public TipoPlanta TipoPlanta { get; set; }
         public List<Foto> ListaFotos { get; set; }

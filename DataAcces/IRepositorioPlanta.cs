@@ -14,7 +14,7 @@ namespace DataAcces
         #endregion
 
         #region TipoPlanta
-        IEnumerable GetTipos();
+        IList<TipoPlanta> GetTipos();
         void UpdateTipo(TipoPlanta obj);
         void InsertTipo(TipoPlanta unTipo);
         TipoPlanta ExisteTipo(TipoPlanta unTipo);

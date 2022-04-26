@@ -11,10 +11,5 @@ namespace Dominio
         public string Descripcion { get; set; }
         public int ValorMin { get; set; }
         public int ValorMax { get; set; }
-
-        public bool IsValid()
-        {
-            return !string.IsNullOrEmpty(Nombre);
-        }
     }
 }

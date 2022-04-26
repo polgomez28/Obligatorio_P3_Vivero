@@ -208,9 +208,9 @@ namespace DataAcces
                 command.Dispose();
             }
         }
-        public IEnumerable GetTipos()
+        public IList<TipoPlanta> GetTipos()
         {
-            ICollection<TipoPlanta> resultado = new List<TipoPlanta>();
+            IList<TipoPlanta> resultado = new List<TipoPlanta>();
             IDbCommand command = connection.CreateCommand();
             command.CommandText = "SELECT * FROM dbo.TipoPlanta";
 
@@ -247,11 +247,6 @@ namespace DataAcces
         //Genero el insert del TipoPlanta obtenido del TipoPlantaController Siempre y cuando no exista (!ExisteTipo)
         public void InsertTipo(TipoPlanta obj)
         {
-            //TipoPlanta unT = new TipoPlanta();
-
-            //unT = ExisteTipo(obj);
-            //if (unT == null)
-            //{
 
             IDbCommand command = connection.CreateCommand();
             command.CommandText = @"INSERT INTO TipoPlanta(TipoNombre, TipoDesc) VALUES(@TipoNombre, @TipoDesc)";
@@ -273,11 +268,6 @@ namespace DataAcces
                 connection.Dispose();
                 command.Dispose();
             }
-            //}
-            //else
-            //{
-            //    throw new Exception("Ya existe el tipo ingresado");
-            //}
 
         }
         // Busca si existe un Tipo por nombre en la base de datos
