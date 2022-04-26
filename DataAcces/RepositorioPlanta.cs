@@ -277,21 +277,7 @@ namespace DataAcces
             return exist;
 
         }
-        // Busca si existe un Tipo por nombre en la base de datos
-        public TipoPlanta ExisteTipo(TipoPlanta obj)
-        {
-            TipoPlanta Tipo = null;
-            ICollection<TipoPlanta> resultado = new List<TipoPlanta>();
-            resultado = (ICollection<TipoPlanta>)GetTipos();
-            foreach (TipoPlanta unTipo in resultado)
-            {
-                if (obj.TipoNombre.Equals(unTipo.TipoNombre))
-                {
-                    Tipo = unTipo;
-                }
-            }
-            return Tipo;
-        }
+        
 
         public TipoPlanta GetByIdTipo(int id)
         {
