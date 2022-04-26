@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace Dominio
@@ -8,7 +9,10 @@ namespace Dominio
     {
         public int IdFichaCuidados { get; set; }
         public string Riego { get; set; }
+        [Required]
+
         public TipoIluminacion TipoIluminacion { get; set; }
         public int Temperatura { get; set; }
+        //[Required] da error
     }
 }
