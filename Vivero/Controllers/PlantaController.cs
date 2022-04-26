@@ -194,5 +194,33 @@ namespace Vivero.Controllers
 
             return Redirect("/Login/Login");
         }
+
+        public ActionResult Search()
+        {
+            return View(repositorioPlanta.GetTipos());
+        }
+
+        [HttpPost]
+        public ActionResult Search(string NombreCientifico, string TipoNombre, string Ambiente, int Altura, int Altura2)
+        {
+            if (!(HttpContext.Session.GetString("_Name") is null))
+            {
+                try
+
+                {
+                    IList<Planta> listPlantas = repositorioPlanta.SearchPlantas(NombreCientifico, TipoNombre, Ambiente, Altura, Altura2);
+                    return View("VisualizarSearch", listPlantas);
+                    
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+            }
+
+            return Redirect("/Login/Login");
+        }
     }
+    
 }

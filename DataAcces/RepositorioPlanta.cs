@@ -327,36 +327,6 @@ namespace DataAcces
             }
             return Tipo;
 
-            //TipoPlanta unTipo = null;
-            //IDbCommand command = connection.CreateCommand();
-            //command.CommandText = @"SELECT * FROM TipoPlanta WHERE TipoNombre = @TipoNombre";
-            //command.Parameters.Add(new SqlParameter("@TipoNombre", TipoNombre));
-            //try
-            //{
-            //    connection.Open();
-            //    using (IDataReader reader = command.ExecuteReader())
-            //    {
-            //        reader.Read();
-
-            //        unTipo = new TipoPlanta();
-            //        unTipo.IdTipoPlanta = (int)reader["IdTipoPlanta"];
-            //        unTipo.TipoNombre = (string)reader["TipoNombre"];
-            //        unTipo.TipoDesc = (string)reader["TipoDesc"];
-
-            //    }
-
-            //}
-            //catch (Exception ex)
-            //{
-            //    throw;
-            //}
-            //finally
-            //{
-            //    connection.Close();
-            //    connection.Dispose();
-            //    command.Dispose();
-            //}
-            //return unTipo;
         }
 
         public void DeleteTipo(int idTipoPlanta)
@@ -652,6 +622,65 @@ namespace DataAcces
                 command.Dispose();
             }
             return unTipoIlum;
+        }
+
+        public IList<Planta> SearchPlantas(string NombreCientifico, string TipoNombre, string Ambiente, int Altura, int Altura2)
+        {
+
+            IList<Planta> listaPlantas = new List<Planta>();
+            IDbCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT p.IdPlanta, p.NomCientifico, p.Descripcion, p.Ambiente, p.Altura, tp.IdTipoPlanta, tp.TipoNombre, tp.TipoDesc, fc.IdFichaCuidados, fc.Riego, fc.Temperatura, ti.IdTipoIluminacion, ti.Tipo FROM dbo.Planta p INNER JOIN dbo.TipoPlanta tp ON p.IdTipoPlanta = tp.IdTipoPlanta INNER JOIN dbo.FichaCuidados fc ON p.IdFichaCuidados = fc.IdFichaCuidados INNER JOIN dbo.TipoIluminacion ti ON fc.IdTipoIluminacion = ti.IdTipoIluminacion WHERE (P.NomCientifico = CASE WHEN @NombreCientifico IS NOT NULL THEN @NombreCientifico ELSE P.NomCientifico END) and (P.Altura < CASE WHEN @Altura <> 0 THEN @Altura ELSE P.Altura END) and (P.Altura >= CASE WHEN @Altura2 <> 0 THEN @Altura2 ELSE P.Altura END) and tp.TipoNombre = @TipoNombre and p.Ambiente = @Ambiente ";
+
+            command.Parameters.Add(new SqlParameter("@NombreCientifico", NombreCientifico));
+            
+            command.Parameters.Add(new SqlParameter("@Altura", Altura));
+            command.Parameters.Add(new SqlParameter("@Altura2", Altura2));
+            command.Parameters.Add(new SqlParameter("@TipoNombre", TipoNombre));
+            command.Parameters.Add(new SqlParameter("@Ambiente", Ambiente));
+
+            try
+            {
+                connection.Open();
+                using (IDataReader reader = command.ExecuteReader())
+                {
+                    Planta planta = null;
+                    //List<Foto> listaFotos = new List<Foto>();
+                    while (reader.Read())
+                    {
+                        planta = new Planta();
+                        planta.IdPlanta = (int)reader["IdPlanta"];
+                        planta.NombreCientifico = (string)reader["NomCientifico"];
+                        planta.Descripcion = (string)reader["Descripcion"];
+                        planta.Ambiente = (string)reader["Ambiente"];
+                        planta.Altura = (int)reader["Altura"];
+                        planta.TipoPlanta = new TipoPlanta();
+                        planta.TipoPlanta.IdTipoPlanta = (int)reader["IdTipoPlanta"];
+                        planta.TipoPlanta.TipoNombre = (string)reader["TipoNombre"];
+                        planta.TipoPlanta.TipoDesc = (string)reader["TipoDesc"];
+                        planta.FichaCuidados = new FichaCuidados();
+                        planta.FichaCuidados.IdFichaCuidados = (int)reader["IdFichaCuidados"];
+                        planta.FichaCuidados.Riego = (string)reader["Riego"];
+                        planta.FichaCuidados.Temperatura = (int)reader["Temperatura"];
+                        planta.FichaCuidados.TipoIluminacion = new TipoIluminacion();
+                        planta.FichaCuidados.TipoIluminacion.IdIluminacion = (int)reader["IdTipoIluminacion"];
+                        planta.FichaCuidados.TipoIluminacion.DescripcionTipoIlum = (string)reader["Tipo"];
+                        //planta.ListaFotos = listaFotos; //Agregar la lista de fotos de cada planta
+
+                        listaPlantas.Add(planta);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            finally
+            {
+                connection.Close();
+                connection.Dispose();
+                command.Dispose();
+            }
+            return listaPlantas;
         }
     }
 }

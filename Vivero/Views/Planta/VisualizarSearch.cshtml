@@ -1,0 +1,89 @@
+﻿@model IEnumerable<Dominio.Planta>
+
+@{
+    ViewData["Title"] = "VisualizarSearch";
+}
+
+<h1>VisualizarSearch</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IdPlanta)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NombreCientifico)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ambiente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Altura)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TipoPlanta.TipoNombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TipoPlanta.TipoDesc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FichaCuidados.Riego)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FichaCuidados.Temperatura)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FichaCuidados.TipoIluminacion.DescripcionTipoIlum)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdPlanta)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombreCientifico)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ambiente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Altura)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TipoPlanta.TipoNombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TipoPlanta.TipoDesc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FichaCuidados.Riego)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FichaCuidados.Temperatura)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FichaCuidados.TipoIluminacion.DescripcionTipoIlum)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
