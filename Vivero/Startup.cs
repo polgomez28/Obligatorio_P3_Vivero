@@ -28,7 +28,7 @@ namespace Vivero
             //Session configuration
             services.AddDistributedMemoryCache();
             services.AddSession(options => {
-                options.IdleTimeout = TimeSpan.FromMinutes(1);//You can set Time   
+                options.IdleTimeout = TimeSpan.FromHours(1); 
             });
             services.AddMvc();
         }

@@ -24,7 +24,7 @@ namespace Vivero.Controllers
         // GET: HomeController1
         public ActionResult Index()
         {
-            if (!(HttpContext.Session.GetString("_Name") is null))
+            if (Convert.ToBoolean(HttpContext.Session.GetString("Logeado")))
             {
                 List<Planta> plantas = (List<Planta>)repositorioPlanta.Get();
                 return View(plantas);
@@ -36,9 +36,10 @@ namespace Vivero.Controllers
         // GET: HomeController1/Details/5
         public ActionResult Details(int id)
         {
-            if (!(HttpContext.Session.GetString("_Name") is null))
+            if (Convert.ToBoolean(HttpContext.Session.GetString("Logeado")))
             {
-                return View();
+                Planta unaPlanta = repositorioPlanta.GetByID(id);
+                return View(unaPlanta);
             }
 
             return Redirect("/Login/Login");
@@ -47,7 +48,7 @@ namespace Vivero.Controllers
         // GET: HomeController1/Create
         public ActionResult Create()
         {
-            if (!(HttpContext.Session.GetString("_Name") is null))
+            if (Convert.ToBoolean(HttpContext.Session.GetString("Logeado")))
             {
                 return View("CreateFoto");
             }
@@ -59,13 +60,76 @@ namespace Vivero.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Planta unaPlanta, IFormFile imagen)
         {
-            if (!(HttpContext.Session.GetString("_Name") is null))
+            if (Convert.ToBoolean(HttpContext.Session.GetString("Logeado")))
             {
                 return View();
             }
 
             return Redirect("/Login/Login");
         }
+
+        // GET Create Planta
+        public ActionResult CreatePlanta()
+        {
+            if (Convert.ToBoolean(HttpContext.Session.GetString("Logeado")))
+            {                                
+                return View(repositorioPlanta.GetListas());
+            }
+
+            return Redirect("/Login/Login");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(Planta unaPlanta)
+        {
+            if (Convert.ToBoolean(HttpContext.Session.GetString("Logeado")))
+            {
+                try
+                {
+                    ICollection<ParamSistema> parametros = new List<ParamSistema>();
+                    parametros = (ICollection<ParamSistema>)repositorioParam.Get();
+                    int maxLargo = 0;
+                    int minLargo = 0;
+                    foreach (ParamSistema param in parametros)
+                    {
+                        if (param.Nombre.Equals("PlantaDesc"))
+                        {
+                            maxLargo = param.ValorMax;
+                            minLargo = param.ValorMin;
+                        }
+                        unaPlanta.NombreCientifico = Planta.QuitarEspacios(unaPlanta.NombreCientifico);
+                        unaPlanta.Descripcion = Planta.QuitarEspacios(unaPlanta.Descripcion);
+                        if (Planta.NoContieneNumeros(unaPlanta.NombreCientifico) && Planta.LargoValido(unaPlanta.Descripcion, maxLargo, minLargo) && Planta.NombresValidos(unaPlanta.NombresVulgares))
+                        {
+                            try
+                            {
+                                repositorioPlanta.Insert(unaPlanta);
+                                return View("SuccessAlta");
+                            }
+                            catch (Exception e)
+                            {
+                                return View("ErrorAlta");
+                            }
+
+                        }
+                        else
+                        {
+                            return View("ErrorAlta");
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
+
+            return Redirect("/Login/Login");
+        }
+
+
+
         // POST: HomeController1/Create
         //[HttpPost]
         //[ValidateAntiForgeryToken]
@@ -77,22 +141,21 @@ namespace Vivero.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateFoto(Foto unaFoto, IFormFile imagen)
+        public ActionResult CreateFoto(Foto foto, IFormFile imagen)
         {
-            if (!(HttpContext.Session.GetString("_Name") is null))
+            if (Convert.ToBoolean(HttpContext.Session.GetString("Logeado")))
             {
                 try
                 {
-                    if (unaFoto == null || imagen == null || !ModelState.IsValid)
-
-                        return View();
-                    // ruta física donde está ubicada wwroot en el servidor
-
-                    if (GuardarImagen(imagen, unaFoto))
+                    if (ModelState.IsValid && !(imagen is null))
                     {
-                        return View("VisualizarFoto", unaFoto);
+                        foto.Imagen = ConvertImageToByteArray(imagen);
+
                     }
-                    return View(unaFoto);
+                    else
+                    {
+                        return View();
+                    }
                 }
                 catch
                 {
@@ -102,43 +165,25 @@ namespace Vivero.Controllers
 
             return Redirect("/Login/Login");
         }
-        private bool GuardarImagen(IFormFile imagen, Foto unaFoto)
+        private byte[] ConvertImageToByteArray(IFormFile imagen)
         {
-            if (imagen == null || unaFoto == null)
-                return false;
-
-            // subir la imagen
-            string rutaFisicaWwwRoot = _environment.WebRootPath;
-            //ruta donde se guardan las fotos de las plantas
-            string nombreImagen = imagen.FileName;
-            string rutaFisicaFoto = Path.Combine
-                                (rutaFisicaWwwRoot, "imagenes", "fotos", nombreImagen);
-            //FileStream permite manejar archivos
-            try
+            byte[] imagenByte;
+            using (var ms = new MemoryStream())
             {
-                //el método using libera los recursos del objeto FileStream al finalizar
-                using (FileStream f = new FileStream(rutaFisicaFoto, FileMode.Create))
-                {
-                    //si fueran archivos grandes o si fueran varios, deberíamos usar la versión
-                    //asincrónica de CopyTo, aquí no es necesario.
-                    //sería: await imagen.CopyToAsync (f);
-                    imagen.CopyTo(f);
-                }
-                unaFoto.imagen = nombreImagen;
-                return true;
+                imagen.CopyTo(ms);
+                imagenByte = ms.ToArray();
             }
-            catch (Exception ex)
-            {
-
-                return false;
-            }
+            return imagenByte;
         }
+
+
         // GET: HomeController1/Edit/5
         public ActionResult Edit(int id)
         {
-            if (!(HttpContext.Session.GetString("_Name") is null))
+            if (Convert.ToBoolean(HttpContext.Session.GetString("Logeado")))
             {
-                return View();
+                Planta unaPlanta = repositorioPlanta.GetByID(id);
+                return View(unaPlanta);
             }
 
             return Redirect("/Login/Login");
@@ -147,17 +192,47 @@ namespace Vivero.Controllers
         // POST: HomeController1/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(Planta unaPlanta)
         {
-            if (!(HttpContext.Session.GetString("_Name") is null))
+            if (Convert.ToBoolean(HttpContext.Session.GetString("Logeado")))
             {
                 try
                 {
-                    return RedirectToAction(nameof(Index));
+                    ICollection<ParamSistema> parametros = new List<ParamSistema>();
+                    parametros = (ICollection<ParamSistema>)repositorioParam.Get();
+                    int maxLargo = 0;
+                    int minLargo = 0;
+                    foreach(ParamSistema param in parametros)
+                    {
+                        if (param.Nombre.Equals("PlantaDesc"))
+                        {
+                            maxLargo = param.ValorMax;
+                            minLargo = param.ValorMin;
+                        }
+                        unaPlanta.NombreCientifico = Planta.QuitarEspacios(unaPlanta.NombreCientifico);
+                        unaPlanta.Descripcion = Planta.QuitarEspacios(unaPlanta.Descripcion);
+                        if(Planta.NoContieneNumeros(unaPlanta.NombreCientifico) && Planta.LargoValido(unaPlanta.Descripcion, maxLargo, minLargo) && Planta.NombresValidos(unaPlanta.NombresVulgares))
+                        {
+                            try
+                            {
+                                repositorioPlanta.Update(unaPlanta);
+                                return View("SuccessAlta");
+                            }
+                            catch (Exception e)
+                            {
+                                return View("ErrorAlta");
+                            }
+
+                        }
+                        else
+                        {
+                            return View("ErrorAlta");
+                        }
+                    }                    
                 }
-                catch
+                catch (Exception)
                 {
-                    return View();
+                    throw;
                 }
             }
 
@@ -167,9 +242,10 @@ namespace Vivero.Controllers
         // GET: HomeController1/Delete/5
         public ActionResult Delete(int id)
         {
-            if (!(HttpContext.Session.GetString("_Name") is null))
+            if (Convert.ToBoolean(HttpContext.Session.GetString("Logeado")))
             {
-                return View();
+                Planta unaPlanta = repositorioPlanta.GetByID(id);
+                return View(unaPlanta);
             }
 
             return Redirect("/Login/Login");
@@ -178,17 +254,18 @@ namespace Vivero.Controllers
         // POST: HomeController1/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult DeletePlanta(int idPlanta)
         {
-            if (!(HttpContext.Session.GetString("_Name") is null))
+            if (Convert.ToBoolean(HttpContext.Session.GetString("Logeado")))
             {
                 try
                 {
-                    return RedirectToAction(nameof(Index));
+                    repositorioPlanta.Delete(idPlanta);
+                    return View("SuccessAlta");
                 }
                 catch
                 {
-                    return View();
+                    return View("ErrorAlta");
                 }
             }
 
@@ -203,7 +280,7 @@ namespace Vivero.Controllers
         [HttpPost]
         public ActionResult Search(string NombreCientifico, string TipoNombre, string Ambiente, int Altura, int Altura2)
         {
-            if (!(HttpContext.Session.GetString("_Name") is null))
+            if (Convert.ToBoolean(HttpContext.Session.GetString("Logeado")))
             {
                 try
 

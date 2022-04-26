@@ -14,7 +14,7 @@ namespace Vivero.Controllers
         // GET: ParamSistemaController
         public ActionResult Index()
         {
-            if (!(HttpContext.Session.GetString("_Name") is null))
+            if (Convert.ToBoolean(HttpContext.Session.GetString("Logeado")))
             {
                 return View(repositorio.Get());
             }
@@ -25,7 +25,7 @@ namespace Vivero.Controllers
         // GET: ParamSistemaController/Details/5
         public ActionResult Details(int id)
         {
-            if (!(HttpContext.Session.GetString("_Name") is null))
+            if (Convert.ToBoolean(HttpContext.Session.GetString("Logeado")))
             {
                 return View();
             }
@@ -36,7 +36,7 @@ namespace Vivero.Controllers
         // GET: ParamSistemaController/Create
         public ActionResult Create()
         {
-            if (!(HttpContext.Session.GetString("_Name") is null))
+            if (Convert.ToBoolean(HttpContext.Session.GetString("Logeado")))
             {
                 return View();
             }
@@ -49,7 +49,7 @@ namespace Vivero.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
         {
-            if (!(HttpContext.Session.GetString("_Name") is null))
+            if (Convert.ToBoolean(HttpContext.Session.GetString("Logeado")))
             {
                 try
                 {
@@ -67,7 +67,7 @@ namespace Vivero.Controllers
         // GET: ParamSistemaController/Edit/5
         public ActionResult Edit(int id)
         {
-            if (!(HttpContext.Session.GetString("_Name") is null))
+            if (Convert.ToBoolean(HttpContext.Session.GetString("Logeado")))
             {
                 ParamSistema unParam = repositorio.GetByID(id);
                 return View(unParam);
@@ -81,7 +81,7 @@ namespace Vivero.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(ParamSistema unParam)
         {
-            if (!(HttpContext.Session.GetString("_Name") is null))
+            if (Convert.ToBoolean(HttpContext.Session.GetString("Logeado")))
             {
                 try
                 {
@@ -100,7 +100,7 @@ namespace Vivero.Controllers
         // GET: ParamSistemaController/Delete/5
         public ActionResult Delete(int id)
         {
-            if (!(HttpContext.Session.GetString("_Name") is null))
+            if (Convert.ToBoolean(HttpContext.Session.GetString("Logeado")))
             {
                 return View();
             }
@@ -113,7 +113,7 @@ namespace Vivero.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)
         {
-            if (!(HttpContext.Session.GetString("_Name") is null))
+            if (Convert.ToBoolean(HttpContext.Session.GetString("Logeado")))
             {
                 try
                 {

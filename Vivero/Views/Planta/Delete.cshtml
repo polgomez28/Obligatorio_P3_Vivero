@@ -1,11 +1,12 @@
 ﻿@model Dominio.Planta
 
 @{
-    ViewData["Title"] = "Detalle";
+    ViewData["Title"] = "Delete";
 }
 
-<h1>Detalle</h1>
+<h1>Eliminar</h1>
 
+<h3>¿Estás seguro de borrar esta Planta?</h3>
 <div>
     <h4>Planta</h4>
     <hr />
@@ -52,17 +53,18 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Altura)
         </dd>
-
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.NombresVulgares)
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.NombresVulgares)
         </dd>
-
+       
     </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.IdPlanta">Editar</a>
-    <a asp-action="Index">Volver a la lista</a>
+    
+    <form asp-action="DeletePlanta">
+        <input type="hidden" asp-for="IdPlanta" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
 </div>

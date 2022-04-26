@@ -38,7 +38,42 @@ else
     </div>
 }
 
+<<<<<<< HEAD
 <a asp-action="Edit" asp-route-id="@Model.IdTipoPlanta">Editar</a> |
 <form>
     <a asp-action="Index">Back to List</a>
 </form>
+=======
+<div>
+    <h4>Tipo de Planta</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.IdTipoPlanta)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.IdTipoPlanta)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TipoNombre)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TipoNombre)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TipoDesc)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TipoDesc)
+        </dd>
+    </dl>
+    <a asp-action="Edit" asp-route-id="@Model.IdTipoPlanta">Editar</a> |
+    <form>
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>
+
+<div>
+    <a asp-controller="TipoPlanta" asp-action="Index">Back to List</a>
+</div>
+>>>>>>> 2d95c4e017ce73409f44c1ad19ca304b575c501d

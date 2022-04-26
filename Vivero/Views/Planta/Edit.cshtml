@@ -1,22 +1,18 @@
 ﻿@model Dominio.Planta
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Editar";
 }
 
-<h1>Create</h1>
+<h1>Editar</h1>
 
 <h4>Planta</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create" enctype="multipart/form-data" method="post">
+        <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="IdPlanta" class="control-label"></label>
-                <input asp-for="IdPlanta" class="form-control" />
-                <span asp-validation-for="IdPlanta" class="text-danger"></span>
-            </div>
+
             <div class="form-group">
                 <label asp-for="NombreCientifico" class="control-label"></label>
                 <input asp-for="NombreCientifico" class="form-control" />
@@ -28,9 +24,14 @@
                 <span asp-validation-for="Descripcion" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="NombresVulgares" class="control-label"></label>
-                <input asp-for="NombresVulgares" class="form-control" />
-                <span asp-validation-for="NombresVulgares" class="text-danger"></span>
+                <label asp-for="TipoPlanta" class="control-label"></label>
+                <select>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="FichaCuidados" class="control-label"></label>
+                <select>
+                </select>
             </div>
             <div class="form-group">
                 <label asp-for="Ambiente" class="control-label"></label>
@@ -43,13 +44,18 @@
                 <span asp-validation-for="Altura" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <label asp-for="NombresVulgares" class="control-label"></label>
+                <input asp-for="NombresVulgares" class="form-control" />
+                <span asp-validation-for="NombresVulgares" class="text-danger"></span>
+            </div>
+          
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-controller="Planta" asp-action="Index">Back to List</a>
+    <a asp-action="Index">Volver a la lista</a>
 </div>
-

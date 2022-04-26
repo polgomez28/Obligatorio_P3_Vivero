@@ -8,8 +8,7 @@ namespace DataAcces
     {
         SqlConnection connection = null;
 
-
-        public string connectionString = @"data Source=PC-224;Database=Vivero;User Instance=false; Integrated Security=True";
+        public string connectionString = @"data Source=localhost\SQLEXPRESS;Database=Vivero;User Instance=false; Integrated Security=True";
 
         public string ConnectionString { get => connectionString; set => connectionString = value; }
 
