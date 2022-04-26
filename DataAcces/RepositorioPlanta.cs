@@ -667,5 +667,83 @@ namespace DataAcces
             }
             return unTipoIlum;
         }
+
+
+        public Planta GetListas()
+        {
+            IList<FichaCuidados> listaFichas = new List<FichaCuidados>();
+            IList<TipoPlanta> listaTipos = new List<TipoPlanta>();
+            IList<Foto> listaFotos = new List<Foto>();
+            Planta planta = new Planta();
+            planta.ListaFotos = (List<Foto>)listaFotos;
+            planta.ListaTipoPlantas = (List<Foto>)listaTipos;
+            planta.ListaFichas = (List<FichaCuidados>)listaFichas;
+
+            IDbCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM dbo.TipoPlanta SELECT * FROM dbo.FichaCuidados SELECT * FROM dbo.Foto";
+
+            try
+            {
+                connection.Open();
+                using (IDataReader reader = command.ExecuteReader())
+                {
+                    FichaCuidados ficha = null;
+                    TipoPlanta tipo = null;
+                    Foto foto = null;
+                    while (reader.Read())
+                    {
+                        tipo = new TipoPlanta();
+                        tipo.IdTipoPlanta = (int)reader["IdTipoPlanta"];
+                        tipo.TipoNombre = (string)reader["TipoNombre"];
+                        tipo.TipoDesc = (string)reader["TipoDesc"];
+                        listaTipos.Add(tipo);
+                        ficha = new FichaCuidados();
+                        ficha.IdFichaCuidados = (int)reader["IdFichaCuidados"];
+                        listaFichas.Add(ficha);
+                        foto = new Foto();
+                        foto.IdFoto = (int)reader["IdFoto"];
+                        foto.Nombre = (string)reader["Nombre"];
+                        listaFotos.Add(foto);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                connection.Close();
+                connection.Dispose();
+                command.Dispose();
+            }
+            return planta;
+        }
+
+
+        public void Insert(Foto obj)
+        {
+            IDbCommand command = connection.CreateCommand();
+            command.CommandText = @"Insert into dbo.Plantas(NomCientifico, Descripcion, IdTipoPlanta, IdFichaCuidados, Ambiente, Altura) Values(@NombreCientifico,
+            @Descripcion,  @IdTipo, @FichaCuidados, @Ambiente, @Altura)";
+
+            command.Parameters.Add(new SqlParameter("@Imagen", obj.Imagen));
+
+            try
+            {
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                connection.Close();
+                connection.Dispose();
+                command.Dispose();
+            }
+        }
     }
 }

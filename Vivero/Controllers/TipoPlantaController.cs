@@ -16,7 +16,7 @@ namespace Vivero.Controllers
         // GET: TipoPlantaController
         public ActionResult Index()
         {
-            if (!(HttpContext.Session.GetString("_Name") is null))
+            if (Convert.ToBoolean(HttpContext.Session.GetString("Logeado")))
             {
                 return View(repositorio.GetTipos());
             }
@@ -26,7 +26,7 @@ namespace Vivero.Controllers
         // GET: TipoPlantaController/Details/5
         public ActionResult Details(int id)
         {
-            if (!(HttpContext.Session.GetString("_Name") is null))
+            if (Convert.ToBoolean(HttpContext.Session.GetString("Logeado")))
             {
                 return View();
             }
@@ -37,7 +37,7 @@ namespace Vivero.Controllers
         // GET: TipoPlantaController/Create
         public ActionResult Create()
         {
-            if (!(HttpContext.Session.GetString("_Name") is null))
+            if (Convert.ToBoolean(HttpContext.Session.GetString("Logeado")))
             {
                 return View();
             }
@@ -50,7 +50,7 @@ namespace Vivero.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(TipoPlanta unTipo)
         {
-            if (!(HttpContext.Session.GetString("_Name") is null))
+            if (Convert.ToBoolean(HttpContext.Session.GetString("Logeado")))
             {
                 try
                 {
@@ -109,7 +109,7 @@ namespace Vivero.Controllers
         // GET: TipoPlantaController/Edit/5
         public ActionResult Edit(int id)
         {
-            if (!(HttpContext.Session.GetString("_Name") is null))
+            if (Convert.ToBoolean(HttpContext.Session.GetString("Logeado")))
             {
                 TipoPlanta unTipo = repositorio.GetByIdTipo(id);
                 return View(unTipo);
@@ -123,7 +123,7 @@ namespace Vivero.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(TipoPlanta unTipo)
         {
-            if (!(HttpContext.Session.GetString("_Name") is null))
+            if (Convert.ToBoolean(HttpContext.Session.GetString("Logeado")))
             {
                 try
                 {
@@ -175,7 +175,7 @@ namespace Vivero.Controllers
         // GET: TipoPlantaController/Delete/5
         public ActionResult Delete(int id)
         {
-            if (!(HttpContext.Session.GetString("_Name") is null))
+            if (Convert.ToBoolean(HttpContext.Session.GetString("Logeado")))
             {
                 TipoPlanta unTipo = repositorio.GetByIdTipo(id);
                 return View(unTipo);
@@ -189,7 +189,7 @@ namespace Vivero.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteTipo(int IdTipoPlanta)
         {
-            if (!(HttpContext.Session.GetString("_Name") is null))
+            if (Convert.ToBoolean(HttpContext.Session.GetString("Logeado")))
             {
                 try
                 {
@@ -206,7 +206,7 @@ namespace Vivero.Controllers
         }
         public ActionResult Search()
         {
-            if (!(HttpContext.Session.GetString("_Name") is null))
+            if (Convert.ToBoolean(HttpContext.Session.GetString("Logeado")))
             {
                 return View();
             }
@@ -216,7 +216,7 @@ namespace Vivero.Controllers
         [HttpPost]
         public ActionResult Search(string TipoNombre)
         {
-            if (!(HttpContext.Session.GetString("_Name") is null))
+            if (Convert.ToBoolean(HttpContext.Session.GetString("Logeado")))
             {
                 try
 

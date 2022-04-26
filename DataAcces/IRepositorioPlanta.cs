@@ -40,7 +40,11 @@ namespace DataAcces
         void InsertTipoIlum(TipoIluminacion obj);
         TipoIluminacion GetByIdTipoIlum(int idTipoIlum);
 
-#endregion
+        #endregion
 
+        #region Listas en Planta
+        Planta GetListas();
+
+        #endregion
     }
 }

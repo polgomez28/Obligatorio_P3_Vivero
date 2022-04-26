@@ -20,8 +20,9 @@ namespace Vivero.Controllers
         {
             if (ModelState.IsValid && ValidateUser(usuario))
             {
-                HttpContext.Session.SetString("_Name", usuario.Email);
-                return Redirect("/TipoPlanta/Index");
+                HttpContext.Session.SetString("Name", usuario.Email);
+                HttpContext.Session.SetString("Logeado", true.ToString());
+                return Redirect("/Planta/Index");
             }
 
             return RedirectToAction("Login", new { mensaje = "Usuario o Contraseña incorrecta" });
@@ -29,7 +30,8 @@ namespace Vivero.Controllers
 
         public ActionResult Logout()
         {
-            return View();
+            HttpContext.Session.Clear();
+            return Redirect("/Login/Login");
         }
 
         private bool ValidateUser(Usuario usuario)

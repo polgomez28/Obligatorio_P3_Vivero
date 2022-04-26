@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Lista de Plantas</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -13,31 +13,25 @@
     <thead>
         <tr>
             <th>
-                @*@Html.DisplayNameFor(model => model.IdPlanta)*@IdPlanta
+                Id Planta
             </th>
             <th>
-                @*@Html.DisplayNameFor(model => model.NombreCientifico)*@NombreCientifico
+                Nombre Cientifico
             </th>
             <th>
-                @*@Html.DisplayNameFor(model => model.Descripcion)*@Descripcion
+                Descripcion
             </th>
             <th>
-                @*@Html.DisplayNameFor(model => model.TipoPlanta)*@TipoPlanta
+                Tipo Planta
             </th>
             <th>
-                @*@Html.DisplayNameFor(model => model.FichaCuidados)*@FichaCuidados
+                Id Ficha Cuidados
             </th>
             <th>
-                @*@Html.DisplayNameFor(model => model.NombresVulgares)*@NombresVulgares
+                Ambiente
             </th>
             <th>
-                @*@Html.DisplayNameFor(model => model.Ambiente)*@Ambiente
-            </th>
-            <th>
-                @*@Html.DisplayNameFor(model => model.Altura)*@Altura
-            </th>
-            <th>
-                @*@Html.DisplayNameFor(model => model.NomFotoVariable)*@NomFotoVariable
+                Altura
             </th>
             <th></th>
         </tr>
@@ -61,16 +55,10 @@
                 @Html.DisplayFor(modelItem => item.FichaCuidados.IdFichaCuidados)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.NombresVulgares)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Ambiente)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Altura)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NomFotoVariable)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
