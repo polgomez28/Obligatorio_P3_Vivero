@@ -11,15 +11,55 @@ namespace Dominio
         public string NombreCientifico { get; set; }
         [Required]
         public string Descripcion { get; set; }
+        [Required]
         public TipoPlanta TipoPlanta { get; set; }
         public List<Foto> ListaFotos { get; set; }
         public FichaCuidados FichaCuidados { get; set; }
         public string NombresVulgares { get; set; }
-        public string Ambiente { get; set; } // Enum o tabla?
-        public double Altura { get; set; }
+        [Required]
+        public string Ambiente { get; set; }
+        public int Altura { get; set; }
+        [Required]
         public string NomFotoVariable { get; set; }
 
-        // Agregar métodos de validación, tal vez hacer una clase que maneje eso
+        // Validaciones
 
+        // --- Validar Nombre Científico
+
+        // ------ No contiene números
+        public static bool NoContieneNumeros(string nombreCien)
+        {
+            bool valido = true;
+            foreach (char c in nombreCien)
+            {
+                if (c >= '0' && c <= '9')
+                {
+                    valido = false;
+                }
+            }
+            return valido;
+        }              
+        
+        // ------ Quitar espacios inicio y final
+        public static string QuitarEspacios(string nombreCien)
+        {
+            char[] charsToTrim = { ' ' };
+            string nombreSinEspacios = nombreCien.Trim(charsToTrim);
+            return nombreSinEspacios;
+        }
+
+        // ------ Validar descripcion
+
+        public static bool LargoValido(string desc, int max, int min)
+        {
+            if(desc.Length < max && desc.Length > min)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }   
     }
 }

@@ -52,7 +52,7 @@ namespace DataAcces
         {
             IList<Planta> listaPlantas = new List<Planta>();
             IDbCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT p.IdPlanta, p.NomCientifico, p.Descripcion, p.Ambiente, p.Altura, tp.IdTipoPlanta, tp.TipoNombre, tp.TipoDesc, fc.IdFichaCuidados, fc.Riego, fc.Temperatura, ti.IdTipoIluminacion, ti.Tipo FROM dbo.Planta p INNER JOIN dbo.TipoPlanta tp ON p.IdTipoPlanta = tp.IdTipoPlanta INNER JOIN dbo.FichaCuidados fc ON p.IdFichaCuidados = fc.IdFichaCuidados INNER JOIN dbo.TipoIluminacion ti ON fc.IdTipoIluminacion = ti.IdTipoIluminacion";
+            command.CommandText = "SELECT p.IdPlanta, p.NomCientifico, p.Descripcion, p.Ambiente, p.Altura, p.NombresVulgares, tp.IdTipoPlanta, tp.TipoNombre, tp.TipoDesc, fc.IdFichaCuidados, fc.Riego, fc.Temperatura, ti.IdTipoIluminacion, ti.Tipo FROM dbo.Planta p INNER JOIN dbo.TipoPlanta tp ON p.IdTipoPlanta = tp.IdTipoPlanta INNER JOIN dbo.FichaCuidados fc ON p.IdFichaCuidados = fc.IdFichaCuidados INNER JOIN dbo.TipoIluminacion ti ON fc.IdTipoIluminacion = ti.IdTipoIluminacion";
 
             try
             {
@@ -69,6 +69,7 @@ namespace DataAcces
                         planta.Descripcion = (string)reader["Descripcion"];
                         planta.Ambiente = (string)reader["Ambiente"];
                         planta.Altura = (int)reader["Altura"];
+                        planta.NombresVulgares = (string)reader["NombresVulgares"];
                         planta.TipoPlanta = new TipoPlanta();
                         planta.TipoPlanta.IdTipoPlanta = (int)reader["IdTipoPlanta"];
                         planta.TipoPlanta.TipoNombre = (string)reader["TipoNombre"];
@@ -86,7 +87,7 @@ namespace DataAcces
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
@@ -103,29 +104,39 @@ namespace DataAcces
         public Planta GetByID(int id)
         {
             IDbCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT * FROM dbo.Plantas WHERE Id = @Id";
+            command.CommandText = "SELECT p.IdPlanta, p.NomCientifico, p.Descripcion, p.Ambiente, p.Altura, p.NombresVulgares, tp.IdTipoPlanta, tp.TipoNombre, tp.TipoDesc, fc.IdFichaCuidados, fc.Riego, fc.Temperatura," +
+            " ti.IdTipoIluminacion, ti.Tipo FROM dbo.Planta p INNER JOIN dbo.TipoPlanta tp ON p.IdTipoPlanta = tp.IdTipoPlanta INNER JOIN dbo.FichaCuidados fc ON p.IdFichaCuidados = fc.IdFichaCuidados INNER JOIN dbo.TipoIluminacion" +
+            " ti ON fc.IdTipoIluminacion = ti.IdTipoIluminacion WHERE Id = @Id";
             command.Parameters.Add(new SqlParameter("@Id", id));
             Planta unaPlanta = null;
+
             try
             {
                 connection.Open();
                 using (IDataReader reader = command.ExecuteReader())
-                {
+                {                    
+                    List<Foto> listaFotos = new List<Foto>();
                     while (reader.Read())
                     {
                         unaPlanta = new Planta();
-                        int idTipo = (int)reader["IdTipoPlanta"]; // obtengo id del tipo de planta
-                        TipoPlanta unTipo = GetByIdTipo(idTipo); // llamo método que busca tipo por id
-                        unaPlanta.TipoPlanta = unTipo;
+                        unaPlanta.IdPlanta = (int)reader["IdPlanta"];                        
                         unaPlanta.NombreCientifico = (string)reader["NomCientifico"];
-                        unaPlanta.NombresVulgares = (string)reader["NombresVulgares"];
                         unaPlanta.Descripcion = (string)reader["Descripcion"];
-                        int idFicha = (int)reader["IdFichaCuidados"];
-                        FichaCuidados unaFicha = GetByIdFicha(idFicha);
-                        unaPlanta.FichaCuidados = unaFicha;
-                        unaPlanta.ListaFotos = new List<Foto>();  // modificar luego de definir cómo se va a manejar la foto (string)reader["Foto"]
                         unaPlanta.Ambiente = (string)reader["Ambiente"];
                         unaPlanta.Altura = (int)reader["Altura"];
+                        unaPlanta.NombresVulgares = (string)reader["NombresVulgares"];
+                        unaPlanta.TipoPlanta = new TipoPlanta();
+                        unaPlanta.TipoPlanta.IdTipoPlanta = (int)reader["IdTipoPlanta"];
+                        unaPlanta.TipoPlanta.TipoNombre = (string)reader["TipoNombre"];
+                        unaPlanta.TipoPlanta.TipoDesc = (string)reader["TipoDesc"];
+                        unaPlanta.FichaCuidados = new FichaCuidados();
+                        unaPlanta.FichaCuidados.IdFichaCuidados = (int)reader["IdFichaCuidados"];
+                        unaPlanta.FichaCuidados.Riego = (string)reader["Riego"];
+                        unaPlanta.FichaCuidados.Temperatura = (int)reader["Temperatura"];
+                        unaPlanta.FichaCuidados.TipoIluminacion = new TipoIluminacion();
+                        unaPlanta.FichaCuidados.TipoIluminacion.IdIluminacion = (int)reader["IdTipoIluminacion"];
+                        unaPlanta.FichaCuidados.TipoIluminacion.DescripcionTipoIlum = (string)reader["Tipo"];
+                        unaPlanta.ListaFotos = listaFotos;
                     }
                 }
             }
@@ -358,7 +369,7 @@ namespace DataAcces
         {
             ICollection<FichaCuidados> listadoFichas = new List<FichaCuidados>();
             IDbCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT * FROM dbo.FichaCuidados";
+            command.CommandText = "SELECT f.IdFichaCuidados, f.Riego, f.Temperatura, ti.IdTipoIluminacion, ti.Tipo FROM dbo.FichaCuidados f INNER JOIN dbo.TipoIluminacion ti on f.IdTipoIluminacion = ti.IdTipoIluminacion";
 
             try
             {
@@ -369,12 +380,12 @@ namespace DataAcces
                     while (reader.Read())
                     {
                         unaFicha = new FichaCuidados();
-                        int idTipoIluminacion = (int)reader["IdTipoIluminacion"]; // obtengo id del tipo de iluminacion
-                        TipoIluminacion unTipoIlum = GetByIdTipoIlum(idTipoIluminacion); // llamo método que busca tipo iluminacion por id
-                        unaFicha.TipoIluminacion = unTipoIlum;
+                        unaFicha.IdFichaCuidados = (int)reader["IdFichaCuidados"];
                         unaFicha.Riego = (string)reader["Riego"];
                         unaFicha.Temperatura = (int)reader["Temperatura"];
-                        listadoFichas.Add(unaFicha);
+                        unaFicha.TipoIluminacion = new TipoIluminacion();
+                        unaFicha.TipoIluminacion.IdIluminacion = (int)reader["IdTipoIluminacion"];
+                        unaFicha.TipoIluminacion.DescripcionTipoIlum = (string)reader["ti.Tipo"];
                     }
                 }
             }
@@ -394,7 +405,34 @@ namespace DataAcces
         // UPDATE FICHA
         public void UpdateFicha(FichaCuidados obj)
         {
-            throw new NotImplementedException();
+            IDbCommand command = connection.CreateCommand();
+            command.CommandText = @"UPDATE FichaCuidados SET Riego = @Riego, IdTipoIluminacion = @IdTipoIlum, Temperatura = @Temperatura WHERE IdFichaCuidados = @IdFicha";
+
+            command.Parameters.Add(new SqlParameter("@Riego", obj.Riego));
+            command.Parameters.Add(new SqlParameter("@IdTipoIlum", obj.TipoIluminacion.IdIluminacion));
+            command.Parameters.Add(new SqlParameter("@Temperatura", obj.Temperatura));
+            command.Parameters.Add(new SqlParameter("@IdFicha", obj.IdFichaCuidados));
+
+
+            try
+            {
+                connection.Open();
+                int filasAfectadas = command.ExecuteNonQuery();
+                if (filasAfectadas == 0)
+                {
+                    throw new Exception();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                connection.Close();
+                connection.Dispose();
+                command.Dispose();
+            }
         }
 
         // INSERT FICHA
@@ -431,7 +469,7 @@ namespace DataAcces
         public FichaCuidados GetByIdFicha(int id)
         {
             IDbCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT * FROM dbo.FichaCuidados WHERE Id = @Id";
+            command.CommandText = "SELECT f.IdFichaCuidados, f.Riego, f.Temperatura, ti.IdTipoIluminacion, ti.Tipo FROM dbo.FichaCuidados f INNER JOIN dbo.TipoIluminacion ti on f.IdTipoIluminacion = ti.IdTipoIluminacion WHERE Id = @Id";
             command.Parameters.Add(new SqlParameter("@Id", id));
             FichaCuidados unaFicha = null;
             try
@@ -445,11 +483,12 @@ namespace DataAcces
                     while (reader.Read())
                     {
                         unaFicha = new FichaCuidados();
-                        int idTipoIluminacion = (int)reader["IdTipoIluminacion"]; // obtengo id del tipo de iluminacion
-                        TipoIluminacion unTipoIlum = GetByIdTipoIlum(idTipoIluminacion); // llamo método que busca tipo iluminacion por id
-                        unaFicha.TipoIluminacion = unTipoIlum;
+                        unaFicha.IdFichaCuidados = (int)reader["IdFichaCuidados"];                        
                         unaFicha.Riego = (string)reader["Riego"];
                         unaFicha.Temperatura = (int)reader["Temperatura"];
+                        unaFicha.TipoIluminacion = new TipoIluminacion();
+                        unaFicha.TipoIluminacion.IdIluminacion = (int)reader["IdTipoIluminacion"];
+                        unaFicha.TipoIluminacion.DescripcionTipoIlum = (string)reader["ti.Tipo"];
                     }
                 }
             }
@@ -564,7 +603,31 @@ namespace DataAcces
         // UPDATE TIPO ILUMINACION
         public void UpdateTipoIlum(TipoIluminacion obj)
         {
-            throw new NotImplementedException();
+            IDbCommand command = connection.CreateCommand();
+            command.CommandText = @"UPDATE TipoIluminacion SET Tipo = @TipoNombre WHERE IdTipoIluminacion = @IdTipoIlum";
+
+            command.Parameters.Add(new SqlParameter("@TipoNombre", obj.DescripcionTipoIlum));
+            command.Parameters.Add(new SqlParameter("@IdTipoIlum", obj.IdIluminacion));
+
+            try
+            {
+                connection.Open();
+                int filasAfectadas = command.ExecuteNonQuery();
+                if (filasAfectadas == 0)
+                {
+                    throw new Exception();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                connection.Close();
+                connection.Dispose();
+                command.Dispose();
+            }
         }
 
         // INSERT TIPO ILUMINACION
