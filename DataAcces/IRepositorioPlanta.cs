@@ -16,11 +16,7 @@ namespace DataAcces
         #region TipoPlanta
         IList<TipoPlanta> GetTipos();
         void UpdateTipo(TipoPlanta obj);
-<<<<<<< HEAD
         bool InsertTipo(TipoPlanta unTipo);
-=======
-        bool InsertTipo(TipoPlanta unTipo);        
->>>>>>> 274020364cdf49c3110d98861dbe951f7e8cdb59
         TipoPlanta GetByIdTipo(int id);
         void DeleteTipo(int idTipoPlanta);
         TipoPlanta GetByNombreTipo(string tipoNombre);
