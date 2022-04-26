@@ -1,0 +1,52 @@
+﻿@model IList<Dominio.TipoPlanta>;
+@{
+    ViewData["Title"] = "Search";
+}
+
+<h1>Search</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Search" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label for="NombreCientifico" class="control-label"></label>
+                <input for="NombreCientifico" class="form-control" name="NombreCientifico"/>
+                <span for="NombreCientifico" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="TipoNombre" class="control-label">Selecciona el tipo planta</label>
+                <select class="control-label" id="TipoNombre" name="TipoNombre">
+                    @foreach (var item in Model)
+                    {
+                        <option value="@item.TipoNombre">@item.TipoNombre</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="Ambiente" class="control-label">Seleccionar ambiente</label>
+                <select class="control-label" id="Ambiente" name="Ambiente">
+
+                    <option value="Interior">Interior</option>
+                    <option value="Exterior">Exterior</option>
+                    <option value="Mixta">Mixta</option>
+
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="Altura" class="control-label">Más bajas que esta altura</label>
+                <input for="Altura" class="form-control" name="Altura"/>
+                <span for="Altura" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="Altura2" class="control-label">Esta altura o más</label>
+                <input for="Altura2" class="form-control" name="Altura2"/>
+                <span for="Altura2" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Buscar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>

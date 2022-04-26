@@ -10,14 +10,13 @@ namespace DataAcces
     {
         #region Planta
         //IList<Planta> GetPlantas();
-
+        IList<Planta> SearchPlantas(string NombreCientifico, string TipoNombre, string Ambiente, int Altura, int Altura2);
         #endregion
 
         #region TipoPlanta
         IList<TipoPlanta> GetTipos();
         void UpdateTipo(TipoPlanta obj);
         bool InsertTipo(TipoPlanta unTipo);
-        TipoPlanta ExisteTipo(TipoPlanta unTipo);
         TipoPlanta GetByIdTipo(int id);
         void DeleteTipo(int idTipoPlanta);
         TipoPlanta GetByNombreTipo(string tipoNombre);
