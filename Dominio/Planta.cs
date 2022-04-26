@@ -19,8 +19,7 @@ namespace Dominio
         [Required]
         public string Ambiente { get; set; }
         public int Altura { get; set; }
-        [Required]
-        public string NomFotoVariable { get; set; }
+
 
         // Validaciones
 

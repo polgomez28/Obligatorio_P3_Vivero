@@ -7,11 +7,14 @@
 
 <div class="row">
     <div class="col-md-4">
+        <div>
+            <a asp-action="Index">Listar Todas</a>
+        </div>
         <form asp-action="Search" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label for="NombreCientifico" class="control-label"></label>
-                <input for="NombreCientifico" class="form-control" name="NombreCientifico"/>
+                <input for="NombreCientifico" class="form-control" name="NombreCientifico" />
                 <span for="NombreCientifico" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -35,12 +38,12 @@
             </div>
             <div class="form-group">
                 <label for="Altura" class="control-label">Más bajas que esta altura</label>
-                <input for="Altura" class="form-control" name="Altura"/>
+                <input for="Altura" class="form-control" name="Altura" />
                 <span for="Altura" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label for="Altura2" class="control-label">Esta altura o más</label>
-                <input for="Altura2" class="form-control" name="Altura2"/>
+                <input for="Altura2" class="form-control" name="Altura2" />
                 <span for="Altura2" class="text-danger"></span>
             </div>
 
