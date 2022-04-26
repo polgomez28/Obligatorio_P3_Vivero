@@ -43,6 +43,11 @@ namespace DataAcces
 
         #endregion
 
+        #region Foto
+        void InsertFoto(Foto foto);
+
+        #endregion
+
         #region Listas en Planta
         Planta GetListas();
 
