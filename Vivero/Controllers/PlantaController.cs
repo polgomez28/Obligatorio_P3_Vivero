@@ -38,7 +38,8 @@ namespace Vivero.Controllers
         {
             if (!(HttpContext.Session.GetString("_Name") is null))
             {
-                return View();
+                Planta unaPlanta = repositorioPlanta.GetByID(id);
+                return View(unaPlanta);
             }
 
             return Redirect("/Login/Login");
@@ -66,6 +67,69 @@ namespace Vivero.Controllers
 
             return Redirect("/Login/Login");
         }
+
+        // GET Create Planta
+        public ActionResult CreatePlanta()
+        {
+            if (!(HttpContext.Session.GetString("_Name") is null))
+            {
+                return View();
+            }
+
+            return Redirect("/Login/Login");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(Planta unaPlanta)
+        {
+            if (!(HttpContext.Session.GetString("_Name") is null))
+            {
+                try
+                {
+                    ICollection<ParamSistema> parametros = new List<ParamSistema>();
+                    parametros = (ICollection<ParamSistema>)repositorioParam.Get();
+                    int maxLargo = 0;
+                    int minLargo = 0;
+                    foreach (ParamSistema param in parametros)
+                    {
+                        if (param.Nombre.Equals("PlantaDesc"))
+                        {
+                            maxLargo = param.ValorMax;
+                            minLargo = param.ValorMin;
+                        }
+                        unaPlanta.NombreCientifico = Planta.QuitarEspacios(unaPlanta.NombreCientifico);
+                        unaPlanta.Descripcion = Planta.QuitarEspacios(unaPlanta.Descripcion);
+                        if (Planta.NoContieneNumeros(unaPlanta.NombreCientifico) && Planta.LargoValido(unaPlanta.Descripcion, maxLargo, minLargo) && Planta.NombresValidos(unaPlanta.NombresVulgares))
+                        {
+                            try
+                            {
+                                repositorioPlanta.Insert(unaPlanta);
+                                return View("SuccessAlta");
+                            }
+                            catch (Exception e)
+                            {
+                                return View("ErrorAlta");
+                            }
+
+                        }
+                        else
+                        {
+                            return View("ErrorAlta");
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
+
+            return Redirect("/Login/Login");
+        }
+
+
+
         // POST: HomeController1/Create
         //[HttpPost]
         //[ValidateAntiForgeryToken]
@@ -138,7 +202,8 @@ namespace Vivero.Controllers
         {
             if (!(HttpContext.Session.GetString("_Name") is null))
             {
-                return View();
+                Planta unaPlanta = repositorioPlanta.GetByID(id);
+                return View(unaPlanta);
             }
 
             return Redirect("/Login/Login");
@@ -147,17 +212,47 @@ namespace Vivero.Controllers
         // POST: HomeController1/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(Planta unaPlanta)
         {
             if (!(HttpContext.Session.GetString("_Name") is null))
             {
                 try
                 {
-                    return RedirectToAction(nameof(Index));
+                    ICollection<ParamSistema> parametros = new List<ParamSistema>();
+                    parametros = (ICollection<ParamSistema>)repositorioParam.Get();
+                    int maxLargo = 0;
+                    int minLargo = 0;
+                    foreach(ParamSistema param in parametros)
+                    {
+                        if (param.Nombre.Equals("PlantaDesc"))
+                        {
+                            maxLargo = param.ValorMax;
+                            minLargo = param.ValorMin;
+                        }
+                        unaPlanta.NombreCientifico = Planta.QuitarEspacios(unaPlanta.NombreCientifico);
+                        unaPlanta.Descripcion = Planta.QuitarEspacios(unaPlanta.Descripcion);
+                        if(Planta.NoContieneNumeros(unaPlanta.NombreCientifico) && Planta.LargoValido(unaPlanta.Descripcion, maxLargo, minLargo) && Planta.NombresValidos(unaPlanta.NombresVulgares))
+                        {
+                            try
+                            {
+                                repositorioPlanta.Update(unaPlanta);
+                                return View("SuccessAlta");
+                            }
+                            catch (Exception e)
+                            {
+                                return View("ErrorAlta");
+                            }
+
+                        }
+                        else
+                        {
+                            return View("ErrorAlta");
+                        }
+                    }                    
                 }
-                catch
+                catch (Exception)
                 {
-                    return View();
+                    throw;
                 }
             }
 
@@ -169,7 +264,8 @@ namespace Vivero.Controllers
         {
             if (!(HttpContext.Session.GetString("_Name") is null))
             {
-                return View();
+                Planta unaPlanta = repositorioPlanta.GetByID(id);
+                return View(unaPlanta);
             }
 
             return Redirect("/Login/Login");
@@ -178,17 +274,18 @@ namespace Vivero.Controllers
         // POST: HomeController1/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult DeletePlanta(int idPlanta)
         {
             if (!(HttpContext.Session.GetString("_Name") is null))
             {
                 try
                 {
-                    return RedirectToAction(nameof(Index));
+                    repositorioPlanta.Delete(idPlanta);
+                    return View("SuccessAlta");
                 }
                 catch
                 {
-                    return View();
+                    return View("ErrorAlta");
                 }
             }
 

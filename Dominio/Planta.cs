@@ -60,6 +60,22 @@ namespace Dominio
             {
                 return false;
             }
-        }   
+        }
+        
+        // --- Validar Nombres Vulgares
+        public static bool NombresValidos(string nombres)
+        {
+            bool valido = true;
+            if (nombres.EndsWith(",") || nombres.StartsWith(","))
+            {
+                valido = false;
+            }
+            if (nombres.Contains(",,"))
+            {
+                valido = false;
+            }
+
+            return valido;
+        }
     }
 }

@@ -9,6 +9,9 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+<p>
+    <a asp-action="CreatePlanta">Crear Planta</a>
+</p>
 <table class="table">
     <thead>
         <tr>
@@ -73,9 +76,9 @@
                 @Html.DisplayFor(modelItem => item.NomFotoVariable)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                <a asp-action="Edit" asp-route-id="@item.IdPlanta">Editar</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdPlanta">Borrar</a> |
+                <a asp-action="Details" asp-route-id="@item.IdPlanta">Detalle</a>                
             </td>
         </tr>
 }

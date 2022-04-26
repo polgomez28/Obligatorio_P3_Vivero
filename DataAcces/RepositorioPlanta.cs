@@ -22,7 +22,7 @@ namespace DataAcces
         public void Delete(int id)
         {
             IDbCommand command = connection.CreateCommand();
-            command.CommandText = "DELETE FROM dbo.Plantas WHERE Id = @Id";
+            command.CommandText = "DELETE FROM dbo.Planta WHERE IdPlanta = @Id";
             command.Parameters.Add(new SqlParameter("@Id", id));
             try
             {
@@ -104,9 +104,9 @@ namespace DataAcces
         public Planta GetByID(int id)
         {
             IDbCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT p.IdPlanta, p.NomCientifico, p.Descripcion, p.Ambiente, p.Altura, p.NombresVulgares, tp.IdTipoPlanta, tp.TipoNombre, tp.TipoDesc, fc.IdFichaCuidados, fc.Riego, fc.Temperatura," +
-            " ti.IdTipoIluminacion, ti.Tipo FROM dbo.Planta p INNER JOIN dbo.TipoPlanta tp ON p.IdTipoPlanta = tp.IdTipoPlanta INNER JOIN dbo.FichaCuidados fc ON p.IdFichaCuidados = fc.IdFichaCuidados INNER JOIN dbo.TipoIluminacion" +
-            " ti ON fc.IdTipoIluminacion = ti.IdTipoIluminacion WHERE Id = @Id";
+            command.CommandText = @"SELECT p.IdPlanta, p.NomCientifico, p.Descripcion, p.Ambiente, p.Altura, p.NombresVulgares, tp.IdTipoPlanta, tp.TipoNombre, tp.TipoDesc, fc.IdFichaCuidados, fc.Riego, fc.Temperatura,
+            ti.IdTipoIluminacion, ti.Tipo FROM dbo.Planta p INNER JOIN dbo.TipoPlanta tp ON p.IdTipoPlanta = tp.IdTipoPlanta INNER JOIN dbo.FichaCuidados fc ON p.IdFichaCuidados = fc.IdFichaCuidados INNER JOIN dbo.TipoIluminacion
+            ti ON fc.IdTipoIluminacion = ti.IdTipoIluminacion WHERE IdPlanta = @Id";
             command.Parameters.Add(new SqlParameter("@Id", id));
             Planta unaPlanta = null;
 
@@ -157,7 +157,7 @@ namespace DataAcces
         public void Insert(Planta obj)
         {
             IDbCommand command = connection.CreateCommand();
-            command.CommandText = @"Insert into dbo.Plantas(NomCientifico, Descripcion, IdTipoPlanta, IdFichaCuidados, Ambiente, Altura) Values(@NombreCientifico,
+            command.CommandText = @"Insert into dbo.Planta(NomCientifico, Descripcion, IdTipoPlanta, IdFichaCuidados, Ambiente, Altura) Values(@NombreCientifico,
             @Descripcion,  @IdTipo, @FichaCuidados, @Ambiente, @Altura)";
 
 
@@ -189,7 +189,39 @@ namespace DataAcces
         // UPDATE PLANTA
         public void Update(Planta obj)
         {
-            throw new NotImplementedException();
+            IDbCommand command = connection.CreateCommand();
+            command.CommandText = @"UPDATE FichaCuidados SET NomCientifico = @NombreCien, Descripcion = @Desc, IdTipoPlanta = @IdTipo, IdFichaCuidados = @IdFicha, Ambiente = @Ambiente, Altura = @Altura, NombresVulgares = @Nombres
+            WHERE IdPlanta = @Id";
+
+            command.Parameters.Add(new SqlParameter("@NombreCien", obj.NombreCientifico));
+            command.Parameters.Add(new SqlParameter("@Desc", obj.Descripcion));
+            command.Parameters.Add(new SqlParameter("@IdTipo", obj.TipoPlanta.IdTipoPlanta));
+            command.Parameters.Add(new SqlParameter("@IdFicha", obj.FichaCuidados.IdFichaCuidados));
+            command.Parameters.Add(new SqlParameter("@Ambiente", obj.Ambiente));
+            command.Parameters.Add(new SqlParameter("@Altura", obj.Altura));
+            command.Parameters.Add(new SqlParameter("@Nombres", obj.NombresVulgares));
+            command.Parameters.Add(new SqlParameter("@Id", obj.IdPlanta));
+
+
+            try
+            {
+                connection.Open();
+                int filasAfectadas = command.ExecuteNonQuery();
+                if (filasAfectadas == 0)
+                {
+                    throw new Exception();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                connection.Close();
+                connection.Dispose();
+                command.Dispose();
+            }
         }
 
         // Tipo de planta
@@ -385,7 +417,7 @@ namespace DataAcces
                         unaFicha.Temperatura = (int)reader["Temperatura"];
                         unaFicha.TipoIluminacion = new TipoIluminacion();
                         unaFicha.TipoIluminacion.IdIluminacion = (int)reader["IdTipoIluminacion"];
-                        unaFicha.TipoIluminacion.DescripcionTipoIlum = (string)reader["ti.Tipo"];
+                        unaFicha.TipoIluminacion.DescripcionTipoIlum = (string)reader["Tipo"];
                     }
                 }
             }
@@ -469,7 +501,8 @@ namespace DataAcces
         public FichaCuidados GetByIdFicha(int id)
         {
             IDbCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT f.IdFichaCuidados, f.Riego, f.Temperatura, ti.IdTipoIluminacion, ti.Tipo FROM dbo.FichaCuidados f INNER JOIN dbo.TipoIluminacion ti on f.IdTipoIluminacion = ti.IdTipoIluminacion WHERE Id = @Id";
+            command.CommandText = @"SELECT f.IdFichaCuidados, f.Riego, f.Temperatura, ti.IdTipoIluminacion, ti.Tipo FROM dbo.FichaCuidados f INNER JOIN dbo.TipoIluminacion ti on f.IdTipoIluminacion = ti.IdTipoIluminacion
+            WHERE IdFichaCuidados = @Id";
             command.Parameters.Add(new SqlParameter("@Id", id));
             FichaCuidados unaFicha = null;
             try
@@ -488,7 +521,7 @@ namespace DataAcces
                         unaFicha.Temperatura = (int)reader["Temperatura"];
                         unaFicha.TipoIluminacion = new TipoIluminacion();
                         unaFicha.TipoIluminacion.IdIluminacion = (int)reader["IdTipoIluminacion"];
-                        unaFicha.TipoIluminacion.DescripcionTipoIlum = (string)reader["ti.Tipo"];
+                        unaFicha.TipoIluminacion.DescripcionTipoIlum = (string)reader["Tipo"];
                     }
                 }
             }
@@ -634,7 +667,7 @@ namespace DataAcces
         public void InsertTipoIlum(TipoIluminacion obj)
         {
             IDbCommand command = connection.CreateCommand();
-            command.CommandText = @"INSERT INTO TipoIluminacion(TipoNombre) VALUES(@TipoNombre)";
+            command.CommandText = @"INSERT INTO TipoIluminacion(Tipo) VALUES(@TipoNombre)";
             command.Parameters.Add(new SqlParameter("@TipoNombre", obj.DescripcionTipoIlum));
 
             try
@@ -659,7 +692,7 @@ namespace DataAcces
         public TipoIluminacion GetByIdTipoIlum(int idTipoIlum)
         {
             IDbCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT * FROM dbo.TipoIluminacion WHERE Id = @Id";
+            command.CommandText = "SELECT * FROM dbo.TipoIluminacion WHERE IdTipoIluminacion = @Id";
             command.Parameters.Add(new SqlParameter("@Id", idTipoIlum));
             TipoIluminacion unTipoIlum = null;
             try
