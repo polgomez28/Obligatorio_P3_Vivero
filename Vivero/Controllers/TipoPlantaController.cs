@@ -71,17 +71,10 @@ namespace Vivero.Controllers
                         {
                             try
                             {
-                                TipoPlanta uT = null;
-                                uT = repositorio.ExisteTipo(unTipo);
-                                if (uT==null)
-                                {
+                                
                                     repositorio.InsertTipo(unTipo);
-                                    return View("SuccessAlta");
-                                }
-                                else
-                                {
-                                    return View("ErrorAlta");
-                                }
+                                    return View();
+                                
                                 
                             }
                             catch (Exception ex)

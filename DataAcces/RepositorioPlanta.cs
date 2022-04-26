@@ -249,7 +249,7 @@ namespace DataAcces
         {
 
             IDbCommand command = connection.CreateCommand();
-            command.CommandText = @"INSERT INTO TipoPlanta(TipoNombre, TipoDesc) VALUES(@TipoNombre, @TipoDesc)";
+            command.CommandText = @"IF NOT EXISTS (SELECT * FROM TipoPlanta WHERE TipoNombre = @TipoNombre) INSERT INTO TipoPlanta(TipoNombre, TipoDesc) VALUES(@TipoNombre, @TipoDesc)";
             command.Parameters.Add(new SqlParameter("@TipoNombre", obj.TipoNombre));
             command.Parameters.Add(new SqlParameter("@TipoDesc", obj.TipoDesc));
             try
