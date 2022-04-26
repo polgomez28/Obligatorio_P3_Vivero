@@ -71,9 +71,9 @@ namespace Vivero.Controllers
         // GET Create Planta
         public ActionResult CreatePlanta()
         {
-            if (!(HttpContext.Session.GetString("_Name") is null))
-            {
-                return View();
+            if (Convert.ToBoolean(HttpContext.Session.GetString("Logeado")))
+            {                                
+                return View(repositorioPlanta.GetListas());
             }
 
             return Redirect("/Login/Login");
@@ -83,7 +83,7 @@ namespace Vivero.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Planta unaPlanta)
         {
-            if (!(HttpContext.Session.GetString("_Name") is null))
+            if (Convert.ToBoolean(HttpContext.Session.GetString("Logeado")))
             {
                 try
                 {
@@ -280,7 +280,7 @@ namespace Vivero.Controllers
         [HttpPost]
         public ActionResult Search(string NombreCientifico, string TipoNombre, string Ambiente, int Altura, int Altura2)
         {
-            if (!(HttpContext.Session.GetString("_Name") is null))
+            if (Convert.ToBoolean(HttpContext.Session.GetString("Logeado")))
             {
                 try
 
