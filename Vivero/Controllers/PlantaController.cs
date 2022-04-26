@@ -150,7 +150,7 @@ namespace Vivero.Controllers
                     if (ModelState.IsValid && !(imagen is null))
                     {
                         foto.Imagen = ConvertImageToByteArray(imagen);
-
+                        repositorioPlanta.InsertFoto(foto);
                     }
                     else
                     {
