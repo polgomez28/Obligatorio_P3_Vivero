@@ -245,17 +245,23 @@ namespace DataAcces
             return resultado;
         }
         //Genero el insert del TipoPlanta obtenido del TipoPlantaController Siempre y cuando no exista (!ExisteTipo)
-        public void InsertTipo(TipoPlanta obj)
+        public bool InsertTipo(TipoPlanta obj)
         {
-
+            bool exist = false;
             IDbCommand command = connection.CreateCommand();
-            command.CommandText = @"INSERT INTO TipoPlanta(TipoNombre, TipoDesc) VALUES(@TipoNombre, @TipoDesc)";
+            command.CommandText = "declare @exist bit if NOT EXISTS(select * from dbo.TipoPlanta tp where (tp.TipoNombre = @TipoNombre)) begin insert into TipoPlanta(TipoNombre, TipoDesc) values(@TipoNombre, @TipoDesc) set @exist = 0 end else begin set @exist = 1 end select @exist as exist";
             command.Parameters.Add(new SqlParameter("@TipoNombre", obj.TipoNombre));
             command.Parameters.Add(new SqlParameter("@TipoDesc", obj.TipoDesc));
             try
             {
                 connection.Open();
-                command.ExecuteNonQuery();
+                using (IDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        exist = (bool)reader["exist"];
+                    }
+                }
 
             }
             catch (Exception ex)
@@ -268,6 +274,7 @@ namespace DataAcces
                 connection.Dispose();
                 command.Dispose();
             }
+            return exist;
 
         }
         // Busca si existe un Tipo por nombre en la base de datos
