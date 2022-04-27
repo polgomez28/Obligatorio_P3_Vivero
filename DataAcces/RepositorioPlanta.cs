@@ -833,8 +833,23 @@ namespace DataAcces
                         foto.Nombre = (string)reader["Nombre"];
                         listaFotos.Add(foto);
                     }
+                    while (reader.Read())
+                    {
+                        ficha = new FichaCuidados();
+                        ficha.IdFichaCuidados = (int)reader["IdFichaCuidados"];
+                        listaFichas.Add(ficha);
+                    }
+                    while (reader.Read())
+                    {
+                        foto = new Foto();
+                        foto.IdFoto = (int)reader["IdFoto"];
+                        foto.Nombre = (string)reader["Nombre"];
+                        listaFotos.Add(foto);
+                    }
                 }
             }
+
+
             catch (Exception)
             {
                 throw;
@@ -851,13 +866,13 @@ namespace DataAcces
         }
 
 
-        public void Insert(Foto obj)
+        public void InsertFoto(Foto foto)
         {
             IDbCommand command = connection.CreateCommand();
-            command.CommandText = @"Insert into dbo.Plantas(NomCientifico, Descripcion, IdTipoPlanta, IdFichaCuidados, Ambiente, Altura) Values(@NombreCientifico,
-            @Descripcion,  @IdTipo, @FichaCuidados, @Ambiente, @Altura)";
+            command.CommandText = @"declare @NuevoNombre varchar(20) set @NuevoNombre = (SELECT TOP 1 (f.IdFoto + 1) FROM dbo.Foto f ORDER BY f.IdFoto DESC) + '_' + @Nombre; Insert into dbo.Foto(Nombre, Imagen) Values(@NuevoNombre,@Imagen)";
 
-            command.Parameters.Add(new SqlParameter("@Imagen", obj.Imagen));
+            command.Parameters.Add(new SqlParameter("@Nombre", foto.Imagen));
+            command.Parameters.Add(new SqlParameter("@Imagen", foto.Imagen));
 
             try
             {
