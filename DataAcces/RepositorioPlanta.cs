@@ -791,16 +791,19 @@ namespace DataAcces
             planta.ListaFichas = (List<FichaCuidados>)listaFichas;
 
             IDbCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT * FROM dbo.TipoPlanta SELECT * FROM dbo.FichaCuidados SELECT * FROM dbo.Foto";
+            IDbCommand command2 = connection.CreateCommand();
+            IDbCommand command3 = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM dbo.TipoPlanta";
+            command2.CommandText = "SELECT * FROM dbo.FichaCuidados";
+            command3.CommandText = "SELECT * FROM dbo.Foto";
+
 
             try
             {
                 connection.Open();
                 using (IDataReader reader = command.ExecuteReader())
-                {
-                    FichaCuidados ficha = null;
-                    TipoPlanta tipo = null;
-                    Foto foto = null;
+                {                    
+                    TipoPlanta tipo = null;                    
                     while (reader.Read())
                     {
                         tipo = new TipoPlanta();
@@ -808,13 +811,21 @@ namespace DataAcces
                         tipo.TipoNombre = (string)reader["TipoNombre"];
                         tipo.TipoDesc = (string)reader["TipoDesc"];
                         listaTipos.Add(tipo);                        
-                    }
+                    }                   
+                }
+                using (IDataReader reader = command2.ExecuteReader())
+                {
+                    FichaCuidados ficha = null;                               
                     while (reader.Read())
                     {
                         ficha = new FichaCuidados();
                         ficha.IdFichaCuidados = (int)reader["IdFichaCuidados"];
                         listaFichas.Add(ficha);
-                    }
+                    }                    
+                }
+                using (IDataReader reader = command3.ExecuteReader())
+                {                    
+                    Foto foto = null;                    
                     while (reader.Read())
                     {
                         foto = new Foto();
@@ -848,6 +859,8 @@ namespace DataAcces
                 connection.Close();
                 connection.Dispose();
                 command.Dispose();
+                command2.Dispose();
+                command3.Dispose();
             }
             return planta;
         }
