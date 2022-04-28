@@ -725,7 +725,7 @@ namespace DataAcces
 
             IList<Planta> listaPlantas = new List<Planta>();
             IDbCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT p.IdPlanta, p.NomCientifico, p.Descripcion, p.Ambiente, p.Altura, tp.IdTipoPlanta, tp.TipoNombre, tp.TipoDesc, fc.IdFichaCuidados, fc.Riego, fc.Temperatura, ti.IdTipoIluminacion, ti.Tipo FROM dbo.Planta p INNER JOIN dbo.TipoPlanta tp ON p.IdTipoPlanta = tp.IdTipoPlanta INNER JOIN dbo.FichaCuidados fc ON p.IdFichaCuidados = fc.IdFichaCuidados INNER JOIN dbo.TipoIluminacion ti ON fc.IdTipoIluminacion = ti.IdTipoIluminacion WHERE (P.NomCientifico like '%' + @NombreCientifico + '%' OR P.NomCientifico  is null) and (P.Altura < CASE WHEN @Altura <> 0 THEN @Altura ELSE P.Altura END) and (P.Altura >= CASE WHEN @Altura2 <> 0 THEN @Altura2 ELSE P.Altura END) and tp.TipoNombre = @TipoNombre and p.Ambiente = @Ambiente ";
+            command.CommandText = "SELECT p.IdPlanta, p.NomCientifico, p.Descripcion, p.Ambiente, p.Altura, tp.IdTipoPlanta, tp.TipoNombre, tp.TipoDesc, fc.IdFichaCuidados, fc.Riego, fc.Temperatura, ti.IdTipoIluminacion, ti.Tipo FROM dbo.Planta p INNER JOIN dbo.TipoPlanta tp ON p.IdTipoPlanta = tp.IdTipoPlanta INNER JOIN dbo.FichaCuidados fc ON p.IdFichaCuidados = fc.IdFichaCuidados INNER JOIN dbo.TipoIluminacion ti ON fc.IdTipoIluminacion = ti.IdTipoIluminacion WHERE (P.NomCientifico like '%' + @NombreCientifico + '%' OR P.NomCientifico  is null) and (P.Altura < @Altura OR @Altura = 0) and (P.Altura >= @Altura2 OR @Altura2 = 0) and tp.TipoNombre = @TipoNombre and p.Ambiente = @Ambiente ";
 
             command.Parameters.Add(new SqlParameter("@NombreCientifico", NombreCientifico));
             
@@ -833,19 +833,7 @@ namespace DataAcces
                         foto.Nombre = (string)reader["Nombre"];
                         listaFotos.Add(foto);
                     }
-                    while (reader.Read())
-                    {
-                        ficha = new FichaCuidados();
-                        ficha.IdFichaCuidados = (int)reader["IdFichaCuidados"];
-                        listaFichas.Add(ficha);
-                    }
-                    while (reader.Read())
-                    {
-                        foto = new Foto();
-                        foto.IdFoto = (int)reader["IdFoto"];
-                        foto.Nombre = (string)reader["Nombre"];
-                        listaFotos.Add(foto);
-                    }
+
                 }
             }
 
