@@ -81,7 +81,7 @@ namespace Vivero.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Planta unaPlanta)
+        public ActionResult CreatePlanta(Planta unaPlanta)
         {
             if (Convert.ToBoolean(HttpContext.Session.GetString("Logeado")))
             {
@@ -97,26 +97,26 @@ namespace Vivero.Controllers
                         {
                             maxLargo = param.ValorMax;
                             minLargo = param.ValorMin;
-                        }
-                        unaPlanta.NombreCientifico = Planta.QuitarEspacios(unaPlanta.NombreCientifico);
-                        unaPlanta.Descripcion = Planta.QuitarEspacios(unaPlanta.Descripcion);
-                        if (Planta.NoContieneNumeros(unaPlanta.NombreCientifico) && Planta.LargoValido(unaPlanta.Descripcion, maxLargo, minLargo) && Planta.NombresValidos(unaPlanta.NombresVulgares))
+                        }                        
+                    }
+                    unaPlanta.NombreCientifico = Planta.QuitarEspacios(unaPlanta.NombreCientifico);
+                    unaPlanta.Descripcion = Planta.QuitarEspacios(unaPlanta.Descripcion);
+                    if (Planta.NoContieneNumeros(unaPlanta.NombreCientifico) && Planta.LargoValido(unaPlanta.Descripcion, maxLargo, minLargo) && Planta.NombresValidos(unaPlanta.NombresVulgares))
+                    {
+                        try
                         {
-                            try
-                            {
-                                repositorioPlanta.Insert(unaPlanta);
-                                return View("SuccessAlta");
-                            }
-                            catch (Exception e)
-                            {
-                                return View("ErrorAlta");
-                            }
-
+                            repositorioPlanta.Insert(unaPlanta);
+                            return View("SuccessAlta");
                         }
-                        else
+                        catch (Exception e)
                         {
                             return View("ErrorAlta");
                         }
+
+                    }
+                    else
+                    {
+                        return View("ErrorAlta");
                     }
                 }
                 catch (Exception)

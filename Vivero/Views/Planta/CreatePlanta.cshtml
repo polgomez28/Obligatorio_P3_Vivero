@@ -12,11 +12,7 @@
     <div class="col-md-4">
         <form asp-action="CreatePlanta">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="IdPlanta" class="control-label"></label>
-                <input asp-for="IdPlanta" class="form-control" />
-                <span asp-validation-for="IdPlanta" class="text-danger"></span>
-            </div>
+            
             <div class="form-group">
                 <label asp-for="NombreCientifico" class="control-label"></label>
                 <input asp-for="NombreCientifico" class="form-control" />
