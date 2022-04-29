@@ -722,11 +722,11 @@ namespace DataAcces
 
         public IList<Planta> SearchPlantas(string NombreCientifico, string TipoNombre, string Ambiente, int Altura, int Altura2)
         {
-
+            
             IList<Planta> listaPlantas = new List<Planta>();
             IDbCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT p.IdPlanta, p.NomCientifico, p.Descripcion, p.Ambiente, p.Altura, tp.IdTipoPlanta, tp.TipoNombre, tp.TipoDesc, fc.IdFichaCuidados, fc.Riego, fc.Temperatura, ti.IdTipoIluminacion, ti.Tipo FROM dbo.Planta p INNER JOIN dbo.TipoPlanta tp ON p.IdTipoPlanta = tp.IdTipoPlanta INNER JOIN dbo.FichaCuidados fc ON p.IdFichaCuidados = fc.IdFichaCuidados INNER JOIN dbo.TipoIluminacion ti ON fc.IdTipoIluminacion = ti.IdTipoIluminacion WHERE (P.NomCientifico like '%' + @NombreCientifico + '%' OR P.NomCientifico  is null) and (P.Altura < @Altura OR @Altura = 0) and (P.Altura >= @Altura2 OR @Altura2 = 0) and tp.TipoNombre = @TipoNombre and p.Ambiente = @Ambiente ";
-
+            command.CommandText = "SELECT p.IdPlanta, p.NomCientifico, p.Descripcion, p.Ambiente, p.Altura, tp.IdTipoPlanta, tp.TipoNombre, tp.TipoDesc, fc.IdFichaCuidados, fc.Riego, fc.Temperatura, ti.IdTipoIluminacion, ti.Tipo FROM dbo.Planta p INNER JOIN dbo.TipoPlanta tp ON p.IdTipoPlanta = tp.IdTipoPlanta INNER JOIN dbo.FichaCuidados fc ON p.IdFichaCuidados = fc.IdFichaCuidados INNER JOIN dbo.TipoIluminacion ti ON fc.IdTipoIluminacion = ti.IdTipoIluminacion WHERE (P.NomCientifico like '%' + @NombreCientifico + '%' OR P.NomCientifico  is null) and (P.Altura < @Altura OR @Altura = 0) and (P.Altura >= @Altura2 OR @Altura2 = 0) and (tp.TipoNombre = CASE WHEN @TipoNombre <> '' THEN @TipoNombre ELSE tp.TipoNombre END) and (p.Ambiente = CASE WHEN @Ambiente <> '' THEN @Ambiente ELSE p.Ambiente END)";
+            
             command.Parameters.Add(new SqlParameter("@NombreCientifico", NombreCientifico));
             
             command.Parameters.Add(new SqlParameter("@Altura", Altura));

@@ -20,6 +20,7 @@
             <div class="form-group">
                 <label for="TipoNombre" class="control-label">Selecciona el tipo planta</label>
                 <select class="control-label" id="TipoNombre" name="TipoNombre">
+                    <option selected disabled value="">SELECCIONE UNA TIPO</option>
                     @foreach (var item in Model)
                     {
                         <option value="@item.TipoNombre">@item.TipoNombre</option>
@@ -29,7 +30,7 @@
             <div class="form-group">
                 <label for="Ambiente" class="control-label">Seleccionar ambiente</label>
                 <select class="control-label" id="Ambiente" name="Ambiente">
-
+                    <option selected disabled value="">SELECCIONE UN AMBIENTE</option>
                     <option value="Interior">Interior</option>
                     <option value="Exterior">Exterior</option>
                     <option value="Mixta">Mixta</option>

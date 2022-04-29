@@ -285,6 +285,18 @@ namespace Vivero.Controllers
                 try
 
                 {
+                    if (NombreCientifico == null)
+                    {
+                        NombreCientifico = "";
+                    }
+                    if (TipoNombre == null)
+                    {
+                        TipoNombre = "";
+                    }
+                    if (Ambiente == null)
+                    {
+                        Ambiente = "";
+                    }
                     IList<Planta> listPlantas = repositorioPlanta.SearchPlantas(NombreCientifico, TipoNombre, Ambiente, Altura, Altura2);
                     return View("VisualizarSearch", listPlantas);
                     
