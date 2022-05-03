@@ -157,8 +157,8 @@ namespace DataAcces
         public void Insert(Planta obj)
         {
             IDbCommand command = connection.CreateCommand();
-            command.CommandText = @"Insert into dbo.Planta(NomCientifico, Descripcion, IdTipoPlanta, IdFichaCuidados, Ambiente, Altura) Values(@NombreCientifico,
-            @Descripcion,  @IdTipo, @FichaCuidados, @Ambiente, @Altura)";
+            command.CommandText = @"Insert into dbo.Planta(NomCientifico, Descripcion, IdTipoPlanta, IdFichaCuidados, Ambiente, Altura, NombresVulgares) Values(@NombreCientifico,
+            @Descripcion,  @IdTipo, @IdFichaCuidados, @Ambiente, @Altura, @NombresVulgares)";
 
 
             command.Parameters.Add(new SqlParameter("@NombreCientifico", obj.NombreCientifico));
@@ -167,6 +167,7 @@ namespace DataAcces
             command.Parameters.Add(new SqlParameter("@IdFichaCuidados", obj.FichaCuidados.IdFichaCuidados));
             command.Parameters.Add(new SqlParameter("@Ambiente", obj.Ambiente));
             command.Parameters.Add(new SqlParameter("@Altura", obj.Altura));
+            command.Parameters.Add(new SqlParameter("@NombresVulgares", obj.NombresVulgares));
 
             try
             {
@@ -174,7 +175,7 @@ namespace DataAcces
                 command.ExecuteNonQuery();
 
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 throw;
             }

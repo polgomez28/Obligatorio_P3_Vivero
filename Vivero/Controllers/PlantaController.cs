@@ -81,12 +81,14 @@ namespace Vivero.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreatePlanta(Planta unaPlanta)
+        public ActionResult CreatePlanta(Planta unaPlanta, int IdFichaCuidados, int IdTipoPlanta)
         {
             if (Convert.ToBoolean(HttpContext.Session.GetString("Logeado")))
             {
                 try
                 {
+                    TipoPlanta unT = new TipoPlanta();
+                    FichaCuidados unF = new FichaCuidados();
                     ICollection<ParamSistema> parametros = new List<ParamSistema>();
                     parametros = (ICollection<ParamSistema>)repositorioParam.Get();
                     int maxLargo = 0;
@@ -101,6 +103,10 @@ namespace Vivero.Controllers
                     }
                     unaPlanta.NombreCientifico = Planta.QuitarEspacios(unaPlanta.NombreCientifico);
                     unaPlanta.Descripcion = Planta.QuitarEspacios(unaPlanta.Descripcion);
+                    unT.IdTipoPlanta = IdTipoPlanta;
+                    unF.IdFichaCuidados = IdFichaCuidados;
+                    unaPlanta.TipoPlanta = unT;
+                    unaPlanta.FichaCuidados = unF;
                     if (Planta.NoContieneNumeros(unaPlanta.NombreCientifico) && Planta.LargoValido(unaPlanta.Descripcion, maxLargo, minLargo) && Planta.NombresValidos(unaPlanta.NombresVulgares))
                     {
                         try
