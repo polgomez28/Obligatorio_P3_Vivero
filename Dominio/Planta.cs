@@ -7,6 +7,7 @@ namespace Dominio
 {
     public class Planta
     {
+        [Key]
         public int IdPlanta { get; set; }
         public string NombreCientifico { get; set; }
         [Required]

@@ -7,6 +7,7 @@ namespace Dominio
 {
     public class Foto
     {
+        [Key]
         public int IdFoto { get; set; }
         [Required]
         public string Nombre { get; set; }

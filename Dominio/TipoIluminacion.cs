@@ -7,7 +7,9 @@ namespace Dominio
 {
     public class TipoIluminacion
     {
+        [Key]
         public int IdIluminacion { get; set; }
+        [Required]
         public string DescripcionTipoIlum { get; set; }
         //[Required] da error
     }

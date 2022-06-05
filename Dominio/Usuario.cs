@@ -7,6 +7,7 @@ namespace Dominio
 {
     public class Usuario
     {
+        [Key]
         public int IdUsuario { get; set; }
         [Required]
         public string Email { get; set; }

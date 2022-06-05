@@ -1,13 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace Dominio
 {
     public class TipoPlanta
     {
+        [Key]
         public int IdTipoPlanta { get; set; }
+        [Required]
         public string TipoNombre { get; set; }
+        [Required]
         public string TipoDesc { get; set; }
         
         #region Métodos
