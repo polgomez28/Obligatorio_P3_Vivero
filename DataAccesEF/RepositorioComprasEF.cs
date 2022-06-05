@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DataAccesEF
 {
-    class RepositorioUsuarios
+    class RepositorioComprasEF
     {
     }
 }
