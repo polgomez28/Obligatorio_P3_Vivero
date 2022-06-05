@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Dominio
@@ -14,6 +15,7 @@ namespace Dominio
 
         public TipoIluminacion TipoIluminacion { get; set; }
         public int Temperatura { get; set; }
-        //[Required] da error
+        [ForeignKey("IdTipoIluminacion")]
+        public int IdTipoIluminacion { get; set; }
     }
 }

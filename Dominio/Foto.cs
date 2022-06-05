@@ -13,9 +13,5 @@ namespace Dominio
         public string Nombre { get; set; }
         public byte[] Imagen { get; set; }
 
-        //public bool IsValid()
-        //{
-        //    return !string.IsNullOrEmpty(Nombre);
-        //}
     }
 }

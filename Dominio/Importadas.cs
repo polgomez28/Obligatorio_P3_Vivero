@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Dominio
@@ -13,5 +14,7 @@ namespace Dominio
         public bool EsDelSur { get; set; }
         public int TasaDescuento { get; set; }
         public static string DescripcionSanitaria { get; set; }
+        [ForeignKey("IdPlanta")]
+        public int IdPlanta { get; set; }
     }
 }

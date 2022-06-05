@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Dominio
@@ -20,8 +21,13 @@ namespace Dominio
         [Required]
         public string Ambiente { get; set; }
         public int Altura { get; set; }
-
-
+        [ForeignKey("IdTipoPlanta")]
+        public int IdTipoPlanta { get; set; }
+        // Analizar como resolver foto(posibilidad: Foto - ItemFoto - Planta)
+        //[ForeignKey("IdItemFoto")]
+        //public int IdItemFoto { get; set; }
+        [ForeignKey("IdFichaCuidados")]
+        public int IdFichaCuidados { get; set; }
         public List<TipoPlanta> ListaTipoPlantas { get; set; }
 
         public List<FichaCuidados> ListaFichas { get; set; }
