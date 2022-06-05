@@ -8,6 +8,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DataAccesEF;
+using Microsoft.EntityFrameworkCore;
 
 namespace Vivero
 {
@@ -25,6 +27,10 @@ namespace Vivero
         {
             services.AddControllersWithViews();
 
+            services.AddDbContext<VivieroContext>
+                (opciones => opciones
+                             .UseSqlServer(Configuration.GetConnectionString("Connection_Vivero"))
+                             .EnableSensitiveDataLogging());
             //Session configuration
             services.AddDistributedMemoryCache();
             services.AddSession(options => {
