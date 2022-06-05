@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.0.32112.339
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32228.343
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dominio", "Dominio\Dominio.csproj", "{295458BD-EDB8-4A4C-9B9D-751D0552F414}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vivero", "Vivero\Vivero.csproj", "{9E0E87BE-6437-4749-B9C8-B6BAB5B8D683}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Vivero_DataBase", "Vivero_DataBase\Vivero_DataBase.sqlproj", "{EB13A5FC-45A5-4B6F-A8B7-36F646B4F00C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccesEF", "DataAccesEF\DataAccesEF.csproj", "{867E7C9D-32CB-43F2-8C7A-C1D0080B48C6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +37,10 @@ Global
 		{EB13A5FC-45A5-4B6F-A8B7-36F646B4F00C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EB13A5FC-45A5-4B6F-A8B7-36F646B4F00C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EB13A5FC-45A5-4B6F-A8B7-36F646B4F00C}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{867E7C9D-32CB-43F2-8C7A-C1D0080B48C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{867E7C9D-32CB-43F2-8C7A-C1D0080B48C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{867E7C9D-32CB-43F2-8C7A-C1D0080B48C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{867E7C9D-32CB-43F2-8C7A-C1D0080B48C6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
