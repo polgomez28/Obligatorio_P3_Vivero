@@ -26,6 +26,11 @@ namespace DataAccesEF
         public VivieroContext(DbContextOptions<VivieroContext> options) :
             base(options)
         { }
+
+        public VivieroContext()
+        {
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             IConfiguration configuration = (new ConfigurationBuilder()).AddJsonFile("appsettings.json").Build();
