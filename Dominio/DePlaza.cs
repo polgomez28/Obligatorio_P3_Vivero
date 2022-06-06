@@ -14,6 +14,7 @@ namespace Dominio
         public double CostoFlete { get; set; }
         [ForeignKey("IdPlanta")]
         public int IdPlanta { get; set; }
+        public Planta Planta { get; set; }
 
     }
 }

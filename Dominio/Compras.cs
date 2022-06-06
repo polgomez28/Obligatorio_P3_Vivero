@@ -17,5 +17,6 @@ namespace Dominio
         public List<ItemPlantas> Items { get; set; }
         [ForeignKey("IdItemPlanta")]
         public int IdItemPlanta { get; set; }
+        public ItemPlantas ItemPlantas { get; set; }
     }
 }
