@@ -10,6 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DataAccesEF;
 using Microsoft.EntityFrameworkCore;
+using DataAcces;
 
 namespace Vivero
 {
@@ -26,7 +27,7 @@ namespace Vivero
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-
+            //services.AddScoped<IRepositorioPlanta, RepositorioPlantaEF, IRepositorioParamSistema, RepositorioParamSistemaEF>();
             services.AddDbContext<VivieroContext>
                 (opciones => opciones
                              .UseSqlServer(Configuration.GetConnectionString("Connection_Vivero"))
