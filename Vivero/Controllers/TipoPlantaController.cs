@@ -5,20 +5,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Dominio;
-using DataAcces;
 
 namespace Vivero.Controllers
 {
     public class TipoPlantaController : Controller
     {
-        IRepositorioPlanta repositorio = new RepositorioPlanta(new Connection());
-        IRepositorio<ParamSistema> repositorioParam = new RepositorioParamSistema(new Connection());
+        private readonly IRepositorioTipoPlanta _repositorioTipoPlanta;
+
+        public TipoPlantaController(IRepositorioTipoPlanta repositorioTipoPlanta)
+        {
+            _repositorioTipoPlanta = repositorioTipoPlanta;
+        }
+        /* CONEXION VIEJA
+        IRepositorioPlanta repositorio = new RepositorioPlanta_old(new Connection());
+        IRepositorio<ParamSistema> repositorioParam = new RepositorioParamSistema_old(new Connection());
         // GET: TipoPlantaController
+        */
+
         public ActionResult Index()
         {
             if (Convert.ToBoolean(HttpContext.Session.GetString("Logeado")))
             {
-                return View(repositorio.GetTipos());
+                return View(_repositorioTipoPlanta.GetType());
             }
             return Redirect("/Login/Login");
         }
@@ -55,7 +63,7 @@ namespace Vivero.Controllers
                 try
                 {
                     ICollection<ParamSistema> resultado = new List<ParamSistema>();
-                    resultado = (ICollection<ParamSistema>)repositorioParam.Get();
+                    //resultado = (ICollection<ParamSistema>)repositorioParam.Get();
                     int numMin = 0, numMax = 0;
                     foreach (ParamSistema item in resultado)
                     {
@@ -71,15 +79,15 @@ namespace Vivero.Controllers
                         {
                             try
                             {
-                                bool exist = repositorio.InsertTipo(unTipo);
-                                if (!exist)
-                                {                                    
-                                    return View("SuccessAlta");
-                                }
-                                else
-                                {
-                                    return View("ErrorAlta");
-                                }
+                                //bool exist = _repositorioTipoPlanta.InsertTipo(unTipo);
+                                //if (!exist)
+                                //{                                    
+                                //    return View("SuccessAlta");
+                               // }
+                                //else
+                                //{
+                                 //   return View("ErrorAlta");
+                                //}
                                 
                             }
                             catch (Exception ex)
@@ -111,8 +119,9 @@ namespace Vivero.Controllers
         {
             if (Convert.ToBoolean(HttpContext.Session.GetString("Logeado")))
             {
-                TipoPlanta unTipo = repositorio.GetByIdTipo(id);
-                return View(unTipo);
+
+                //TipoPlanta unTipo = repositorio.GetByIdTipo(id);
+                //return View(unTipo);
             }
 
             return Redirect("/Login/Login");
@@ -128,7 +137,7 @@ namespace Vivero.Controllers
                 try
                 {
                     ICollection<ParamSistema> resultado = new List<ParamSistema>();
-                    resultado = (ICollection<ParamSistema>)repositorioParam.Get();
+                    //resultado = (ICollection<ParamSistema>)repositorioParam.Get();
                     int numMin = 0, numMax = 0;
                     foreach (ParamSistema item in resultado)
                     {
@@ -144,7 +153,7 @@ namespace Vivero.Controllers
                         {
                             try
                             {
-                                repositorio.UpdateTipo(unTipo);
+                                //repositorio.UpdateTipo(unTipo);
                                 return View("SuccessAlta");
                             }
                             catch (Exception ex)
@@ -177,8 +186,8 @@ namespace Vivero.Controllers
         {
             if (Convert.ToBoolean(HttpContext.Session.GetString("Logeado")))
             {
-                TipoPlanta unTipo = repositorio.GetByIdTipo(id);
-                return View(unTipo);
+                //TipoPlanta unTipo = repositorio.GetByIdTipo(id);
+                //return View(unTipo);
             }
 
             return Redirect("/Login/Login");
@@ -193,7 +202,7 @@ namespace Vivero.Controllers
             {
                 try
                 {
-                    repositorio.DeleteTipo(IdTipoPlanta);
+                    //repositorio.DeleteTipo(IdTipoPlanta);
                     return View("SuccessAlta");
                 }
                 catch
@@ -221,7 +230,8 @@ namespace Vivero.Controllers
                 try
 
                 {
-                    TipoPlanta unTipo = repositorio.GetByNombreTipo(TipoNombre);
+                    //TipoPlanta unTipo = repositorio.GetByNombreTipo(TipoNombre);
+                    /*
                     if (unTipo == null)
                     {
                         return View("ErrorAlta");
@@ -230,6 +240,7 @@ namespace Vivero.Controllers
                     {
                         return View("ViewSearch", unTipo);
                     }
+                    */
                 }
                 catch (Exception)
                 {

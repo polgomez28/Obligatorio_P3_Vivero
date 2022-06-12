@@ -8,11 +8,11 @@ using Dominio;
 
 namespace DataAcces
 {
-    public class RepositorioUsuario : IRepositorioUsuario
+    public class RepositorioUsuario_old : IRepositorioUsuario_old
     {
         private IDbConnection conneccion;
 
-        public RepositorioUsuario(IDbConnection con)
+        public RepositorioUsuario_old(IDbConnection con)
         {
             this.conneccion = con;
         }

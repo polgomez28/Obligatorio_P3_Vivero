@@ -15,8 +15,5 @@ namespace Dominio
         public double CostoTotal { get; set; }
         // agrego atributo list para listar items
         public List<ItemPlantas> Items { get; set; }
-        [ForeignKey("IdItemPlanta")]
-        public int IdItemPlanta { get; set; }
-        public ItemPlantas ItemPlantas { get; set; }
     }
 }

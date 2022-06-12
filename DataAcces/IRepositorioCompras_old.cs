@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DataAcces
 {
-    class RepositorioCompras
+    interface IRepositorioCompras_old
     {
     }
 }

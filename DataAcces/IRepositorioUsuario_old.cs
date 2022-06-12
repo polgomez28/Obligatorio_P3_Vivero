@@ -6,7 +6,7 @@ using System.Text;
 
 namespace DataAcces
 {
-    public interface IRepositorioUsuario
+    public interface IRepositorioUsuario_old
     {
         IList<Usuario> GetUsuarios();
     }

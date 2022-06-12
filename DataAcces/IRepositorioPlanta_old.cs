@@ -6,7 +6,7 @@ using System.Text;
 
 namespace DataAcces
 {
-    public interface IRepositorioPlanta:IRepositorio<Planta>
+    public interface IRepositorioPlanta_old:IRepositorio_old<Planta>
     {
         #region Planta
         //IList<Planta> GetPlantas();

@@ -8,12 +8,12 @@ using System.Text;
 
 namespace DataAcces
 {
-    public class RepositorioPlanta : IRepositorioPlanta
+    public class RepositorioPlanta_old : IRepositorioPlanta_old
     {
         private IDbConnection connection;
 
         // Constructor de RepositorioPlanta
-        public RepositorioPlanta(IDbConnection con)
+        public RepositorioPlanta_old(IDbConnection con)
         {
             this.connection = con;
         }

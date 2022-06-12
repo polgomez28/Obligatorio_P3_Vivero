@@ -29,6 +29,7 @@ namespace Dominio
         [ForeignKey("IdFichaCuidados")]
         public int IdFichaCuidados { get; set; }
         public List<TipoPlanta> ListaTipoPlantas { get; set; }
+        public List<ItemCompra> ItemCompras { get; set; }
 
         public List<FichaCuidados> ListaFichas { get; set; }
 

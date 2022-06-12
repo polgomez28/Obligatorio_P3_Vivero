@@ -1,5 +1,4 @@
-﻿using DataAcces;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -10,13 +9,24 @@ namespace Vivero.Controllers
 {
     public class ParamSistemaController : Controller
     {
-        IRepositorio<ParamSistema> repositorio = new RepositorioParamSistema(new Connection());
+        private readonly IRepositorioParamSistema _repositorioParamSistema;
+
+        public ParamSistemaController(IRepositorioParamSistema repositorioParamSistema)
+        {
+            _repositorioParamSistema = repositorioParamSistema;
+        }
+
+        /* CONEXION ANTERIOR
+        IRepositorio<ParamSistema> repositorio = new RepositorioParamSistema_old(new Connection());
+        */
+
+
         // GET: ParamSistemaController
         public ActionResult Index()
         {
             if (Convert.ToBoolean(HttpContext.Session.GetString("Logeado")))
             {
-                return View(repositorio.Get());
+                return View(_repositorioParamSistema.Get());
             }
 
             return Redirect("/Login/Login");
@@ -69,7 +79,7 @@ namespace Vivero.Controllers
         {
             if (Convert.ToBoolean(HttpContext.Session.GetString("Logeado")))
             {
-                ParamSistema unParam = repositorio.GetByID(id);
+                ParamSistema unParam = _repositorioParamSistema.GetByID(id);
                 return View(unParam);
             }
 
@@ -85,7 +95,7 @@ namespace Vivero.Controllers
             {
                 try
                 {
-                    repositorio.Update(unParam);
+                    _repositorioParamSistema.Update(unParam);
                     return View("SuccessAlta");
                 }
                 catch

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataAccesEF.Migrations
 {
-    [DbContext(typeof(VivieroContext))]
+    [DbContext(typeof(ViveroContext))]
     partial class VivieroContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

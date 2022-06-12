@@ -4,7 +4,7 @@ using System.Text;
 using Dominio;
 namespace DataAcces
 {
-    public interface IRepositorioParamSistema:IRepositorio<ParamSistema>
+    public interface IRepositorioParamSistema_old:IRepositorio_old<ParamSistema>
     {
     }
 }

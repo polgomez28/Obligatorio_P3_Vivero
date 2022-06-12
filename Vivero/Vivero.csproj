@@ -16,7 +16,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DataAccesEF\DataAccesEF.csproj" />
-    <ProjectReference Include="..\DataAcces\DataAcces.csproj" />
     <ProjectReference Include="..\Dominio\Dominio.csproj" />
   </ItemGroup>
 

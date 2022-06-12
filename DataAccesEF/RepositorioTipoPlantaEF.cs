@@ -4,19 +4,18 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using System.Data.SqlClient;
-using DataAcces;
 using System.Collections;
 
 namespace DataAccesEF
 {
-    public class RepositorioTipoPlantaEF : IRepositorioPlanta
+    public class RepositorioTipoPlantaEF : IRepositorioTipoPlanta
     {
         /// Ageregar inyeccion de dependencia del dbcontex que no inyecta el TipoPlantacontroller. 
         /// Aplica para cada repositorio
 
-        VivieroContext _dbContext = new VivieroContext();
+        ViveroContext _dbContext = new ViveroContext();
 
-        public RepositorioTipoPlantaEF(VivieroContext dbContext) 
+        public RepositorioTipoPlantaEF(ViveroContext dbContext)
         {
             _dbContext = dbContext;
         }
@@ -30,12 +29,12 @@ namespace DataAccesEF
             bool exito = false;
             try
             {
-                
-                    _dbContext.Add<TipoPlanta>(unTipo);
-                    exito = _dbContext.SaveChanges() > 0;
-                    return exito;
-                
-                
+
+                _dbContext.Add<TipoPlanta>(unTipo);
+                exito = _dbContext.SaveChanges() > 0;
+                return exito;
+
+
             }
             catch (SqlException ex)
             {
@@ -47,7 +46,98 @@ namespace DataAccesEF
 
                 throw;
             }
+
+        }
+        public bool Update(TipoPlanta tipo)
+        {
+            bool exito = false;
+            try
+            {
+                _dbContext.Update<TipoPlanta>(tipo);
+                exito = _dbContext.SaveChanges() > 0;
+            }
+            catch (SqlException ex)
+            {
+
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return exito;
             
+        }
+        public IList<TipoPlanta> GetTipoPlantas()
+        {
+            IList<TipoPlanta> tipos = null;
+            try
+            {
+                
+                tipos = _dbContext.TipoPlantas.ToList();
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            return tipos;
+
+        }
+        public TipoPlanta GetByID(int id)
+        {
+            TipoPlanta tipo = null;
+            try
+            {
+                int Id = (int)id;
+                tipo = _dbContext.TipoPlantas.Find(Id);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            return tipo;
+        }
+
+        public TipoPlanta GetByNombreTipo(string TipoNombre)
+        {
+            TipoPlanta tipo = null;
+            try
+            {
+                tipo = _dbContext.TipoPlantas.Find(TipoNombre);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+            return tipo;
+        }
+        
+        public bool Remove(TipoPlanta unTipo)
+        {
+            bool exito = false;
+            try
+            {
+                _dbContext.TipoPlantas.Remove(unTipo);
+                exito = _dbContext.SaveChanges() > 0;
+            }
+            catch (SqlException ex)
+            {
+
+                throw;
+            }
+            return exito;
+        }
+
+        public IList<TipoPlanta> Get()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Insert(TipoPlanta obj)
+        {
+            throw new NotImplementedException();
         }
 
         public void Delete(int id)
@@ -55,135 +145,7 @@ namespace DataAccesEF
             throw new NotImplementedException();
         }
 
-        public void DeleteFicha(int idFicha)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void DeleteTipo(int idTipoPlanta)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void DeleteTipoILum(int idTipoIlum)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IList<TipoPlanta> FindAll()
-        {
-            IList<TipoPlanta> tipos = null;
-            try
-            {
-                using (VivieroContext dbContext = new VivieroContext())
-                {
-                    tipos = dbContext.TipoPlantas.ToList();
-                }
-                return tipos;
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-
-        public IList<Planta> Get()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Planta GetByID(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public FichaCuidados GetByIdFicha(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public TipoPlanta GetByIdTipo(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public TipoIluminacion GetByIdTipoIlum(int idTipoIlum)
-        {
-            throw new NotImplementedException();
-        }
-
-        public TipoPlanta GetByNombreTipo(string tipoNombre)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable GetFichas()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Planta GetListas()
-        {
-            throw new NotImplementedException();
-        }
-
-        public IList<TipoPlanta> GetTipos()
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable GetTiposIlum()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Insert(Planta obj)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void InsertFicha(FichaCuidados obj)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void InsertFoto(Foto foto)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool InsertTipo(TipoPlanta unTipo)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void InsertTipoIlum(TipoIluminacion obj)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IList<Planta> SearchPlantas(string NombreCientifico, string TipoNombre, string Ambiente, int Altura, int Altura2)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(Planta obj)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void UpdateFicha(FichaCuidados obj)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void UpdateTipo(TipoPlanta obj)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void UpdateTipoIlum(TipoIluminacion obj)
+        void Dominio.IRepositorio<TipoPlanta>.Update(TipoPlanta obj)
         {
             throw new NotImplementedException();
         }

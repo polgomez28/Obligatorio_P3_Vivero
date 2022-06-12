@@ -8,12 +8,12 @@ using System.Data.SqlClient;
 
 namespace DataAcces
 {
-    public class RepositorioParamSistema : IRepositorioParamSistema
+    public class RepositorioParamSistema_old : IRepositorioParamSistema_old
     {
         private IDbConnection conneccion;
 
         // Constructor de RepositorioPlanta
-        public RepositorioParamSistema(IDbConnection con)
+        public RepositorioParamSistema_old(IDbConnection con)
         {
             this.conneccion = con;
         }

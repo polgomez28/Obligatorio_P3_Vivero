@@ -8,7 +8,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace DataAccesEF
 {
-    public class VivieroContext : DbContext
+    public class ViveroContext : DbContext
     {
         public DbSet<Planta> Plantas { get; set; }
         public DbSet<Foto> Fotos { get; set; }
@@ -21,13 +21,14 @@ namespace DataAccesEF
         public DbSet<DePlaza> DePlazas { get; set; }
         public DbSet<Importadas> Importadas { get; set; }
         public DbSet<ItemPlantas> ItemPlantas { get; set; }
+        public DbSet<ItemCompra> ItemCompras { get; set; }
 
 
-        public VivieroContext(DbContextOptions<VivieroContext> options) :
+        public ViveroContext(DbContextOptions<ViveroContext> options) :
             base(options)
         { }
 
-        public VivieroContext()
+        public ViveroContext()
         {
         }
 
@@ -58,8 +59,7 @@ namespace DataAccesEF
             modelBuilder.Entity<ItemPlantas>();
             // Creo la tabla Compras
             modelBuilder.Entity<Compras>();
-            // Creamos realción
-            modelBuilder.Entity<Compras>().HasOne(c => c.ItemPlantas);
+            
             // Creo la tabla Plantas
             modelBuilder.Entity<Planta>();
             // Creamos realción
@@ -75,7 +75,8 @@ namespace DataAccesEF
             // Creamos realción
             modelBuilder.Entity<Importadas>().HasOne(i => i.Planta);
 
-
+            // Creamos la realción NaN Compras - ItemCompras - Plantas
+            modelBuilder.Entity<ItemCompra>().HasKey(i => new { i.IdCompra, i.IdPlanta });
 
 
         }

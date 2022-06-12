@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataAccesEF.Migrations
 {
-    [DbContext(typeof(VivieroContext))]
+    [DbContext(typeof(ViveroContext))]
     [Migration("20220606011254_init")]
     partial class init
     {

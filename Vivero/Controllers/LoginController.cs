@@ -1,5 +1,4 @@
-﻿using DataAcces;
-using Dominio;
+﻿using Dominio;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,8 +6,16 @@ namespace Vivero.Controllers
 {
     public class LoginController : Controller
     {
-        IRepositorioUsuario repositorioUsuario = new RepositorioUsuario(new Connection());
-        
+        private readonly IRepositorioUsuario _repositorioUsuario;
+
+        public LoginController(IRepositorioUsuario repositorioUsuario)
+        {
+            _repositorioUsuario = repositorioUsuario;
+        }
+        /* CONEXION ANTERIOR
+        IRepositorioUsuario repositorioUsuario = new RepositorioUsuario_old(new Connection());
+        */
+
         public ActionResult Login(string mensaje)
         {
             ViewBag.mensaje = mensaje;
@@ -36,7 +43,7 @@ namespace Vivero.Controllers
 
         private bool ValidateUser(Usuario usuario)
         {
-            var usuarios = repositorioUsuario.GetUsuarios();
+            var usuarios = _repositorioUsuario.GetUsuarios();
             foreach (var usu in usuarios)
             {
                 if (usu.Email.Equals(usuario.Email) && usu.Contraseña.Equals(usuario.Contraseña))
