@@ -4,14 +4,16 @@ using DataAccesEF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataAccesEF.Migrations
 {
     [DbContext(typeof(ViveroContext))]
-    partial class VivieroContextModelSnapshot : ModelSnapshot
+    [Migration("20220613021658_init2pg")]
+    partial class init2pg
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
