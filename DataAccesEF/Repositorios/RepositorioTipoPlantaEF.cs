@@ -13,12 +13,13 @@ namespace DataAccesEF
         /// Ageregar inyeccion de dependencia del dbcontex que no inyecta el TipoPlantacontroller. 
         /// Aplica para cada repositorio
 
-        ViveroContext _dbContext = new ViveroContext();
-
+        ViveroContext _dbContext;
+        
         public RepositorioTipoPlantaEF(ViveroContext dbContext)
         {
             _dbContext = dbContext;
         }
+
         /// <summary>
         /// Agregamos un Tipo de planta
         /// </summary>

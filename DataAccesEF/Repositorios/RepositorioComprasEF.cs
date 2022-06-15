@@ -5,29 +5,35 @@ using System.Text;
 
 namespace DataAccesEF
 {
-    public class RepositorioParamSistemaEF : IRepositorioParamSistema
+    public class RepositorioComprasEF : IRepositorioCompras
     {
+        ViveroContext _dbContext;
+
+        public RepositorioComprasEF(ViveroContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
         public void Delete(int id)
         {
             throw new NotImplementedException();
         }
 
-        public IList<ParamSistema> Get()
+        public IList<Compras> Get()
         {
             throw new NotImplementedException();
         }
 
-        public ParamSistema GetByID(int id)
+        public Compras GetByID(int id)
         {
             throw new NotImplementedException();
         }
 
-        public void Insert(ParamSistema obj)
+        public void Insert(Compras obj)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(ParamSistema obj)
+        public void Update(Compras obj)
         {
             throw new NotImplementedException();
         }

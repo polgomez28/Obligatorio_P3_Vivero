@@ -8,8 +8,8 @@ namespace TestVivero
 {
     public class Tests
     {
-        ViveroContext dbcontex = null;
-        private RepositorioTipoPlantaEF repoTipo;
+        //ViveroContext dbcontex = new ViveroContext();
+        private RepositorioTipoPlantaEF repoTipo = null;
 
         //Repositorio
         //IRepositorioTipoPlanta repoTipo = null;
@@ -17,7 +17,7 @@ namespace TestVivero
         public void Setup()
         {
             //Instancio el repositorio
-            repoTipo = new RepositorioTipoPlantaEF(dbcontex);
+            repoTipo = new RepositorioTipoPlantaEF();
         }
 
         [Test]

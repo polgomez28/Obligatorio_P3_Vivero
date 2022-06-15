@@ -7,6 +7,16 @@ namespace DataAccesEF
 {
     public class RepositorioPlantaEF : IRepositorioPlanta
     {
+        /// Ageregar inyeccion de dependencia del dbcontex que no inyecta el TipoPlantacontroller. 
+        /// Aplica para cada repositorio
+
+        ViveroContext _dbContext;
+
+        public RepositorioPlantaEF(ViveroContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
+
         public void Delete(int id)
         {
             throw new NotImplementedException();
