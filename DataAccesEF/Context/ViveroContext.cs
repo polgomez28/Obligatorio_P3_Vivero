@@ -20,7 +20,6 @@ namespace DataAccesEF
         public DbSet<Compras> Compras { get; set; }
         public DbSet<DePlaza> DePlazas { get; set; }
         public DbSet<Importadas> Importadas { get; set; }
-        public DbSet<ItemPlantas> ItemPlantas { get; set; }
         public DbSet<ItemCompra> ItemCompras { get; set; }
 
 
@@ -48,15 +47,14 @@ namespace DataAccesEF
             // Creo la tabla TipoIluminacion
             modelBuilder.Entity<TipoIluminacion>();
             // Creo la tabla FichaCuidados
-            modelBuilder.Entity<FichaCuidados>();
+            //modelBuilder.Entity<FichaCuidados>();
             //Creo la relación
             modelBuilder.Entity<FichaCuidados>().HasOne(f => f.TipoIluminacion);
             // Creo la tabla ParamSistema
             modelBuilder.Entity<ParamSistema>();
             // Creo la tabla Usuarios
             modelBuilder.Entity<Usuario>();
-            // Creo la tabla ItemPlantas
-            modelBuilder.Entity<ItemPlantas>();
+            
             // Creo la tabla Compras
             modelBuilder.Entity<Compras>();
             

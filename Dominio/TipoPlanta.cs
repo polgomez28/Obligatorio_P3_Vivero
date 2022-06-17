@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Dominio
@@ -8,10 +9,13 @@ namespace Dominio
     public class TipoPlanta
     {
         [Key]
+        [Column("Id")]
         public int IdTipoPlanta { get; set; }
         [Required]
+        [Column("Nombre")]
         public string TipoNombre { get; set; }
         [Required]
+        [Column("Desc")]
         public string TipoDesc { get; set; }
         
         #region Métodos

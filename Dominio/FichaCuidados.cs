@@ -12,10 +12,11 @@ namespace Dominio
         public int IdFichaCuidados { get; set; }
         public string Riego { get; set; }
         [Required]
-
+        [ForeignKey("IdTipoIluminacion")]
         public TipoIluminacion TipoIluminacion { get; set; }
         public int Temperatura { get; set; }
-        [ForeignKey("IdTipoIluminacion")]
-        public int IdTipoIluminacion { get; set; }
+        //[Column("IdTipoIluminacion")]
+        
+        //public int IdTipoIluminacion { get; set; }
     }
 }

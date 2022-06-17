@@ -14,25 +14,16 @@ namespace Dominio
         [Required]
         public string Descripcion { get; set; }
         [Required]
+        [ForeignKey("IdTipoPlanta")]
         public TipoPlanta TipoPlanta { get; set; }
         public List<Foto> ListaFotos { get; set; }
+        [ForeignKey("IdFichaCuidados")]
         public FichaCuidados FichaCuidados { get; set; }
         public string NombresVulgares { get; set; }
         [Required]
         public string Ambiente { get; set; }
         public int Altura { get; set; }
-        [ForeignKey("IdTipoPlanta")]
-        public int IdTipoPlanta { get; set; }
-        // Analizar como resolver foto(posibilidad: Foto - ItemFoto - Planta)
-        //[ForeignKey("IdItemFoto")]
-        //public int IdItemFoto { get; set; }
-        [ForeignKey("IdFichaCuidados")]
-        public int IdFichaCuidados { get; set; }
-        public List<TipoPlanta> ListaTipoPlantas { get; set; }
-        public List<ItemCompra> ItemCompras { get; set; }
-
-        public List<FichaCuidados> ListaFichas { get; set; }
-
+        
         // Validaciones
 
         // --- Validar Nombre Científico

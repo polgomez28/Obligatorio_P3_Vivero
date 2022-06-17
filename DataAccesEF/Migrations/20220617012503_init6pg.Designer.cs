@@ -4,14 +4,16 @@ using DataAccesEF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataAccesEF.Migrations
 {
     [DbContext(typeof(ViveroContext))]
-    partial class VivieroContextModelSnapshot : ModelSnapshot
+    [Migration("20220617012503_init6pg")]
+    partial class init6pg
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -158,6 +160,9 @@ namespace DataAccesEF.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("ComprasIdCompra")
+                        .HasColumnType("int");
+
                     b.Property<string>("Descripcion")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -175,6 +180,8 @@ namespace DataAccesEF.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("IdPlanta");
+
+                    b.HasIndex("ComprasIdCompra");
 
                     b.HasIndex("IdFichaCuidados");
 
@@ -305,6 +312,10 @@ namespace DataAccesEF.Migrations
 
             modelBuilder.Entity("Dominio.Planta", b =>
                 {
+                    b.HasOne("Dominio.Compras", null)
+                        .WithMany("ListaPlantas")
+                        .HasForeignKey("ComprasIdCompra");
+
                     b.HasOne("Dominio.FichaCuidados", "FichaCuidados")
                         .WithMany()
                         .HasForeignKey("IdFichaCuidados");

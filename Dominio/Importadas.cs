@@ -14,8 +14,8 @@ namespace Dominio
         public bool EsDelSur { get; set; }
         public int TasaDescuento { get; set; }
         public static string DescripcionSanitaria { get; set; }
+
         [ForeignKey("IdPlanta")]
-        public int IdPlanta { get; set; }
         public Planta Planta { get; set; }
     }
 }

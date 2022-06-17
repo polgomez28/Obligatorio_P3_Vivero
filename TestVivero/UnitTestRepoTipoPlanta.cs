@@ -17,7 +17,7 @@ namespace TestVivero
         public void Setup()
         {
             //Instancio el repositorio
-            repoTipo = new RepositorioTipoPlantaEF();
+            //repoTipo = new RepositorioTipoPlantaEF();
         }
 
         [Test]

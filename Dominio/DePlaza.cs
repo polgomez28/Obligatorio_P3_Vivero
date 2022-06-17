@@ -12,8 +12,8 @@ namespace Dominio
         public int IdPlaza { get; }
         public static double TasaIVA { get; set; }
         public double CostoFlete { get; set; }
+
         [ForeignKey("IdPlanta")]
-        public int IdPlanta { get; set; }
         public Planta Planta { get; set; }
 
     }

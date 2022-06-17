@@ -11,9 +11,9 @@ namespace Dominio
         [Key]
         public int IdCompra { get; set; }
         public DateTime FechaCompra { get; set; }
-        public List<Planta> ListaPlantas { get; set; }
+        //public List<Planta> ListaPlantas { get; set; }
         public double CostoTotal { get; set; }
         // agrego atributo list para listar items
-        public List<ItemPlantas> Items { get; set; }
+        public List<ItemCompra> Items { get; set; }
     }
 }
