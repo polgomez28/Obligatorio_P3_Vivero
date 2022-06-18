@@ -69,22 +69,7 @@ namespace DataAccesEF
             return exito;
             
         }
-        public IList<TipoPlanta> GetTipoPlantas()
-        {
-            IList<TipoPlanta> tipos = null;
-            try
-            {
-                
-                tipos = _dbContext.TipoPlantas.ToList();
-
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-            return tipos;
-
-        }
+        
         public TipoPlanta GetByID(int id)
         {
             TipoPlanta tipo = null;
@@ -133,7 +118,19 @@ namespace DataAccesEF
 
         public IList<TipoPlanta> Get()
         {
-            throw new NotImplementedException();
+            IList<TipoPlanta> tipos = null;
+            try
+            {
+
+                tipos = _dbContext.TipoPlantas.ToList();
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            return tipos;
+            
         }
 
         public void Insert(TipoPlanta obj)

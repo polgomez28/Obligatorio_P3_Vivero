@@ -1,6 +1,7 @@
 ﻿using Dominio;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace DataAccesEF
@@ -25,7 +26,9 @@ namespace DataAccesEF
 
         public IList<ParamSistema> Get()
         {
-            throw new NotImplementedException();
+            IList<ParamSistema> param = null;
+            param = _dbContext.ParamSistema.ToList();
+            return param;
         }
 
         public ParamSistema GetByID(int id)

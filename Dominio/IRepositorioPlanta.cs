@@ -27,13 +27,13 @@ namespace Dominio
         #endregion
 
         #region FichaCuidados
-        /*
-        IEnumerable GetFichas();
+
+        IList GetFichas();
         void UpdateFicha(FichaCuidados obj);
         void InsertFicha(FichaCuidados obj);
         FichaCuidados GetByIdFicha(int id);
         void DeleteFicha(int idFicha);
-        */
+
         #endregion
 
         #region TipoIluminacion

@@ -14,11 +14,13 @@ namespace Vivero.Controllers
     {
         private readonly IRepositorioPlanta _repositorioPlanta;
         private readonly IRepositorioTipoPlanta _repositorioTipo;
+        private readonly IRepositorioParamSistema _repositorioParam;
 
-        public PlantaController(IRepositorioPlanta repositorioPlanta, IRepositorioTipoPlanta repositorioTipoPlanta)
+        public PlantaController(IRepositorioPlanta repositorioPlanta, IRepositorioTipoPlanta repositorioTipoPlanta, IRepositorioParamSistema repositorioParam)
         {
             _repositorioPlanta = repositorioPlanta;
             _repositorioTipo = repositorioTipoPlanta;
+            _repositorioParam = repositorioParam;
         }
 
         /* CONEXION VIEJA
@@ -199,6 +201,8 @@ namespace Vivero.Controllers
         {
             if (Convert.ToBoolean(HttpContext.Session.GetString("Logeado")))
             {
+                ViewBag.FichaCuidados = _repositorioPlanta.GetFichas();
+                ViewBag.TipoPlanta = _repositorioTipo.Get();
                 Planta unaPlanta = _repositorioPlanta.GetByID(id);
                 return View(unaPlanta);
             }
@@ -216,7 +220,7 @@ namespace Vivero.Controllers
                 try
                 {
                     ICollection<ParamSistema> parametros = new List<ParamSistema>();
-                    //parametros = (ICollection<ParamSistema>)repositorioParam.Get();
+                    parametros = _repositorioParam.Get();
                     int maxLargo = 0;
                     int minLargo = 0;
                     foreach(ParamSistema param in parametros)
@@ -233,7 +237,7 @@ namespace Vivero.Controllers
                             try
                             {
                                 _repositorioPlanta.Update(unaPlanta);
-                                return View("SuccessAlta");
+                                return View("Index");
                             }
                             catch (Exception e)
                             {

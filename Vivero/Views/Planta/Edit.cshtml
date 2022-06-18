@@ -25,15 +25,13 @@
             </div>
             <div class="form-group">
                 <label asp-for="TipoPlanta" class="control-label"></label>
-                <select>
-                    <option value="@Model.TipoPlanta.TipoNombre">@Model.TipoPlanta.TipoNombre</option>
-                </select>
+                @Html.DropDownListFor(model => model.TipoPlanta.IdTipoPlanta, new SelectList(@ViewBag.TipoPlanta, "IdTipoPlanta", "TipoNombre"), "Seleccione...", new { @class = "form-control" })
+                <span asp-validation-for="@Model.TipoPlanta.IdTipoPlanta" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="FichaCuidados" class="control-label"></label>
-                <select>
-                    <option value="@Model.FichaCuidados.IdFichaCuidados">@Model.FichaCuidados.IdFichaCuidados</option>
-                </select>
+                @Html.DropDownListFor(model => model.FichaCuidados.IdFichaCuidados, new SelectList(@ViewBag.FichaCuidados, "IdFichaCuidados", "Riego"), "Seleccione...", new { @class = "form-control" })
+                <span asp-validation-for="@Model.FichaCuidados.IdFichaCuidados" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Ambiente" class="control-label"></label>
