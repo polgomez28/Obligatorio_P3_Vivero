@@ -293,7 +293,7 @@ namespace Vivero.Controllers
                 try
                 {
                     _repositorioPlanta.Delete(idPlanta);
-                    return View("SuccessAlta");
+                    return RedirectToAction(nameof(Index));
                 }
                 catch
                 {

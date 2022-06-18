@@ -125,7 +125,6 @@ namespace DataAccesEF
 
                 throw;
             }
-            return planta;
         }
 
         public FichaCuidados GetByIdFicha(int id)
