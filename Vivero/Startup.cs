@@ -31,6 +31,7 @@ namespace Vivero
             services.AddScoped<IRepositorioParamSistema, RepositorioParamSistemaEF>();
             services.AddScoped<IRepositorioTipoPlanta, RepositorioTipoPlantaEF>();
             services.AddScoped<IRepositorioCompras, RepositorioComprasEF>();
+            services.AddScoped<IRepositorioUsuario, RepositorioUsuariosEF > ();
 
             services.AddDbContext<ViveroContext>
                 (opciones => opciones

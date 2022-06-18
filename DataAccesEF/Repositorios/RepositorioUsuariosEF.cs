@@ -1,6 +1,7 @@
 ﻿using Dominio;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace DataAccesEF
@@ -19,7 +20,17 @@ namespace DataAccesEF
 
         public IList<Usuario> GetUsuarios()
         {
-            throw new NotImplementedException();
+            IList<Usuario> usuarios = new List<Usuario>();
+            try
+            {
+                usuarios = _dbContext.Usuarios.ToList();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            return usuarios;
         }
     }
 }

@@ -42,11 +42,39 @@ namespace DataAccesEF
 
         public IList<Planta> Get()
         {
-            IList<Planta> plantas = null;
+            IList<Planta> result = new List<Planta>();
             try
             {
-                plantas = _dbContext.Plantas.ToList();
-                
+               var plantas = from p in _dbContext.Plantas
+                          join t in _dbContext.TipoPlantas on
+                          p.TipoPlanta.IdTipoPlanta equals t.IdTipoPlanta
+                          select new
+                          {
+                              Id = p.IdPlanta,
+                              Nombre = p.NombreCientifico,
+                              Descripcion = p.Descripcion,
+                              Ambiente = p.Ambiente,
+                              Altura = p.Altura,
+                              TipoPlanta = new { Id = t.IdTipoPlanta, Nombre = t.TipoNombre, Descripcion = t.TipoDesc}};
+                foreach (var item in plantas)
+                {
+                    Planta planta = new Planta()
+                    {
+                        IdPlanta = item.Id,
+                        NombreCientifico = item.Nombre,
+                        Descripcion = item.Descripcion,
+                        Ambiente = item.Ambiente,
+                        Altura = item.Altura,
+                        TipoPlanta = new TipoPlanta()
+                        {
+                            IdTipoPlanta = item.TipoPlanta.Id,
+                            TipoNombre = item.TipoPlanta.Nombre,
+                            TipoDesc = item.TipoPlanta.Descripcion
+                        }
+                    };
+                    result.Add(planta);
+                }
+                return result;
             }
             catch (SqlException ex)
             {
@@ -57,7 +85,6 @@ namespace DataAccesEF
 
                 throw;
             }
-            return plantas;
         }
 
         public Planta GetByID(int id)
@@ -98,14 +125,36 @@ namespace DataAccesEF
         public IList<Planta> SearchPlantas(string NombreCientifico, string TipoNombre, string Ambiente, int Altura, int Altura2)
         {
             IList<Planta> plantas = null;
-            //plantas = (from p in Planta
-            //           where)
+            try
+            {
+                plantas = _dbContext.Plantas.Where(p => p.NombreCientifico.Contains(NombreCientifico)).ToList();
+                plantas = plantas.Where(p => p.NombresVulgares.Contains(TipoNombre)).ToList();
+                plantas = plantas.Where(p => p.Ambiente == Ambiente).ToList();
+                plantas = plantas.Where(p => p.Altura > Altura).ToList();
+                plantas = plantas.Where(p => p.Altura < Altura2).ToList();
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+            
             return plantas;
         }
 
         public void Update(Planta obj)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _dbContext.Update<Planta>(obj);
+                _dbContext.SaveChanges();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
         }
     }
 }

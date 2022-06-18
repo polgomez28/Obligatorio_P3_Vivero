@@ -15,7 +15,7 @@ namespace Dominio
         [Column("Nombre")]
         public string TipoNombre { get; set; }
         [Required]
-        [Column("Desc")]
+        [Column("Descripcion")]
         public string TipoDesc { get; set; }
         
         #region Métodos

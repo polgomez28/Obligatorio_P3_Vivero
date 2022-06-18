@@ -13,10 +13,12 @@ namespace Vivero.Controllers
     public class PlantaController : Controller
     {
         private readonly IRepositorioPlanta _repositorioPlanta;
+        private readonly IRepositorioTipoPlanta _repositorioTipo;
 
-        public PlantaController(IRepositorioPlanta repositorioPlanta)
+        public PlantaController(IRepositorioPlanta repositorioPlanta, IRepositorioTipoPlanta repositorioTipoPlanta)
         {
             _repositorioPlanta = repositorioPlanta;
+            _repositorioTipo = repositorioTipoPlanta;
         }
 
         /* CONEXION VIEJA
@@ -25,11 +27,11 @@ namespace Vivero.Controllers
         */
 
         // Para trabajar con el upload de la foto
-        private IWebHostEnvironment _environment;
-        public PlantaController(IWebHostEnvironment environment)
-        {
-            _environment = environment;
-        }
+        //private IWebHostEnvironment _environment;
+        //public PlantaController(IWebHostEnvironment environment)
+        //{
+        //    _environment = environment;
+        //}
         // GET: HomeController1
         public ActionResult Index()
         {

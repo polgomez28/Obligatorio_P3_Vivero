@@ -4,14 +4,16 @@ using DataAccesEF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataAccesEF.Migrations
 {
     [DbContext(typeof(ViveroContext))]
-    partial class VivieroContextModelSnapshot : ModelSnapshot
+    [Migration("20220618013249_int8pg")]
+    partial class int8pg
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -187,18 +189,16 @@ namespace DataAccesEF.Migrations
                 {
                     b.Property<int>("IdIluminacion")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("Id")
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("DescripcionTipoIlum")
                         .IsRequired()
-                        .HasColumnName("Descripcion")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("IdIluminacion");
 
-                    b.ToTable("TipoIluminacion");
+                    b.ToTable("TipoIluminacions");
                 });
 
             modelBuilder.Entity("Dominio.TipoPlanta", b =>

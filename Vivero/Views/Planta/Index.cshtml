@@ -43,37 +43,48 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdPlanta)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NombreCientifico)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Descripcion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TipoPlanta.TipoNombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FichaCuidados.IdFichaCuidados)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ambiente)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Altura)
-            </td>
-            
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdPlanta">Editar</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdPlanta">Borrar</a> |
-                <a asp-action="Details" asp-route-id="@item.IdPlanta">Detalle</a>                
+        @if (Model.Any())
+        {
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IdPlanta)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NombreCientifico)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Descripcion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TipoPlanta.TipoNombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FichaCuidados.IdFichaCuidados)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Ambiente)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Altura)
+                    </td>
 
-            </td>
-        </tr>
-}
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.IdPlanta">Editar</a> |
+                        <a asp-action="Delete" asp-route-id="@item.IdPlanta">Borrar</a> |
+                        <a asp-action="Details" asp-route-id="@item.IdPlanta">Detalle</a>
+
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <div class="alert alert-warning" role="alert">
+                Ups! No hay plantas para listar.
+            </div>
+        }
+
     </tbody>
 </table>
