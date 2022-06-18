@@ -85,8 +85,11 @@ namespace Vivero.Controllers
         public ActionResult CreatePlanta()
         {
             if (Convert.ToBoolean(HttpContext.Session.GetString("Logeado")))
-            {                                
-                //return View(_repositorioPlanta.GetListas());
+            {
+                ViewBag.TipoPlanta = _repositorioTipo.Get();
+                ViewBag.FichaCuidados = _repositorioPlanta.GetFichas();
+
+                return View();
             }
 
             return Redirect("/Login/Login");
@@ -94,16 +97,15 @@ namespace Vivero.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreatePlanta(Planta unaPlanta, int IdFichaCuidados, int IdTipoPlanta)
+        public ActionResult CreatePlanta([Bind("NombreCientifico,Descripcion,TipoPlanta,FichaCuidados,NombresVulgares,Ambiente,Altura")] Planta unaPlanta)
         {
             if (Convert.ToBoolean(HttpContext.Session.GetString("Logeado")))
             {
                 try
                 {
-                    TipoPlanta unT = new TipoPlanta();
-                    FichaCuidados unF = new FichaCuidados();
+
                     ICollection<ParamSistema> parametros = new List<ParamSistema>();
-                    //parametros = (ICollection<ParamSistema>)repositorioParam.Get();
+                    parametros = _repositorioParam.Get();
                     int maxLargo = 0;
                     int minLargo = 0;
                     foreach (ParamSistema param in parametros)
@@ -116,16 +118,13 @@ namespace Vivero.Controllers
                     }
                     unaPlanta.NombreCientifico = Planta.QuitarEspacios(unaPlanta.NombreCientifico);
                     unaPlanta.Descripcion = Planta.QuitarEspacios(unaPlanta.Descripcion);
-                    unT.IdTipoPlanta = IdTipoPlanta;
-                    unF.IdFichaCuidados = IdFichaCuidados;
-                    unaPlanta.TipoPlanta = unT;
-                    unaPlanta.FichaCuidados = unF;
+                    
                     if (Planta.NoContieneNumeros(unaPlanta.NombreCientifico) && Planta.LargoValido(unaPlanta.Descripcion, maxLargo, minLargo) && Planta.NombresValidos(unaPlanta.NombresVulgares))
                     {
                         try
                         {
                             _repositorioPlanta.Insert(unaPlanta);
-                            return View("SuccessAlta");
+                            return RedirectToAction(nameof(Index));
                         }
                         catch (Exception e)
                         {

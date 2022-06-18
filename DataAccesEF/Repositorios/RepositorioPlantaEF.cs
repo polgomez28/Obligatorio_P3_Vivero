@@ -141,11 +141,14 @@ namespace DataAccesEF
 
         public void Insert(Planta obj)
         {
-            bool exito = false;
             try
             {
                 _dbContext.Add<Planta>(obj);
-                exito = _dbContext.SaveChanges() > 0;
+                obj.TipoPlanta = _dbContext.TipoPlantas.Find(obj.TipoPlanta.IdTipoPlanta);
+                _dbContext.Entry(obj.TipoPlanta).State = Microsoft.EntityFrameworkCore.EntityState.Unchanged;
+                obj.FichaCuidados = _dbContext.FichaCuidados.Find(obj.FichaCuidados.IdFichaCuidados);
+                _dbContext.Entry(obj.FichaCuidados).State = Microsoft.EntityFrameworkCore.EntityState.Unchanged;
+                _dbContext.SaveChanges();
             }
             catch (SqlException ex)
             {

@@ -12,7 +12,7 @@
     <div class="col-md-4">
         <form asp-action="CreatePlanta">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            
+
             <div class="form-group">
                 <label asp-for="NombreCientifico" class="control-label"></label>
                 <input asp-for="NombreCientifico" class="form-control" />
@@ -25,21 +25,13 @@
             </div>
             <div class="form-group">
                 <label asp-for="TipoPlanta" class="control-label"></label>
-                <select class="control-label" id="IdTipoPlanta" name="IdTipoPlanta">
-                    @*@foreach(var item in Model.ListaTipoPlantas)
-            {
-                <option value="@item.IdTipoPlanta">@item.TipoNombre</option>
-            }*@
-                </select>
+                @Html.DropDownListFor(model => model.TipoPlanta.IdTipoPlanta, new SelectList(@ViewBag.TipoPlanta, "IdTipoPlanta", "TipoNombre"), "Seleccione...", new { @class = "form-control" })
+                <span asp-validation-for="@Model.TipoPlanta.IdTipoPlanta" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="FichaCuidados" class="control-label"></label>
-                <select class="control-label" id="IdFichaCuidados" name="IdFichaCuidados">
-                    @*@foreach(var item in Model.ListaFichas)
-            {
-                <option value="@item.IdFichaCuidados">Ficha @item.IdFichaCuidados</option>
-            }*@
-                </select>
+                @Html.DropDownListFor(model => model.FichaCuidados.IdFichaCuidados, new SelectList(@ViewBag.FichaCuidados, "IdFichaCuidados", "Riego"), "Seleccione...", new { @class = "form-control" })
+                <span asp-validation-for="@Model.FichaCuidados.IdFichaCuidados" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Ambiente" class="control-label">Seleccionar ambiente</label>
@@ -61,7 +53,7 @@
                 <input asp-for="NombresVulgares" class="form-control" />
                 <span asp-validation-for="NombresVulgares" class="text-danger"></span>
             </div>
-          
+
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
