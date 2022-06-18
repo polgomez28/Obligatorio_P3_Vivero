@@ -189,6 +189,8 @@ namespace DataAccesEF
             try
             {
                 _dbContext.Update<Planta>(obj);
+                obj.TipoPlanta = _dbContext.TipoPlantas.Find(obj.TipoPlanta.IdTipoPlanta);
+                _dbContext.Entry(obj.TipoPlanta).State = Microsoft.EntityFrameworkCore.EntityState.Unchanged;
                 _dbContext.SaveChanges();
             }
             catch (Exception ex)

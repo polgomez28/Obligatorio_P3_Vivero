@@ -80,14 +80,14 @@ namespace TestVivero
             Assert.AreNotEqual(0, tipo.IdTipoPlanta);
         }
 
-        [Test]
-        public void TestGetTipoPlantas()
-        {
-            IList<TipoPlanta> tipos = null;
-            tipos = repoTipo.GetTipoPlantas();
-            //Validaciones
-            Assert.IsNotNull(tipos);
-        }
+        //[Test]
+        //public void TestGetTipoPlantas()
+        //{
+        //    IList<TipoPlanta> tipos = null;
+        //    tipos = repoTipo.GetTipoPlantas();
+        //    //Validaciones
+        //    Assert.IsNotNull(tipos);
+        //}
 
         [Test]
         public void RemoveTipo()

@@ -213,7 +213,7 @@ namespace Vivero.Controllers
         // POST: HomeController1/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Planta unaPlanta)
+        public ActionResult Edit(int id,[Bind("IdPlanta,NombreCientifico,Descripcion,TipoPlanta,FichaCuidados,NombresVulgares,Ambiente,Altura")] Planta unaPlanta)
         {
             if (Convert.ToBoolean(HttpContext.Session.GetString("Logeado")))
             {
@@ -230,26 +230,37 @@ namespace Vivero.Controllers
                             maxLargo = param.ValorMax;
                             minLargo = param.ValorMin;
                         }
-                        unaPlanta.NombreCientifico = Planta.QuitarEspacios(unaPlanta.NombreCientifico);
-                        unaPlanta.Descripcion = Planta.QuitarEspacios(unaPlanta.Descripcion);
-                        if(Planta.NoContieneNumeros(unaPlanta.NombreCientifico) && Planta.LargoValido(unaPlanta.Descripcion, maxLargo, minLargo) && Planta.NombresValidos(unaPlanta.NombresVulgares))
+                    }
+                    Planta aux = null;
+                    aux = _repositorioPlanta.GetByID(id);
+                        if (aux.NombreCientifico == unaPlanta.NombreCientifico && aux.NombresVulgares == unaPlanta.NombresVulgares && aux.Descripcion == unaPlanta.Descripcion)
                         {
-                            try
-                            {
-                                _repositorioPlanta.Update(unaPlanta);
-                                return View("Index");
-                            }
-                            catch (Exception e)
-                            {
-                                return View("ErrorAlta");
-                            }
-
+                            _repositorioPlanta.Update(unaPlanta);
+                            return RedirectToAction(nameof(Index));
                         }
                         else
                         {
-                            return View("ErrorAlta");
+                            unaPlanta.NombreCientifico = Planta.QuitarEspacios(unaPlanta.NombreCientifico);
+                            unaPlanta.Descripcion = Planta.QuitarEspacios(unaPlanta.Descripcion);
+                            if (Planta.NoContieneNumeros(unaPlanta.NombreCientifico) && Planta.LargoValido(unaPlanta.Descripcion, maxLargo, minLargo) && Planta.NombresValidos(unaPlanta.NombresVulgares))
+                            {
+                                try
+                                {
+                                    _repositorioPlanta.Update(unaPlanta);
+                                    return RedirectToAction(nameof(Index));
+                                }
+                                catch (Exception e)
+                                {
+                                    return View("ErrorAlta");
+                                }
+
+                            }
+                            else
+                            {
+                                return View("ErrorAlta");
+                            }
                         }
-                    }                    
+                                        
                 }
                 catch (Exception)
                 {
