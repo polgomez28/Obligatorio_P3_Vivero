@@ -302,120 +302,135 @@ namespace Vivero.Controllers
 
             return Redirect("/Login/Login");
         }
-
-        public ActionResult Search()
-        {
-            //ViewBag.TipoPlanta = _repositorioTipo.Get();
-            //ViewBag.FichaCuidados = _repositorioPlanta.GetFichas();
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult Search(Planta unaPlanta)
+        //Nos lleva a la busqueda a seleccionar
+        public ActionResult Busquedas()
         {
             if (Convert.ToBoolean(HttpContext.Session.GetString("Logeado")))
             {
-                try
-
-                {
-
-                    
-                    return Redirect("/Login/Login");
-                }
-                catch (Exception)
-                {
-
-                    throw;
-                }
+                return View();
             }
-
             return Redirect("/Login/Login");
-        }
-
-        public ActionResult Busquedas()
-        {
-            return View();
         }
 
         public ActionResult SearchType()
         {
-            ViewBag.TipoPlanta = _repositorioTipo.Get();
-            return View();
+            if (Convert.ToBoolean(HttpContext.Session.GetString("Logeado")))
+            {
+                ViewBag.TipoPlanta = _repositorioTipo.Get();
+                return View();
+            }
+            return Redirect("/Login/Login");
         }
 
         [HttpPost]
         public ActionResult SearchType(Planta planta)
         {
-            IList<Planta> plantas = null;
-            if (planta.TipoPlanta.IdTipoPlanta != 0)
+            if (Convert.ToBoolean(HttpContext.Session.GetString("Logeado")))
             {
-                plantas = _repositorioPlanta.SearchForType(planta);
+                IList<Planta> plantas = null;
+                if (planta.TipoPlanta.IdTipoPlanta != 0)
+                {
+                    plantas = _repositorioPlanta.SearchForType(planta);
+                }
+                return View("VisualizarSearch", plantas);
             }
-            return View("VisualizarSearch", plantas);
+            return Redirect("/Login/Login");
         }
 
         public ActionResult SearchName()
         {
-            return View();
+            if (Convert.ToBoolean(HttpContext.Session.GetString("Logeado")))
+            {
+                return View();
+            }
+            return Redirect("/Login/Login");
         }
 
         [HttpPost]
         public ActionResult SearchName(Planta planta)
         {
-            IList<Planta> plantas = null;
-            if (planta.NombreCientifico != null)
+            if (Convert.ToBoolean(HttpContext.Session.GetString("Logeado")))
             {
-                plantas = _repositorioPlanta.SearchForName(planta);
+                IList<Planta> plantas = null;
+                if (planta.NombreCientifico != null)
+                {
+                    plantas = _repositorioPlanta.SearchForName(planta);
+                }
+                return View("VisualizarSearch", plantas);
             }
-            return View("VisualizarSearch", plantas);
+            return Redirect("/Login/Login");
         }
 
         public ActionResult SearchAmbiente()
         {
-            return View();
+            if (Convert.ToBoolean(HttpContext.Session.GetString("Logeado")))
+            {
+                return View();
+            }
+            return Redirect("/Login/Login");
         }
 
         [HttpPost]
         public ActionResult SearchAmbiente(Planta planta)
         {
-            IList<Planta> plantas = null;
-            if (planta.Ambiente != null)
+            if (Convert.ToBoolean(HttpContext.Session.GetString("Logeado")))
             {
-                plantas = _repositorioPlanta.SearchAmbiente(planta);
+                IList<Planta> plantas = null;
+                if (planta.Ambiente != null)
+                {
+                    plantas = _repositorioPlanta.SearchAmbiente(planta);
+                }
+                return View("VisualizarSearch", plantas);
             }
-            return View("VisualizarSearch", plantas);
+            return Redirect("/Login/Login");
         }
 
         public ActionResult SearchHeight()
         {
-            return View();
+            if (Convert.ToBoolean(HttpContext.Session.GetString("Logeado")))
+            {
+                return View();
+            }
+            return Redirect("/Login/Login");
         }
 
         [HttpPost]
         public ActionResult SearchHeight(Planta planta)
         {
-            IList<Planta> plantas = null;
-            if (planta.Altura != 0)
+            if (Convert.ToBoolean(HttpContext.Session.GetString("Logeado")))
             {
-                plantas = _repositorioPlanta.SearchHeight(planta);
+                IList<Planta> plantas = null;
+                if (planta.Altura != 0)
+                {
+                    plantas = _repositorioPlanta.SearchHeight(planta);
+                }
+                return View("VisualizarSearch", plantas);
             }
-            return View("VisualizarSearch", plantas);
+            return Redirect("/Login/Login");
         }
 
         public ActionResult SearchGreaterHeight()
         {
-            return View();
+            if (Convert.ToBoolean(HttpContext.Session.GetString("Logeado")))
+            {
+                return View();
+            }
+            return Redirect("/Login/Login");
         }
 
         [HttpPost]
         public ActionResult SearchGreaterHeight(Planta planta)
         {
-            IList<Planta> plantas = null;
-            if (planta.Altura != 0)
+            if (Convert.ToBoolean(HttpContext.Session.GetString("Logeado")))
             {
-                plantas = _repositorioPlanta.SearchGreaterHeight(planta);
+                IList<Planta> plantas = null;
+                if (planta.Altura != 0)
+                {
+                    plantas = _repositorioPlanta.SearchGreaterHeight(planta);
+                }
+                return View("VisualizarSearch", plantas);
             }
-            return View("VisualizarSearch", plantas);
+            return Redirect("/Login/Login");
         }
     }
     

@@ -214,7 +214,11 @@ namespace DataAccesEF
         {
             throw new NotImplementedException();
         }
-
+        /// <summary>
+        ///  Busqueda por tipo de planta       
+        /// </summary>
+        /// <param name="planta"></param>
+        /// <returns>IList<Planta></returns>
         public IList<Planta> SearchForType(Planta planta)
         {
             IList<Planta> plantas = null;
@@ -230,7 +234,11 @@ namespace DataAccesEF
             }
             return plantas;
         }
-
+        /// <summary>
+        ///  Busqueda por Nombre planta, cualquier contenido que coincida con nombre cientifico o nombres vulgares       
+        /// </summary>
+        /// <param name="planta"></param>
+        /// <returns>IList<Planta></returns>
         public IList<Planta> SearchForName(Planta planta)
         {
             IList<Planta> plantas = null;
@@ -246,7 +254,11 @@ namespace DataAccesEF
             }
             return plantas;
         }
-
+        /// <summary>
+        ///  Busqueda por Ambiente de planta       
+        /// </summary>
+        /// <param name="planta"></param>
+        /// <returns>IList<Planta></returns>
         public IList<Planta> SearchAmbiente(Planta planta)
         {
             IList<Planta> plantas = null;
@@ -262,7 +274,11 @@ namespace DataAccesEF
             }
             return plantas;
         }
-
+        /// <summary>
+        ///  Busqueda por altura menor de planta       
+        /// </summary>
+        /// <param name="planta"></param>
+        /// <returns>IList<Planta></returns>
         public IList<Planta> SearchHeight(Planta planta)
         {
             IList<Planta> plantas = null;
@@ -278,7 +294,11 @@ namespace DataAccesEF
             }
             return plantas;
         }
-
+        /// <summary>
+        ///  Busqueda por altura de planta mayor o igual
+        /// </summary>
+        /// <param name="planta"></param>
+        /// <returns>IList<Planta></returns>
         public IList<Planta> SearchGreaterHeight(Planta planta)
         {
             IList<Planta> plantas = null;
