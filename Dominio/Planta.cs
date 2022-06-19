@@ -19,6 +19,7 @@ namespace Dominio
         public List<Foto> ListaFotos { get; set; }
         [ForeignKey("IdFichaCuidados")]
         public FichaCuidados FichaCuidados { get; set; }
+        [Required(ErrorMessage = "El campo {0} es requerido.")]
         public string NombresVulgares { get; set; }
         [Required]
         public string Ambiente { get; set; }

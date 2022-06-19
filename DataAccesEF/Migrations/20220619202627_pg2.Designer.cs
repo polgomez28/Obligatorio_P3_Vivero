@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccesEF.Migrations
 {
     [DbContext(typeof(ViveroContext))]
-    [Migration("20220617010813_init5pg")]
-    partial class init5pg
+    [Migration("20220619202627_pg2")]
+    partial class pg2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -121,40 +121,6 @@ namespace DataAccesEF.Migrations
                     b.ToTable("ItemCompras");
                 });
 
-            modelBuilder.Entity("Dominio.ItemPlantas", b =>
-                {
-                    b.Property<int>("IdItemPlanta")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("Cantidad")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ComprasIdCompra")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdCompra")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdPlanta")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("PlantaCompradaIdPlanta")
-                        .HasColumnType("int");
-
-                    b.Property<double>("PrecioUnitario")
-                        .HasColumnType("float");
-
-                    b.HasKey("IdItemPlanta");
-
-                    b.HasIndex("ComprasIdCompra");
-
-                    b.HasIndex("PlantaCompradaIdPlanta");
-
-                    b.ToTable("ItemPlantas");
-                });
-
             modelBuilder.Entity("Dominio.ParamSistema", b =>
                 {
                     b.Property<int>("IdParam")
@@ -194,17 +160,11 @@ namespace DataAccesEF.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ComprasIdCompra")
-                        .HasColumnType("int");
-
                     b.Property<string>("Descripcion")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("FichaCuidadosIdFichaCuidados")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdFichaCuidados")
+                    b.Property<int?>("IdFichaCuidados")
                         .HasColumnType("int");
 
                     b.Property<int>("IdTipoPlanta")
@@ -214,18 +174,14 @@ namespace DataAccesEF.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NombresVulgares")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("TipoPlantaIdTipoPlanta")
-                        .HasColumnType("int");
 
                     b.HasKey("IdPlanta");
 
-                    b.HasIndex("ComprasIdCompra");
+                    b.HasIndex("IdFichaCuidados");
 
-                    b.HasIndex("FichaCuidadosIdFichaCuidados");
-
-                    b.HasIndex("TipoPlantaIdTipoPlanta");
+                    b.HasIndex("IdTipoPlanta");
 
                     b.ToTable("Plantas");
                 });
@@ -234,16 +190,18 @@ namespace DataAccesEF.Migrations
                 {
                     b.Property<int>("IdIluminacion")
                         .ValueGeneratedOnAdd()
+                        .HasColumnName("Id")
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("DescripcionTipoIlum")
                         .IsRequired()
+                        .HasColumnName("Descripcion")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("IdIluminacion");
 
-                    b.ToTable("TipoIluminacions");
+                    b.ToTable("TipoIluminacion");
                 });
 
             modelBuilder.Entity("Dominio.TipoPlanta", b =>
@@ -256,7 +214,7 @@ namespace DataAccesEF.Migrations
 
                     b.Property<string>("TipoDesc")
                         .IsRequired()
-                        .HasColumnName("Desc")
+                        .HasColumnName("Descripcion")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TipoNombre")
@@ -296,13 +254,10 @@ namespace DataAccesEF.Migrations
                     b.Property<double>("CostoFlete")
                         .HasColumnType("float");
 
-                    b.Property<int>("IdPlanta")
+                    b.Property<int?>("IdPlanta")
                         .HasColumnType("int");
 
-                    b.Property<int?>("PlantaIdPlanta")
-                        .HasColumnType("int");
-
-                    b.HasIndex("PlantaIdPlanta");
+                    b.HasIndex("IdPlanta");
 
                     b.HasDiscriminator().HasValue("DePlaza");
                 });
@@ -314,18 +269,14 @@ namespace DataAccesEF.Migrations
                     b.Property<bool>("EsDelSur")
                         .HasColumnType("bit");
 
-                    b.Property<int>("IdPlanta")
+                    b.Property<int?>("IdPlanta")
                         .HasColumnName("Importadas_IdPlanta")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("PlantaIdPlanta")
-                        .HasColumnName("Importadas_PlantaIdPlanta")
                         .HasColumnType("int");
 
                     b.Property<int>("TasaDescuento")
                         .HasColumnType("int");
 
-                    b.HasIndex("PlantaIdPlanta");
+                    b.HasIndex("IdPlanta");
 
                     b.HasDiscriminator().HasValue("Importadas");
                 });
@@ -349,7 +300,7 @@ namespace DataAccesEF.Migrations
             modelBuilder.Entity("Dominio.ItemCompra", b =>
                 {
                     b.HasOne("Dominio.Compras", "Compras")
-                        .WithMany()
+                        .WithMany("Items")
                         .HasForeignKey("ComprasIdCompra");
 
                     b.HasOne("Dominio.Planta", "Planta")
@@ -357,30 +308,15 @@ namespace DataAccesEF.Migrations
                         .HasForeignKey("PlantaIdPlanta");
                 });
 
-            modelBuilder.Entity("Dominio.ItemPlantas", b =>
-                {
-                    b.HasOne("Dominio.Compras", null)
-                        .WithMany("Items")
-                        .HasForeignKey("ComprasIdCompra");
-
-                    b.HasOne("Dominio.Planta", "PlantaComprada")
-                        .WithMany()
-                        .HasForeignKey("PlantaCompradaIdPlanta");
-                });
-
             modelBuilder.Entity("Dominio.Planta", b =>
                 {
-                    b.HasOne("Dominio.Compras", null)
-                        .WithMany("ListaPlantas")
-                        .HasForeignKey("ComprasIdCompra");
-
                     b.HasOne("Dominio.FichaCuidados", "FichaCuidados")
                         .WithMany()
-                        .HasForeignKey("FichaCuidadosIdFichaCuidados");
+                        .HasForeignKey("IdFichaCuidados");
 
                     b.HasOne("Dominio.TipoPlanta", "TipoPlanta")
                         .WithMany()
-                        .HasForeignKey("TipoPlantaIdTipoPlanta")
+                        .HasForeignKey("IdTipoPlanta")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -389,14 +325,14 @@ namespace DataAccesEF.Migrations
                 {
                     b.HasOne("Dominio.Planta", "Planta")
                         .WithMany()
-                        .HasForeignKey("PlantaIdPlanta");
+                        .HasForeignKey("IdPlanta");
                 });
 
             modelBuilder.Entity("Dominio.Importadas", b =>
                 {
                     b.HasOne("Dominio.Planta", "Planta")
                         .WithMany()
-                        .HasForeignKey("PlantaIdPlanta");
+                        .HasForeignKey("IdPlanta");
                 });
 #pragma warning restore 612, 618
         }
