@@ -5,9 +5,6 @@
 }
 <h1>Lista de Parametros</h1>
 
-@*<p>
-    <a asp-action="Edit">Editar Parametros del sistema</a>
-</p>*@
 <table class="table">
     <thead>
         <tr>
@@ -49,7 +46,7 @@
                 @Html.DisplayFor(modelItem => item.ValorMax)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.IdParam">Editar</a> |
+                <a asp-action="Edit" asp-route-id="@item.IdParam"><i class="fa-solid fa-pen-to-square"></i></a>
             </td>
         </tr>
         }

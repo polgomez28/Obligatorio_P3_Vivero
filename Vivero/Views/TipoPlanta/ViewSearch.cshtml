@@ -38,9 +38,9 @@ else
     </div>
 }
 
-<a asp-action="Edit" asp-route-id="@Model.IdTipoPlanta">Editar</a> |
+<a asp-action="Edit" asp-route-id="@Model.IdTipoPlanta"><i class="fa-solid fa-pen-to-square"></i></a>
 <form>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index"><i class="fa-solid fa-angle-left"></i></a>
 </form>
 
 <div>
@@ -66,13 +66,13 @@ else
             @Html.DisplayFor(model => model.TipoDesc)
         </dd>
     </dl>
-    <a asp-action="Edit" asp-route-id="@Model.IdTipoPlanta">Editar</a> |
+    <a asp-action="Edit" asp-route-id="@Model.IdTipoPlanta"><i class="fa-solid fa-pen-to-square"></i></a>
     <form>
-        <a asp-action="Index">Back to List</a>
+        <a asp-action="Index"><i class="fa-solid fa-angle-left"></i></a>
     </form>
 </div>
 
-<div>
-    <a asp-controller="TipoPlanta" asp-action="Index">Back to List</a>
+<div class="m-5">
+    <a asp-controller="TipoPlanta" asp-action="Index"><i class="fa-solid fa-angle-left"></i></a>
 </div>
 

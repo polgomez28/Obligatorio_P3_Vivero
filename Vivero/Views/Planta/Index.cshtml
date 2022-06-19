@@ -6,14 +6,11 @@
 
 <h1>Lista de Plantas</h1>
 
-@*<p>
-    <a asp-action="Create">Create New</a>
-</p>*@
 <p>
-    <a asp-action="CreatePlanta">Crear Planta</a>
+    <a asp-action="CreatePlanta"><i class="fa-solid fa-user-plus"></i></a>
 </p>
 <p>
-    <a asp-action="Busquedas">Busquedas</a>
+    <a asp-action="Busquedas"><i class="fa-solid fa-magnifying-glass"></i></a>
 </p>
 <table class="table">
     <thead>
@@ -71,9 +68,9 @@
                     </td>
 
                     <td>
-                        <a asp-action="Edit" asp-route-id="@item.IdPlanta">Editar</a> |
-                        <a asp-action="Delete" asp-route-id="@item.IdPlanta">Borrar</a> |
-                        <a asp-action="Details" asp-route-id="@item.IdPlanta">Detalle</a>
+                        <a asp-action="Edit" asp-route-id="@item.IdPlanta"><i class="fa-solid fa-pen-to-square"></i></a>
+                        <a asp-action="Delete" asp-route-id="@item.IdPlanta"><i class="fa-solid fa-trash-can"></i></a>
+                        <a asp-action="Details" asp-route-id="@item.IdPlanta"><i class="fa-solid fa-circle-info"></i></a>
 
                     </td>
                 </tr>

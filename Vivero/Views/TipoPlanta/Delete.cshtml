@@ -34,7 +34,8 @@
 
     <form asp-action="Delete">
         <input type="hidden" asp-for="IdTipoPlanta" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-controller="TipoPlanta" asp-action="Index">Back to List</a>
+        <input type="submit" value="Delete" class="btn btn-danger" />
+
     </form>
+    <a asp-controller="TipoPlanta" asp-action="Index"><i class="fa-solid fa-angle-left"></i></a>
 </div>
