@@ -7,6 +7,6 @@ namespace Dominio
 {
     public interface IRepositorioTipoPlanta : IRepositorio<TipoPlanta>
     {
-
+        bool Delete(TipoPlanta unTipo);
     }
 }
