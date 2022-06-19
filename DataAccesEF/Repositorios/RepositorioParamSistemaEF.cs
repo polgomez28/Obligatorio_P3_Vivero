@@ -33,7 +33,12 @@ namespace DataAccesEF
 
         public ParamSistema GetByID(int id)
         {
-            throw new NotImplementedException();
+            ParamSistema param = null;
+            if (id != 0)
+            {
+                param = _dbContext.ParamSistema.Find(id);
+            }
+            return param;
         }
 
         public void Insert(ParamSistema obj)
@@ -43,7 +48,18 @@ namespace DataAccesEF
 
         public void Update(ParamSistema obj)
         {
-            throw new NotImplementedException();
+            try
+            {
+                if (obj.IdParam != 0)
+                {
+                    _dbContext.Update<ParamSistema>(obj);
+                    _dbContext.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
     }
 }

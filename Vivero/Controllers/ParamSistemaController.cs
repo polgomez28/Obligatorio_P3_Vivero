@@ -96,7 +96,7 @@ namespace Vivero.Controllers
                 try
                 {
                     _repositorioParamSistema.Update(unParam);
-                    return View("SuccessAlta");
+                    return RedirectToAction(nameof(Index));
                 }
                 catch
                 {
