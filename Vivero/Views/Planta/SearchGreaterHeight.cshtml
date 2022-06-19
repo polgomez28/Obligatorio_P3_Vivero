@@ -1,7 +1,27 @@
-﻿
+﻿@model Dominio.Planta
 @{
     ViewData["Title"] = "SearchGreaterHeight";
 }
 
-<h1>SearchGreaterHeight</h1>
+<h1>Busqueda por menor altura</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <div>
+            <a asp-action="Index">Listar Todas</a>
+        </div>
+        <form asp-action="SearchGreaterHeight" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label for="Altura" class="control-label">Más altas que esta altura</label>
+                <input for="Altura" class="form-control" name="Altura" />
+                <span for="Altura" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Buscar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
 

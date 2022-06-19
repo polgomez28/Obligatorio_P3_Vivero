@@ -246,5 +246,53 @@ namespace DataAccesEF
             }
             return plantas;
         }
+
+        public IList<Planta> SearchAmbiente(Planta planta)
+        {
+            IList<Planta> plantas = null;
+            try
+            {
+                plantas = Get();
+                plantas = plantas.Where(p => p.Ambiente == planta.Ambiente).ToList();
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+            return plantas;
+        }
+
+        public IList<Planta> SearchHeight(Planta planta)
+        {
+            IList<Planta> plantas = null;
+            try
+            {
+                plantas = Get();
+                plantas = plantas.Where(p => p.Altura < planta.Altura).ToList();
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+            return plantas;
+        }
+
+        public IList<Planta> SearchGreaterHeight(Planta planta)
+        {
+            IList<Planta> plantas = null;
+            try
+            {
+                plantas = Get();
+                plantas = plantas.Where(p => p.Altura >= planta.Altura).ToList();
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+            return plantas;
+        }
     }
 }

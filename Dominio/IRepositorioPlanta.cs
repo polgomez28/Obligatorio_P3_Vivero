@@ -13,6 +13,9 @@ namespace Dominio
         IList<Planta> SearchPlantas(string NombreCientifico, string TipoNombre, string Ambiente, int Altura, int Altura2);
         IList<Planta> SearchForType(Planta planta);
         IList<Planta> SearchForName(Planta planta);
+        IList<Planta> SearchAmbiente(Planta planta);
+        IList<Planta> SearchHeight(Planta planta);
+        IList<Planta> SearchGreaterHeight(Planta planta);
         #endregion
 
         #region TipoPlanta

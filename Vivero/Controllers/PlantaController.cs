@@ -369,6 +369,54 @@ namespace Vivero.Controllers
             }
             return View("VisualizarSearch", plantas);
         }
+
+        public ActionResult SearchAmbiente()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult SearchAmbiente(Planta planta)
+        {
+            IList<Planta> plantas = null;
+            if (planta.Ambiente != null)
+            {
+                plantas = _repositorioPlanta.SearchAmbiente(planta);
+            }
+            return View("VisualizarSearch", plantas);
+        }
+
+        public ActionResult SearchHeight()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult SearchHeight(Planta planta)
+        {
+            IList<Planta> plantas = null;
+            if (planta.Altura != 0)
+            {
+                plantas = _repositorioPlanta.SearchHeight(planta);
+            }
+            return View("VisualizarSearch", plantas);
+        }
+
+        public ActionResult SearchGreaterHeight()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult SearchGreaterHeight(Planta planta)
+        {
+            IList<Planta> plantas = null;
+            if (planta.Altura != 0)
+            {
+                plantas = _repositorioPlanta.SearchGreaterHeight(planta);
+            }
+            return View("VisualizarSearch", plantas);
+        }
     }
     
 }
