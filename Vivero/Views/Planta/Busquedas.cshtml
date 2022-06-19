@@ -1,0 +1,58 @@
+﻿@*
+
+*@
+@{
+
+}
+<div class="text-center">
+    <h1 class="display-4">Tipos de Busquedas</h1>
+    <h2 class="display-4">Plantas</h2>
+
+</div>
+<div class="row">
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Tipo Planta</h5>
+                <p class="card-text">Busqueda por tipo.</p>
+                <a asp-action="SearchType" class="btn btn-primary">Search</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Nombre</h5>
+                <p class="card-text">Busqueda por nombre cientifico o vulgares</p>
+                <a asp-action="SearchName" class="btn btn-primary">Search</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Ambiente</h5>
+                <p class="card-text">Busqueda por ambiente</p>
+                <a asp-action="SearchAmbiente" class="btn btn-primary">Search</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Altura menor</h5>
+                <p class="card-text">Busqueda por altura menor la indicada</p>
+                <a asp-action="SearchHeight" class="btn btn-primary">Search</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Altura mayor</h5>
+                <p class="card-text">Busqueda por altura mayor o igual a la indicada</p>
+                <a asp-action="SearchGreaterHeight" class="btn btn-primary">Ir al Listado</a>
+            </div>
+        </div>
+    </div>
+</div>

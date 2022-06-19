@@ -54,6 +54,7 @@ namespace DataAccesEF
                var plantas = from p in _dbContext.Plantas
                           join t in _dbContext.TipoPlantas on p.TipoPlanta.IdTipoPlanta equals t.IdTipoPlanta
                           join f in _dbContext.FichaCuidados on p.FichaCuidados.IdFichaCuidados equals f.IdFichaCuidados
+                          join i in _dbContext.TipoIluminacions on f.TipoIluminacion.IdIluminacion equals i.IdIluminacion
                           select new
                           {
                               Id = p.IdPlanta,
@@ -63,7 +64,8 @@ namespace DataAccesEF
                               Altura = p.Altura,
                               Vulgares = p.NombresVulgares,
                               TipoPlanta = new { Id = t.IdTipoPlanta, Nombre = t.TipoNombre, Descripcion = t.TipoDesc},
-                              FichaCuidados = new { Id = f.IdFichaCuidados, Riego = f.Riego, Temperatura = f.Temperatura }
+                              FichaCuidados = new { Id = f.IdFichaCuidados, Riego = f.Riego, Temperatura = f.Temperatura },
+                              TipoIluminacion = new { Id = i.IdIluminacion, i.DescripcionTipoIlum }
                           };
                 foreach (var item in plantas)
                 {
@@ -85,7 +87,12 @@ namespace DataAccesEF
                         {
                             IdFichaCuidados = item.FichaCuidados.Id,
                             Riego = item.FichaCuidados.Riego,
-                            Temperatura = item.FichaCuidados.Temperatura
+                            Temperatura = item.FichaCuidados.Temperatura,
+                            TipoIluminacion = new TipoIluminacion()
+                            {
+                                IdIluminacion = item.TipoIluminacion.Id,
+                                DescripcionTipoIlum = item.TipoIluminacion.DescripcionTipoIlum
+                            }
                         }
                     };
                     result.Add(planta);
@@ -206,6 +213,38 @@ namespace DataAccesEF
         public void UpdateFicha(FichaCuidados obj)
         {
             throw new NotImplementedException();
+        }
+
+        public IList<Planta> SearchForType(Planta planta)
+        {
+            IList<Planta> plantas = null;
+            try
+            {
+                plantas = Get();
+                plantas = plantas.Where(p => p.TipoPlanta.IdTipoPlanta == planta.TipoPlanta.IdTipoPlanta).ToList();
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+            return plantas;
+        }
+
+        public IList<Planta> SearchForName(Planta planta)
+        {
+            IList<Planta> plantas = null;
+            try
+            {
+                plantas = Get();
+                plantas = plantas.Where(p => p.NombreCientifico.Contains(planta.NombreCientifico) || p.NombresVulgares.Contains(planta.NombreCientifico)).ToList();
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+            return plantas;
         }
     }
 }

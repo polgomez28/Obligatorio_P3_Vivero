@@ -1,5 +1,4 @@
-﻿@model IList<Dominio.TipoPlanta>;
-@{
+﻿@model Dominio.Planta
     ViewData["Title"] = "Search";
 }
 
@@ -18,14 +17,14 @@
                 <span for="NombreCientifico" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label for="TipoNombre" class="control-label">Selecciona el tipo planta</label>
-                <select class="control-label" id="TipoNombre" name="TipoNombre">
-                    <option selected disabled value="">SELECCIONE UNA TIPO</option>
-                    @foreach (var item in Model)
-                    {
-                        <option value="@item.TipoNombre">@item.TipoNombre</option>
-                    }
-                </select>
+                <label asp-for="TipoPlanta" class="control-label"></label>
+                @Html.DropDownListFor(model => model.TipoPlanta.IdTipoPlanta, new SelectList(@ViewBag.TipoPlanta, "IdTipoPlanta", "TipoNombre"), "Seleccione...", new { @class = "form-control" })
+                <span asp-validation-for="@Model.TipoPlanta.IdTipoPlanta" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FichaCuidados" class="control-label"></label>
+                @Html.DropDownListFor(model => model.FichaCuidados.IdFichaCuidados, new SelectList(@ViewBag.FichaCuidados, "IdFichaCuidados", "Riego"), "Seleccione...", new { @class = "form-control" })
+                <span asp-validation-for="@Model.FichaCuidados.IdFichaCuidados" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label for="Ambiente" class="control-label">Seleccionar ambiente</label>

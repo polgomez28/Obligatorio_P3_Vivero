@@ -1,0 +1,25 @@
+﻿@model Dominio.Planta
+@{
+    ViewData["Title"] = "SearchName";
+}
+
+<h1>Busqueda por nombre</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <div>
+            <a asp-action="Index">Listar Todas</a>
+        </div>
+        <form asp-action="SearchName" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label for="NombreCientifico" class="control-label"></label>
+                <input for="NombreCientifico" class="form-control" name="NombreCientifico" />
+                <span for="NombreCientifico" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Buscar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>

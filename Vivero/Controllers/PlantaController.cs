@@ -305,32 +305,22 @@ namespace Vivero.Controllers
 
         public ActionResult Search()
         {
+            //ViewBag.TipoPlanta = _repositorioTipo.Get();
+            //ViewBag.FichaCuidados = _repositorioPlanta.GetFichas();
             return View();
         }
 
         [HttpPost]
-        public ActionResult Search(string NombreCientifico, string TipoNombre, string Ambiente, int Altura, int Altura2)
+        public ActionResult Search(Planta unaPlanta)
         {
             if (Convert.ToBoolean(HttpContext.Session.GetString("Logeado")))
             {
                 try
 
                 {
-                    if (NombreCientifico == null)
-                    {
-                        NombreCientifico = "";
-                    }
-                    if (TipoNombre == null)
-                    {
-                        TipoNombre = "";
-                    }
-                    if (Ambiente == null)
-                    {
-                        Ambiente = "";
-                    }
-                    IList<Planta> listPlantas = _repositorioPlanta.SearchPlantas(NombreCientifico, TipoNombre, Ambiente, Altura, Altura2);
-                    return View("VisualizarSearch", listPlantas);
+
                     
+                    return Redirect("/Login/Login");
                 }
                 catch (Exception)
                 {
@@ -340,6 +330,44 @@ namespace Vivero.Controllers
             }
 
             return Redirect("/Login/Login");
+        }
+
+        public ActionResult Busquedas()
+        {
+            return View();
+        }
+
+        public ActionResult SearchType()
+        {
+            ViewBag.TipoPlanta = _repositorioTipo.Get();
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult SearchType(Planta planta)
+        {
+            IList<Planta> plantas = null;
+            if (planta.TipoPlanta.IdTipoPlanta != 0)
+            {
+                plantas = _repositorioPlanta.SearchForType(planta);
+            }
+            return View("VisualizarSearch", plantas);
+        }
+
+        public ActionResult SearchName()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult SearchName(Planta planta)
+        {
+            IList<Planta> plantas = null;
+            if (planta.NombreCientifico != null)
+            {
+                plantas = _repositorioPlanta.SearchForName(planta);
+            }
+            return View("VisualizarSearch", plantas);
         }
     }
     
