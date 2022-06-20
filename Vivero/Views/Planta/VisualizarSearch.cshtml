@@ -7,45 +7,45 @@
 <h1>VisualizarSearch</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create"><i class="fa-solid fa-user-plus"></i></a>
 </p>
 @if (Model.Any())
 {
 
-    <table class="table">
+    <table class="table table-hover">
         <thead>
-            <tr>
-                <th>
+            <tr class="table-primary">
+                <th scope="col">
                     @Html.DisplayNameFor(model => model.IdPlanta)
                 </th>
-                <th>
+                <th scope="col">
                     @Html.DisplayNameFor(model => model.NombreCientifico)
                 </th>
-                <th>
+                <th scope="col">
                     @Html.DisplayNameFor(model => model.Descripcion)
                 </th>
-                <th>
+                <th scope="col">
                     @Html.DisplayNameFor(model => model.Ambiente)
                 </th>
-                <th>
+                <th scope="col">
                     @Html.DisplayNameFor(model => model.Altura)
                 </th>
-                <th>
+                <th scope="col">
                     @Html.DisplayNameFor(model => model.TipoPlanta.TipoNombre)
                 </th>
-                <th>
+                <th scope="col">
                     @Html.DisplayNameFor(model => model.TipoPlanta.TipoDesc)
                 </th>
-                <th>
+                <th scope="col">
                     @Html.DisplayNameFor(model => model.FichaCuidados.Riego)
                 </th>
-                <th>
+                <th scope="col">
                     @Html.DisplayNameFor(model => model.FichaCuidados.Temperatura)
                 </th>
-                <th>
+                <th scope="col">
                     @Html.DisplayNameFor(model => model.FichaCuidados.TipoIluminacion.DescripcionTipoIlum)
                 </th>
-                <th></th>
+                <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
@@ -97,5 +97,5 @@ else
 }
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index"><i class="fa-solid fa-angle-left"></i></a>
 </div>
