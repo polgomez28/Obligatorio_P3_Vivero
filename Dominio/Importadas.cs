@@ -6,16 +6,11 @@ using System.Text;
 
 namespace Dominio
 {
-    public class Importadas:Compras
+    public class Importadas:Compra
     {
-        [Key]
-        public int IdImportadas { get; }
         public static int TasaImportacion { get; set; }
         public bool EsDelSur { get; set; }
         public int TasaDescuento { get; set; }
         public static string DescripcionSanitaria { get; set; }
-
-        [ForeignKey("IdPlanta")]
-        public Planta Planta { get; set; }
     }
 }

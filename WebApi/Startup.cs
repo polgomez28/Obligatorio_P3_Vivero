@@ -1,7 +1,10 @@
+using DataAccesEF;
+using Dominio;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -25,7 +28,20 @@ namespace WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddControllersWithViews();
+            services.AddScoped<IRepositorioPlanta, RepositorioPlantaEF>();
+            services.AddScoped<IRepositorioParamSistema, RepositorioParamSistemaEF>();
+            services.AddScoped<IRepositorioTipoPlanta, RepositorioTipoPlantaEF>();
+            services.AddScoped<IRepositorioCompras, RepositorioComprasEF>();
+            services.AddScoped<IRepositorioUsuario, RepositorioUsuariosEF>();
+            services.AddScoped<IRepositorioDePlaza, RepositorioDePlazaEF>();
+
+            services.AddDbContext<ViveroContext>
+                (opciones => opciones
+                             .UseSqlServer(Configuration.GetConnectionString("Connection_Vivero"))
+                             .EnableSensitiveDataLogging());
             services.AddControllers();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

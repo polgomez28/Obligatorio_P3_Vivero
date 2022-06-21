@@ -4,14 +4,16 @@ using DataAccesEF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataAccesEF.Migrations
 {
     [DbContext(typeof(ViveroContext))]
-    partial class ViveroContextModelSnapshot : ModelSnapshot
+    [Migration("20220621021157_init")]
+    partial class init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -19,7 +21,7 @@ namespace DataAccesEF.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Dominio.Compra", b =>
+            modelBuilder.Entity("Dominio.Compras", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -40,7 +42,7 @@ namespace DataAccesEF.Migrations
 
                     b.ToTable("Compras");
 
-                    b.HasDiscriminator<string>("Discriminator").HasValue("Compra");
+                    b.HasDiscriminator<string>("Discriminator").HasValue("Compras");
                 });
 
             modelBuilder.Entity("Dominio.FichaCuidados", b =>
@@ -105,8 +107,6 @@ namespace DataAccesEF.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("IdCompra", "IdPlanta");
-
-                    b.HasIndex("IdPlanta");
 
                     b.ToTable("ItemCompras");
                 });
@@ -239,7 +239,7 @@ namespace DataAccesEF.Migrations
 
             modelBuilder.Entity("Dominio.DePlaza", b =>
                 {
-                    b.HasBaseType("Dominio.Compra");
+                    b.HasBaseType("Dominio.Compras");
 
                     b.Property<double>("CostoFlete")
                         .HasColumnType("float");
@@ -249,7 +249,7 @@ namespace DataAccesEF.Migrations
 
             modelBuilder.Entity("Dominio.Importadas", b =>
                 {
-                    b.HasBaseType("Dominio.Compra");
+                    b.HasBaseType("Dominio.Compras");
 
                     b.Property<bool>("EsDelSur")
                         .HasColumnType("bit");
@@ -274,21 +274,6 @@ namespace DataAccesEF.Migrations
                     b.HasOne("Dominio.Planta", null)
                         .WithMany("ListaFotos")
                         .HasForeignKey("PlantaIdPlanta");
-                });
-
-            modelBuilder.Entity("Dominio.ItemCompra", b =>
-                {
-                    b.HasOne("Dominio.Compra", "Compra")
-                        .WithMany("Items")
-                        .HasForeignKey("IdCompra")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Dominio.Planta", "Planta")
-                        .WithMany("Items")
-                        .HasForeignKey("IdPlanta")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Dominio.Planta", b =>

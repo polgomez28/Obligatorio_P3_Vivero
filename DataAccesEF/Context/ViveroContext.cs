@@ -17,7 +17,7 @@ namespace DataAccesEF
         public DbSet<ParamSistema> ParamSistema { get; set; }
         public DbSet<TipoIluminacion> TipoIluminacions { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
-        public DbSet<Compras> Compras { get; set; }
+        public DbSet<Compra> Compras { get; set; }
         public DbSet<DePlaza> DePlazas { get; set; }
         public DbSet<Importadas> Importadas { get; set; }
         public DbSet<ItemCompra> ItemCompras { get; set; }
@@ -56,7 +56,7 @@ namespace DataAccesEF
             modelBuilder.Entity<Usuario>();
             
             // Creo la tabla Compras
-            modelBuilder.Entity<Compras>();
+            modelBuilder.Entity<Compra>();
             
             // Creo la tabla Plantas
             modelBuilder.Entity<Planta>();
@@ -67,11 +67,11 @@ namespace DataAccesEF
             // Creo la tabla DePlaza
             modelBuilder.Entity<DePlaza>();
             // Creamos realción
-            modelBuilder.Entity<DePlaza>().HasOne(d => d.Planta);
+            //modelBuilder.Entity<DePlaza>().HasOne(d => d.Planta);
             // Creo la tabla Importadas
             modelBuilder.Entity<Importadas>();
             // Creamos realción
-            modelBuilder.Entity<Importadas>().HasOne(i => i.Planta);
+            //modelBuilder.Entity<Importadas>().HasOne(i => i.Planta);
 
             // Creamos la realción NaN Compras - ItemCompras - Plantas
             modelBuilder.Entity<ItemCompra>().HasKey(i => new { i.IdCompra, i.IdPlanta });

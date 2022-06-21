@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using DataAccesEF;
 
 namespace DataAccesEF
 {
@@ -18,22 +19,22 @@ namespace DataAccesEF
             throw new NotImplementedException();
         }
 
-        public IList<Compras> Get()
+        public IList<Compra> Get()
         {
             throw new NotImplementedException();
         }
 
-        public Compras GetByID(int id)
+        public Compra GetByID(int id)
         {
             throw new NotImplementedException();
         }
 
-        public void Insert(Compras obj)
+        public void Insert(Compra obj)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(Compras obj)
+        public void Update(Compra obj)
         {
             throw new NotImplementedException();
         }

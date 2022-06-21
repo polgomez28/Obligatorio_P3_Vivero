@@ -6,15 +6,11 @@ using System.Text;
 
 namespace Dominio
 {
-    public class DePlaza:Compras
+    public class DePlaza:Compra
     {
-        [Key]
-        public int IdPlaza { get; }
+        
         public static double TasaIVA { get; set; }
         public double CostoFlete { get; set; }
-
-        [ForeignKey("IdPlanta")]
-        public Planta Planta { get; set; }
 
     }
 }

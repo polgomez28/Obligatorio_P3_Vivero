@@ -3,10 +3,42 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DataAccesEF.Migrations
 {
-    public partial class pg1 : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Compras",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FechaCompra = table.Column<DateTime>(nullable: false),
+                    CostoTotal = table.Column<double>(nullable: false),
+                    Discriminator = table.Column<string>(nullable: false),
+                    CostoFlete = table.Column<double>(nullable: true),
+                    EsDelSur = table.Column<bool>(nullable: true),
+                    TasaDescuento = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Compras", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ItemCompras",
+                columns: table => new
+                {
+                    IdPlanta = table.Column<int>(nullable: false),
+                    IdCompra = table.Column<int>(nullable: false),
+                    Cantidad = table.Column<int>(nullable: false),
+                    PrecioUnitario = table.Column<decimal>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ItemCompras", x => new { x.IdCompra, x.IdPlanta });
+                });
+
             migrationBuilder.CreateTable(
                 name: "ParamSistema",
                 columns: table => new
@@ -117,38 +149,6 @@ namespace DataAccesEF.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Compras",
-                columns: table => new
-                {
-                    IdCompra = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    FechaCompra = table.Column<DateTime>(nullable: false),
-                    CostoTotal = table.Column<double>(nullable: false),
-                    Discriminator = table.Column<string>(nullable: false),
-                    CostoFlete = table.Column<double>(nullable: true),
-                    IdPlanta = table.Column<int>(nullable: true),
-                    EsDelSur = table.Column<bool>(nullable: true),
-                    TasaDescuento = table.Column<int>(nullable: true),
-                    Importadas_IdPlanta = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Compras", x => x.IdCompra);
-                    table.ForeignKey(
-                        name: "FK_Compras_Plantas_IdPlanta",
-                        column: x => x.IdPlanta,
-                        principalTable: "Plantas",
-                        principalColumn: "IdPlanta",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Compras_Plantas_Importadas_IdPlanta",
-                        column: x => x.Importadas_IdPlanta,
-                        principalTable: "Plantas",
-                        principalColumn: "IdPlanta",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Fotos",
                 columns: table => new
                 {
@@ -169,44 +169,6 @@ namespace DataAccesEF.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "ItemCompras",
-                columns: table => new
-                {
-                    IdPlanta = table.Column<int>(nullable: false),
-                    IdCompra = table.Column<int>(nullable: false),
-                    PlantaIdPlanta = table.Column<int>(nullable: true),
-                    ComprasIdCompra = table.Column<int>(nullable: true),
-                    Cantidad = table.Column<int>(nullable: false),
-                    PrecioUnitario = table.Column<decimal>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ItemCompras", x => new { x.IdCompra, x.IdPlanta });
-                    table.ForeignKey(
-                        name: "FK_ItemCompras_Compras_ComprasIdCompra",
-                        column: x => x.ComprasIdCompra,
-                        principalTable: "Compras",
-                        principalColumn: "IdCompra",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_ItemCompras_Plantas_PlantaIdPlanta",
-                        column: x => x.PlantaIdPlanta,
-                        principalTable: "Plantas",
-                        principalColumn: "IdPlanta",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Compras_IdPlanta",
-                table: "Compras",
-                column: "IdPlanta");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Compras_Importadas_IdPlanta",
-                table: "Compras",
-                column: "Importadas_IdPlanta");
-
             migrationBuilder.CreateIndex(
                 name: "IX_FichaCuidados_IdTipoIluminacion",
                 table: "FichaCuidados",
@@ -215,16 +177,6 @@ namespace DataAccesEF.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Fotos_PlantaIdPlanta",
                 table: "Fotos",
-                column: "PlantaIdPlanta");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ItemCompras_ComprasIdCompra",
-                table: "ItemCompras",
-                column: "ComprasIdCompra");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ItemCompras_PlantaIdPlanta",
-                table: "ItemCompras",
                 column: "PlantaIdPlanta");
 
             migrationBuilder.CreateIndex(
@@ -241,6 +193,9 @@ namespace DataAccesEF.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "Compras");
+
+            migrationBuilder.DropTable(
                 name: "Fotos");
 
             migrationBuilder.DropTable(
@@ -251,9 +206,6 @@ namespace DataAccesEF.Migrations
 
             migrationBuilder.DropTable(
                 name: "Usuarios");
-
-            migrationBuilder.DropTable(
-                name: "Compras");
 
             migrationBuilder.DropTable(
                 name: "Plantas");

@@ -21,6 +21,7 @@ namespace Dominio
         public FichaCuidados FichaCuidados { get; set; }
         [Required(ErrorMessage = "El campo {0} es requerido.")]
         public string NombresVulgares { get; set; }
+        public List<ItemCompra> Items { get; set; }
         [Required]
         public string Ambiente { get; set; }
         public int Altura { get; set; }

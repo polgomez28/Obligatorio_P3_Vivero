@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccesEF.Migrations
 {
     [DbContext(typeof(ViveroContext))]
-    [Migration("20220619202627_pg2")]
-    partial class pg2
+    [Migration("20220621220817_init3")]
+    partial class init3
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,7 +23,7 @@ namespace DataAccesEF.Migrations
 
             modelBuilder.Entity("Dominio.Compras", b =>
                 {
-                    b.Property<int>("IdCompra")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -38,7 +38,7 @@ namespace DataAccesEF.Migrations
                     b.Property<DateTime>("FechaCompra")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("IdCompra");
+                    b.HasKey("Id");
 
                     b.ToTable("Compras");
 
@@ -103,7 +103,7 @@ namespace DataAccesEF.Migrations
                     b.Property<int>("Cantidad")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ComprasIdCompra")
+                    b.Property<int?>("ComprasId")
                         .HasColumnType("int");
 
                     b.Property<int?>("PlantaIdPlanta")
@@ -114,7 +114,7 @@ namespace DataAccesEF.Migrations
 
                     b.HasKey("IdCompra", "IdPlanta");
 
-                    b.HasIndex("ComprasIdCompra");
+                    b.HasIndex("ComprasId");
 
                     b.HasIndex("PlantaIdPlanta");
 
@@ -254,11 +254,6 @@ namespace DataAccesEF.Migrations
                     b.Property<double>("CostoFlete")
                         .HasColumnType("float");
 
-                    b.Property<int?>("IdPlanta")
-                        .HasColumnType("int");
-
-                    b.HasIndex("IdPlanta");
-
                     b.HasDiscriminator().HasValue("DePlaza");
                 });
 
@@ -269,14 +264,8 @@ namespace DataAccesEF.Migrations
                     b.Property<bool>("EsDelSur")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("IdPlanta")
-                        .HasColumnName("Importadas_IdPlanta")
-                        .HasColumnType("int");
-
                     b.Property<int>("TasaDescuento")
                         .HasColumnType("int");
-
-                    b.HasIndex("IdPlanta");
 
                     b.HasDiscriminator().HasValue("Importadas");
                 });
@@ -299,12 +288,12 @@ namespace DataAccesEF.Migrations
 
             modelBuilder.Entity("Dominio.ItemCompra", b =>
                 {
-                    b.HasOne("Dominio.Compras", "Compras")
+                    b.HasOne("Dominio.Compras", null)
                         .WithMany("Items")
-                        .HasForeignKey("ComprasIdCompra");
+                        .HasForeignKey("ComprasId");
 
-                    b.HasOne("Dominio.Planta", "Planta")
-                        .WithMany()
+                    b.HasOne("Dominio.Planta", null)
+                        .WithMany("Items")
                         .HasForeignKey("PlantaIdPlanta");
                 });
 
@@ -319,20 +308,6 @@ namespace DataAccesEF.Migrations
                         .HasForeignKey("IdTipoPlanta")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Dominio.DePlaza", b =>
-                {
-                    b.HasOne("Dominio.Planta", "Planta")
-                        .WithMany()
-                        .HasForeignKey("IdPlanta");
-                });
-
-            modelBuilder.Entity("Dominio.Importadas", b =>
-                {
-                    b.HasOne("Dominio.Planta", "Planta")
-                        .WithMany()
-                        .HasForeignKey("IdPlanta");
                 });
 #pragma warning restore 612, 618
         }
