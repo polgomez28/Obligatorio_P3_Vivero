@@ -14,5 +14,8 @@ namespace Dominio.DtoCompra
         public string Nombre { get; set; }
         public int Cantidad { get; set; }
         public decimal PrecioUnitario { get; set; }
+        public decimal TasaIVA { get; set; }
+        public decimal MontoImpuesto { get; set; }
+        public decimal MontoDescuento { get; set; }
     }
 }
