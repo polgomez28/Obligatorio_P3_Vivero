@@ -9,7 +9,7 @@ namespace Dominio
     public class Planta
     {
         [Key]
-        public int IdPlanta { get; set; }
+        public int IdPlanta { get; set; }        
         public string NombreCientifico { get; set; }
         [Required]
         public string Descripcion { get; set; }
@@ -23,7 +23,7 @@ namespace Dominio
         public string NombresVulgares { get; set; }
         public List<ItemCompra> Items { get; set; }
         [Required]
-        public string Ambiente { get; set; }
+        public string Ambiente { get; set; }        
         public int Altura { get; set; }
         
         // Validaciones
@@ -80,6 +80,6 @@ namespace Dominio
             }
 
             return valido;
-        }
+        }        
     }
 }

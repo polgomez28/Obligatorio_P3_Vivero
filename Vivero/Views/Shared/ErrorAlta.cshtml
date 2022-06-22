@@ -4,5 +4,6 @@
     ViewData["Título"] = "Error";
 }
 <div class="alert alert-danger" role="alert">
-    Ups! algo salió mal.
+    <p>@ViewBag.Mensaje</p>
 </div>
+<a onclick="history.go(-1); return false;" href="#"><i class="fa-solid fa-angle-left"></i></a>

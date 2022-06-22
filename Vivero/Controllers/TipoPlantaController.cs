@@ -67,20 +67,30 @@ namespace Vivero.Controllers
                             minLargo = param.ValorMin;
                         }
                     }
-                    
-                    if (TipoPlanta.DescValid(unTipo.TipoDesc, maxLargo, minLargo) && TipoPlanta.QuitarEspacios(unTipo.TipoNombre))
-                    {
-                        _repositorioTipoPlanta.Insert(unTipo);
-                        return RedirectToAction(nameof(Index));
-                    }
+
+                    if (unTipo.TipoDesc != null && unTipo.TipoNombre != null) {
+
+                        if (TipoPlanta.DescValid(unTipo.TipoDesc, maxLargo, minLargo) && TipoPlanta.QuitarEspacios(unTipo.TipoNombre))
+                        {
+                            _repositorioTipoPlanta.Insert(unTipo);
+                            return RedirectToAction(nameof(Index));
+                        }
+                        else
+                        {
+                            ViewBag.Mensaje = "ERROR: No cumple las validaciones";
+                            return View("ErrorAlta");
+                        }
+
+                    }                    
                     else
                     {
-                        ViewBag.Mensaje = "ERROR: No cumple las validaciones";
+                        ViewBag.Mensaje = "ERROR: Hay campos vacíos";
                         return View("ErrorAlta");
                     }
                 }
                 catch
                 {
+                    ViewBag.Mensaje = "ERROR: No se pudo completar la acción";
                     return View("ErrorAlta");
                 }
             }
@@ -122,29 +132,36 @@ namespace Vivero.Controllers
                         }
                     }
 
-                    if (TipoPlanta.DescValid(unTipo.TipoDesc, maxLargo, minLargo) && TipoPlanta.QuitarEspacios(unTipo.TipoNombre))
-                    {
-                        try
+                    if (unTipo.TipoDesc != null && unTipo.TipoNombre != null) {
+                        if (TipoPlanta.DescValid(unTipo.TipoDesc, maxLargo, minLargo) && TipoPlanta.QuitarEspacios(unTipo.TipoNombre))
                         {
-                            _repositorioTipoPlanta.Update(unTipo);
-                            return RedirectToAction(nameof(Index));
+                            try
+                            {
+                                _repositorioTipoPlanta.Update(unTipo);
+                                return RedirectToAction(nameof(Index));
+                            }
+                            catch (Exception ex)
+                            {
+                                ViewBag.Mensaje = "ERROR: No se pudo completar la acción";
+                                return View("ErrorAlta");
+                            }
                         }
-                        catch (Exception ex)
+                        else
                         {
-
-                            throw;
+                            ViewBag.Mensaje = "ERROR: No cumple las validaciones";
+                            return View("ErrorAlta");
                         }
                     }
                     else
                     {
-                        ViewBag.Mensaje = "ERROR: No cumple las validaciones";
+                        ViewBag.Mensaje = "ERROR: Hay campos vacíos";
                         return View("ErrorAlta");
-                    }
+                    }                    
                 }
                 catch (Exception)
                 {
-
-                    throw;
+                    ViewBag.Mensaje = "ERROR: No se pudo completar la acción";
+                    return View("ErrorAlta");
                 }
             }
 
@@ -184,8 +201,8 @@ namespace Vivero.Controllers
                     }
                     if (existe)
                     {
-                        ViewBag.Mensaje = "Tipo esta asociado a una planta existente, no se puede borrar";
-                        return View("Error");
+                        ViewBag.Mensaje = "ERROR: Tipo esta asociado a una planta existente, no se puede borrar";
+                        return View("ErrorAlta");
                     }
                     else
                     {
@@ -195,6 +212,7 @@ namespace Vivero.Controllers
                 }
                 catch
                 {
+                    ViewBag.Mensaje = "ERROR: No se pudo completar la acción";
                     return View("ErrorAlta");
                 }
             }

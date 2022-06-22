@@ -67,7 +67,8 @@ namespace Vivero.Controllers
                 }
                 catch
                 {
-                    return View();
+                    ViewBag.Mensaje = "ERROR: No se pudo completar la acción";
+                    return View("ErrorAlta");
                 }
             }
 
@@ -100,6 +101,7 @@ namespace Vivero.Controllers
                 }
                 catch
                 {
+                    ViewBag.Mensaje = "ERROR: No se pudo completar la acción";
                     return View("ErrorAlta");
                 }
             }
@@ -131,7 +133,8 @@ namespace Vivero.Controllers
                 }
                 catch
                 {
-                    return View();
+                    ViewBag.Mensaje = "ERROR: No se pudo completar la acción";
+                    return View("ErrorAlta");
                 }
             }
 

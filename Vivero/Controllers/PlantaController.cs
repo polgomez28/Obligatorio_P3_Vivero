@@ -118,28 +118,40 @@ namespace Vivero.Controllers
                     }
                     unaPlanta.NombreCientifico = Planta.QuitarEspacios(unaPlanta.NombreCientifico);
                     unaPlanta.Descripcion = Planta.QuitarEspacios(unaPlanta.Descripcion);
-                    
-                    if (Planta.NoContieneNumeros(unaPlanta.NombreCientifico) && Planta.LargoValido(unaPlanta.Descripcion, maxLargo, minLargo) && Planta.NombresValidos(unaPlanta.NombresVulgares))
-                    {
-                        try
+
+                    if (unaPlanta.NombreCientifico != null && unaPlanta.Descripcion != null && unaPlanta.TipoPlanta != null && unaPlanta.Altura > 0 && unaPlanta.Ambiente != null
+                        && unaPlanta.FichaCuidados != null && unaPlanta.NombresVulgares != null) {
+                        if (Planta.NoContieneNumeros(unaPlanta.NombreCientifico) && Planta.LargoValido(unaPlanta.Descripcion, maxLargo, minLargo) && Planta.NombresValidos(unaPlanta.NombresVulgares))
                         {
-                            _repositorioPlanta.Insert(unaPlanta);
-                            return RedirectToAction(nameof(Index));
+                            try
+                            {
+                                _repositorioPlanta.Insert(unaPlanta);
+                                return RedirectToAction(nameof(Index));
+                            }
+                            catch (Exception e)
+                            {
+                                ViewBag.Mensaje = "ERROR: No se pudo completar la acción";
+                                return View("ErrorAlta");
+                            }
+
                         }
-                        catch (Exception e)
+                        else
                         {
+                            ViewBag.Mensaje = "ERROR: No cumple las validaciones";
                             return View("ErrorAlta");
                         }
 
-                    }
+                    }                    
                     else
                     {
+                        ViewBag.Mensaje = "ERROR: Hay campos vacíos";
                         return View("ErrorAlta");
                     }
                 }
                 catch (Exception)
                 {
-                    throw;
+                    ViewBag.Mensaje = "ERROR: No se pudo completar la acción";
+                    return View("ErrorAlta");
                 }
             }
 
@@ -250,12 +262,14 @@ namespace Vivero.Controllers
                                 }
                                 catch (Exception e)
                                 {
+                                    ViewBag.Mensaje = "ERROR: No se pudo completar la acción";
                                     return View("ErrorAlta");
                                 }
 
                             }
                             else
                             {
+                                ViewBag.Mensaje = "ERROR: No cumple las validaciones";
                                 return View("ErrorAlta");
                             }
                         }
@@ -263,7 +277,8 @@ namespace Vivero.Controllers
                 }
                 catch (Exception)
                 {
-                    throw;
+                    ViewBag.Mensaje = "ERROR: No se pudo completar la acción";
+                    return View("ErrorAlta");
                 }
             }
 
@@ -296,6 +311,7 @@ namespace Vivero.Controllers
                 }
                 catch
                 {
+                    ViewBag.Mensaje = "ERROR: No se pudo completar la acción";
                     return View("ErrorAlta");
                 }
             }
