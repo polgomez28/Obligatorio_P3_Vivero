@@ -40,7 +40,8 @@ namespace WebApi
                 (opciones => opciones
                              .UseSqlServer(Configuration.GetConnectionString("Connection_Vivero"))
                              .EnableSensitiveDataLogging());
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(options =>
+            options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
         }
 

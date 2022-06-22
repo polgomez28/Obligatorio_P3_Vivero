@@ -11,9 +11,23 @@ namespace Dominio
         public int Id { get; set; }
         public DateTime FechaCompra { get; set; }
         //public List<Planta> ListaPlantas { get; set; }
-        public double CostoTotal { get; set; }
+        public decimal CostoTotal { get; set; }
         // agrego atributo list para listar items
         
         public List<ItemCompra> Items { get; set; }
+
+
+        public decimal CalcularCostoImpuesto(int Tasa, decimal monto)
+        {
+            if (Tasa > 0 && monto > 0)
+            {
+                return (Tasa * monto) / 100;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+        
     }
 }

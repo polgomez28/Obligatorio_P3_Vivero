@@ -1,4 +1,5 @@
 ﻿using Dominio;
+using Dominio.DtoCompra;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,6 +42,11 @@ namespace DataAccesEF
             return param;
         }
 
+        public IList<ParamSistema> GetTipo(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Insert(ParamSistema obj)
         {
             throw new NotImplementedException();
@@ -60,6 +66,11 @@ namespace DataAccesEF
             {
                 throw;
             }
+        }
+
+        IList<DtoCompra> IRepositorio<ParamSistema>.GetTipo(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

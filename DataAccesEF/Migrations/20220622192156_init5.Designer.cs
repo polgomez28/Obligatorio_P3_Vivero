@@ -4,14 +4,16 @@ using DataAccesEF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataAccesEF.Migrations
 {
     [DbContext(typeof(ViveroContext))]
-    partial class ViveroContextModelSnapshot : ModelSnapshot
+    [Migration("20220622192156_init5")]
+    partial class init5
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -244,8 +246,8 @@ namespace DataAccesEF.Migrations
                     b.Property<double>("CostoFlete")
                         .HasColumnType("float");
 
-                    b.Property<decimal>("TasaIVA")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<int>("TasaIVA")
+                        .HasColumnType("int");
 
                     b.HasDiscriminator().HasValue("DePlaza");
                 });

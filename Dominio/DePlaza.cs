@@ -9,8 +9,7 @@ namespace Dominio
     public class DePlaza:Compra
     {
         
-        public static double TasaIVA { get; set; }
+        public decimal TasaIVA { get; set; }
         public double CostoFlete { get; set; }
-
     }
 }

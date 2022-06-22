@@ -7,5 +7,6 @@ namespace Dominio
 {
     public interface IRepositorioCompras : IRepositorio<Compra>
     {
+        
     }
 }

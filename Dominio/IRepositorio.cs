@@ -12,7 +12,8 @@ namespace Dominio
         T GetByID(int id);
         void Insert(T obj);
         void Delete(int id);
-        void Update(T obj);                   
+        void Update(T obj);
+        IList<DtoCompra.DtoCompra> GetTipo(int id);
     }
 }
 

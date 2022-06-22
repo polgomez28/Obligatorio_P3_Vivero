@@ -6,6 +6,6 @@ namespace Dominio
 {
     public interface IRepositorioDePlaza : IRepositorio<DePlaza>
     {
-
+        void Insert(int IVA, DePlaza obj);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Dominio;
+using Dominio.DtoCompra;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -14,12 +15,15 @@ namespace WebApi.Controllers
     {
         private readonly IRepositorioDePlaza _repoDePlaza;
         private readonly IRepositorioPlanta _repoPlanta;
-        
+        private readonly IRepositorioCompras _repoCompras;
+        private readonly IRepositorioParamSistema _repoParam;
 
-        public ComprasController(IRepositorioDePlaza repositorioDePlaza, IRepositorioPlanta repositorioPlanta)
+        public ComprasController(IRepositorioDePlaza repositorioDePlaza, IRepositorioPlanta repositorioPlanta, IRepositorioCompras repositorioCompras, IRepositorioParamSistema repositorioParamSistema)
         {
             _repoDePlaza = repositorioDePlaza;
             _repoPlanta = repositorioPlanta;
+            _repoCompras = repositorioCompras;
+            _repoParam = repositorioParamSistema;
         }
 
         [HttpPost]
@@ -28,7 +32,17 @@ namespace WebApi.Controllers
         {
             if (dePlaza != null)
             {
-                _repoDePlaza.Insert(dePlaza);
+                IList<ParamSistema> paramSistemas = new List<ParamSistema>();
+                int IVA = 0;
+                paramSistemas = _repoParam.Get();
+                foreach (var item in paramSistemas)
+                {
+                    if (item.Nombre == "TasaIVA")
+                    {
+                        IVA = item.ValorMax;
+                    }
+                }
+                _repoDePlaza.Insert(IVA, dePlaza);
                 string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
                 Uri uri = new Uri(Request.Scheme + "://" + Request.Host + "/api/" + controllerName + "/" + dePlaza.Id);
 
@@ -41,12 +55,12 @@ namespace WebApi.Controllers
             }
         }
 
-        [HttpGet]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Planta))]
+        [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(DePlaza))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult Get()
+        public IActionResult Get(int id)
         {
-            return Ok(_repoPlanta.Get());
+            return Ok(_repoCompras.GetTipo(id));
         }
 
     }

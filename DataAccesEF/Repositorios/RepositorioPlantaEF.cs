@@ -5,6 +5,7 @@ using System.Text;
 using System.Linq;
 using System.Data.SqlClient;
 using System.Collections;
+using Dominio.DtoCompra;
 
 namespace DataAccesEF
 {
@@ -313,6 +314,16 @@ namespace DataAccesEF
                 throw;
             }
             return plantas;
+        }
+
+        public IList<Planta> GetTipo(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        IList<DtoCompra> IRepositorio<Planta>.GetTipo(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }
